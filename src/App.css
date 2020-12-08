@@ -16,7 +16,7 @@ html,body {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
-
+h2 {moin:moin;}
 body {
   height: 100vh;
   width: 100vw;
