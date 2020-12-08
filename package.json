@@ -1,0 +1,46 @@
+{
+  "name": "galerie-sens",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.1",
+    "@material-ui/icons": "^4.9.1",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.2.2",
+    "axios": "^0.21.0",
+    "express": "^4.17.1",
+    "history": "^5.0.0",
+    "react": "^16.10.0",
+    "react-dom": "^16.8.0",
+    "react-gdpr-consent": "^1.0.3",
+    "react-matter-js": "^1.0.5",
+    "react-router-dom": "^6.0.0-beta.0",
+    "react-scripts": "4.0.1",
+    "web-vitals": "1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
