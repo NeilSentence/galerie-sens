@@ -6,7 +6,7 @@ class Impressum extends Component {
 	render() {
 		return (
 			<div className="sctn sctn_impressum">
-				<h1 className="sctn_heading fallable">Impressum</h1>
+				<h1 className="sctn_heading delayed-fallable">Impressum</h1>
 				<div className="sctn_body">
 
 				<h1>Datenschutzerklärung</h1>

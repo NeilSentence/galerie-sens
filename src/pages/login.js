@@ -4,7 +4,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="sctn sctn_login">
-				<h1 className="sctn_heading fallable">Login</h1>
+				<h1 className="sctn_heading delayed-fallable">Login</h1>
 			</div>
 		)
 	}

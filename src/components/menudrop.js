@@ -92,7 +92,7 @@ class Scene extends React.Component {
 			  			xPos = x; yPos = y
 			    		const box = Matter.Bodies.rectangle(xPos, yPos, width, height, {})
 			    		const randomAngularV = () => (Math.random()>0.5)? 1 : -1;
-			    		Body.setAngularVelocity( box, Math.PI/1000*randomAngularV());
+			    		Body.setAngularVelocity( box, Math.PI/10*randomAngularV());
 			    		return box
 			    	}
 		    	)
