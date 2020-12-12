@@ -31,6 +31,7 @@ class Scene extends React.Component {
   	componentDidMount(){
 
 	  	const runCode = () => {
+
 	  		const Body = Matter.Body
 			const fallables = document.querySelectorAll(".fallable")
 			const delayed_fallables = document.querySelectorAll(".delayed-fallable")

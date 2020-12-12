@@ -2,6 +2,11 @@
   font-family: 'Delius-Regular';
   src: local('Delius-Regular'), url(./fonts/Delius-Regular.ttf) format('truetype');
 }
+@font-face {
+  font-family: 'Runen';
+  src: local('Runen_germanisch'), url(./fonts/Runen_germanisch.ttf) format('truetype');
+}
+
 
 html,body {
   margin: 0;
@@ -75,7 +80,7 @@ body {
 }
 .sctn_artist .sctn_subheading {align-items: center;flex: 0 0 33.333%;}
 
-#mjs-wrapper {transition: background 0.2s ease;z-index: 1;}
+#mjs-wrapper {position:fixed;transition: background 0.2s ease;z-index: 1;}
 
 #mjs-wrapper ul {
   font-size: 14pt;
