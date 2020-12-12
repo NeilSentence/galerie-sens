@@ -24,7 +24,7 @@ const Dummy = () => {
 		setTimeout(rePaint, 500, el,tar,color)
 	}
 	return (
-		<div className='blocks dummies fallable' onTouchStart={switchColor} onMouseDown={switchColor} style={dummiesStyle()}></div>
+		<div className='blocks dummies fallable xposrandom' onTouchStart={switchColor} onMouseDown={switchColor} style={dummiesStyle()}></div>
 	)
 }
 

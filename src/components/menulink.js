@@ -9,7 +9,7 @@ const MenuLink = (props) => {
 	// TODO: nur .menulink h1 als quasi <a> link
 
 	return (
-		<Card className="blocks menulink fallable noselect" style={{
+		<Card className="blocks menulink fallable noselect xposrandom" style={{
 			height:120,
 			background:"#f1f1f1",
 			textAlign: "center",

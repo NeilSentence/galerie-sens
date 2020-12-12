@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import MyToolbar from './myToolbar'
+import PageTitle from './pageTitle'
 import MenuButton from './menuButton'
 import AdminButton from './adminButton'
 import Scene from './menudrop' 
@@ -8,7 +9,7 @@ import MenuLink from './menulink'
 
 const styles = {
 	outerStyleL: {width:"50%",display:"inline-block",position:"relative",left:"0"},
-	outerStyleR: {width:"50%",display:"inline-block",position:"relative",right:"0"},
+	outerStyleR: {width:"50%",display:"inline-block",position:"relative",right:"0",order: 3},
 	innerStyleL: {display:"flex", justifyContent:"flex-start"},
 	innerStyleR: {display:"flex", justifyContent:"flex-end"}
 }
@@ -25,8 +26,8 @@ class Menu extends Component {
 	}
 
 	numberOfDummies = 12
-
-	elements() {return <><MenuLink imgUrl="IMG/aquarell.jpg" href={"/"} titel="Aquarelle" beschreibung="Experimente mit Wasser und Farbe" /><MenuLink imgUrl="IMG/objekt.png" href={"/login"} titel="Objekte" beschreibung="Recyceltes aus dem frühen Industriezeitalter" /><MenuLink imgUrl="" href={"/artist"} titel="Künstlerprofil" beschreibung="Informationen über die Künstlerin" /></>}
+	// IMG/aquarell.jpg IMG/objekt.png
+	elements() {return <><MenuLink imgUrl="" href={"/"} titel="Aquarelle" beschreibung="Experimente mit Wasser und Farbe" /><MenuLink imgUrl="" href={"/login"} titel="Objekte" beschreibung="Recyceltes aus dem frühen Industriezeitalter" /><MenuLink imgUrl="" href={"/artist"} titel="zur Person" beschreibung="Informationen über die Künstlerin" /></>}
 
 	// ab hier bricht das Syntax-Highlighting zusammen weil elements JSX enthält.
 
@@ -52,7 +53,7 @@ class Menu extends Component {
 			<>
 				<AppBar>
 					<MyToolbar>
-						<h1 className="page_titel">Galerie Sens</h1>
+						<PageTitle classes="page_titel" href="/" text="Galerie Sens" />
 						<div style={styles.outerStyleL}>
 							<div style={styles.innerStyleL}>
 								<MenuButton onPress={this.handleClick} />

@@ -1,6 +1,11 @@
+@font-face {
+  font-family: 'Delius-Regular';
+  src: local('Delius-Regular'), url(./fonts/Delius-Regular.ttf) format('truetype');
+}
+
 html,body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: Delius-Regular, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -38,28 +43,35 @@ body {
   padding: 5em 10em;
 }
 
-.sctn_heading {background: #f1f1f1;z-index: 2}
+.sctn_heading {margin: 0 !important;}
+.sctn_heading, .greybg {z-index:2;background: #484848;color:lightgrey;padding:1.5rem 12px 1.5rem 12px;pointer-events: none;margin-left:1px;}
 /*
   NEVER USE MARGIN ON FALLABLE OBJECTS!
 */
-.fallable {margin: 0 !important;}
-.sctn_body {}
-.sctn_subheading {text-align: center;}
+.sctn_body {padding-top: 2em;}
+.sctn_subheading {text-align: center;font-size:1.3rem;display: flex;flex-flow:wrap;}
 
-.page_titel {margin:0;display:block;position:absolute;text-align:center;width:100%;left:0;color:#eeeeee;}
+.page_titel {cursor:pointer;order:2;margin:0;display:block;text-align:center;width:100%;color:#eeeeee;}
 .sctn_login {}
 /*.sctn_registrierung {margin-top:50px;}*/
 .sctn_impressum {}
 
 .sctn_artist {
-  background: url(assets/IMG/mama_feuer3.png);
-  background-size: cover;
-  background-position: center;
   height: 100vh;
-  color: #f2f2f2;
+  position: relative;
 }
-.sctn_artist .sctn_body {
-  display: flex;
+.sctn_artist:before {
+    background: url(assets/IMG/portrait.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    position: absolute;
+    content: ' ';
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 .sctn_artist .sctn_subheading {align-items: center;flex: 0 0 33.333%;}
 
@@ -81,4 +93,4 @@ body {
   background: blue;
 }
 #mjs-wrapper .menulink h1:hover {color: red;}
-#mjs-wrapper .menulink h1 {margin-left: 1em;}
+#mjs-wrapper .menulink h1 {width:100%;font-size: 2rem;}
