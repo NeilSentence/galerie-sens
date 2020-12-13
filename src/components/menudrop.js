@@ -20,7 +20,7 @@ class Scene extends React.Component {
 	      height:     'calc(100% - 50px)',
 	      width:      '100vw',
 	      position:   'fixed',
-	      background: 'rgba(255,255,255,0.5)'
+	      background: 'rgba(255,255,255,0.88)'
 	    },
 	    blocks: {},
 	    menulink: {
