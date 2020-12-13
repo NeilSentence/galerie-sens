@@ -44,7 +44,7 @@ class Scene extends React.Component {
 		  		// xx, yy, columns, rows, columnGap, rowGap, cb
 		  		0, 0, fallables.length, 1, 0, 0,
 		  		(xx, yy, i) => {
-		  			const {x, y, width, height} = fallables[i].getBoundingClientRect();
+		  			const { width, height } = fallables[i].getBoundingClientRect();
 		  			let xPos, yPos
 		  			xPos = Math.floor((Math.random() * (this.state.width-200)) + 1)
 		  			yPos = -this.state.height+200		
@@ -101,12 +101,45 @@ class Scene extends React.Component {
 			
 			setTimeout(addStuff, 2200);
 			
-			fallables.forEach(e => {
-				e.style.position = "absolute";
-		  		e.addEventListener("click", e => {
+			let origMouseX, origMouseY
+			let mouseHasMoved = false
+
+			fallables.forEach(el => {
+				el.style.position = "absolute";
+		  		el.addEventListener("mousedown", e => {
 		    		// hier soll dann etwas passieren. Es gibt aber schon den "navigate to href" Event Listener im Menulink Component
 		    		// man könnte noch irgendeinen Effekt der bei allen fallables passiert hier anbringen.
+		    		// TODO: get mouse position and navigate only when it hasn't changed much.
+		    		
+		    		const recordOrigMousePos = () => {
+			    		const event = window.event
+			    		origMouseX = event.pageX
+			    		origMouseY = event.pageY
+			    		// console.log(mouseHasMoved, origMouseX, origMouseY)
+		    		}
+		    		if (mouseHasMoved) recordOrigMousePos()
+
 		    	})
+		    	el.addEventListener("mousemove", e => {
+		    		mouseHasMoved = true
+		    	})
+		    	el.addEventListener("mouseup", e => {
+		    		// hier soll dann etwas passieren. Es gibt aber schon den "navigate to href" Event Listener im Menulink Component
+		    		// man könnte noch irgendeinen Effekt der bei allen fallables passiert hier anbringen.
+		    		// TODO: get mouse position and navigate only when it hasn't changed much.
+		    		const event = window.event
+		    		const newMouseX = event.pageX
+		    		const newMouseY = event.pageY
+		    		if (!( (newMouseX > origMouseX+5) || (newMouseY > origMouseY+5) || (newMouseY < origMouseY-5) || (newMouseX < origMouseX-5) )) {
+		    			// alert("OPosX:"+origMouseX+" OPosX:"+origMouseY+" NPosX:"+newMouseX+" NPosX:"+newMouseY)
+		    			// navigate to link target:
+		    			// hack: add class: "navigatable"
+		    			el.classList.add("clickable")
+		    			console.dir(el.classList)
+		    		}
+		    		mouseHasMoved = false
+		    	})
+		    	// TODO: garbage collect event listeners!
 			});    	
 
 			(function update() {

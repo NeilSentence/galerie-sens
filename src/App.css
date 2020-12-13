@@ -92,10 +92,10 @@ body {
 #mjs-wrapper .menulink {
   display: inline-block;
   padding: 1em;
-  cursor: move;
+  cursor: pointer;
+  background:lightgrey;
 }
 #mjs-wrapper .menulink:hover {
-  background: blue;
+  background:#f1f1f1;color:#545454;
 }
-#mjs-wrapper .menulink h1:hover {color: red;}
 #mjs-wrapper .menulink h1 {width:100%;font-size: 2rem;}

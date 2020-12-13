@@ -6,23 +6,28 @@ const MenuLink = (props) => {
 
 	const navigate = useNavigate()
 
+	const links = (e) => {if(e.target.classList.contains('clickable')){e.target.classList.remove('clickable');navigate(props.href)}}
+
 	return (
-		<Card className="blocks menulink fallable noselect xposrandom" style={{
-			height:120,
-			background:"#f1f1f1",
-			textAlign: "center",
-			display: "flex",
-			alignItems:"center",
-			textDecoration:"none",
-			width:400,
-			backgroundColor:"lightgrey",
-			background: `url(${props.imgUrl})`,
-			backgroundPosition: "right",
-			backgroundSize:"50%",
-			backgroundRepeat: "no-repeat"
+		<Card 
+			onTouchEnd={(e) => navigate(props.href)}
+			onClick={(el) => links(el)} 
+			className="blocks menulink fallable noselect xposrandom" 
+			style={{
+				height:120,
+				textAlign: "center",
+				display: "flex",
+				alignItems:"center",
+				textDecoration:"none",
+				width:400,
+				//backgroundColor:"lightgrey",
+				//background: `url(${props.imgUrl})`,
+				//backgroundPosition: "right",
+				backgroundSize:"50%",
+				backgroundRepeat: "no-repeat"
 		}}
 		>	
-			<h1 onTouchEnd={() => navigate(props.href)} onClick={() => navigate(props.href)}>{props.titel}</h1>
+			<h1>{props.titel}</h1>
 		</Card>
 	)
 }
