@@ -1,12 +1,10 @@
 import React from 'react'
-import { Card, Button } from '@material-ui/core'
+import { Card } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
 
 const MenuLink = (props) => {
 
 	const navigate = useNavigate()
-	
-	// TODO: nur .menulink h1 als quasi <a> link
 
 	return (
 		<Card className="blocks menulink fallable noselect xposrandom" style={{

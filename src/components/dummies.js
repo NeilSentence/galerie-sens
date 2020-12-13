@@ -12,6 +12,7 @@ const Dummy = () => {
 	    	return {width:70,height:70,background:'hsla('+hslaStr+')',top:0,left:20,position:"absolute"}
 	}
 	const switchColor = (e) => {
+		e.preventDefault();
 		const color = e.target.style.background
 		let tar = e.target
 		let el = document.getElementById("mjs-wrapper")
