@@ -98,4 +98,4 @@ body {
 #mjs-wrapper .menulink:hover {
   background:#f1f1f1;color:#545454;
 }
-#mjs-wrapper .menulink h1 {width:100%;font-size: 2rem;}
+#mjs-wrapper .menulink h1 {width:100%;font-size: 2rem;pointer-events: none;}
