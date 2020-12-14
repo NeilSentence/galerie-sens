@@ -10,7 +10,7 @@ const MenuLink = (props) => {
 
 	return (
 		<Card 
-			onTouchEnd={(e) => links(el)}
+			onTouchEnd={(el) => links(el)}
 			onClick={(el) => links(el)} 
 			className="blocks menulink fallable noselect xposrandom" 
 			style={{
