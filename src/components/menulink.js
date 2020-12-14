@@ -14,12 +14,12 @@ const MenuLink = (props) => {
 			onClick={(el) => links(el)} 
 			className="blocks menulink fallable noselect xposrandom" 
 			style={{
-				height:120,
+				height:90,
 				textAlign: "center",
 				display: "flex",
 				alignItems:"center",
 				textDecoration:"none",
-				width:400,
+				width:300,
 				//backgroundColor:"lightgrey",
 				//background: `url(${props.imgUrl})`,
 				//backgroundPosition: "right",

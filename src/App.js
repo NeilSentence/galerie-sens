@@ -58,10 +58,10 @@ class App extends Component {
             <div className="container">
               <Routes>
                 <Route exact path='/' element={<Home />} />
-                <Route exact path='/bilder/aquarelle' element={<Bilderwand titel={'Aquarelle'} beschreibung='Experimente mit Wasser und Farbe' tag={'aquarell'} bilder={this.bilder.aquarell} />} />
-                <Route exact path='/bilder/objekte' element={<Bilderwand titel={'Objektkunst'} beschreibung='Recyceltes aus dem frühen Industriezeitalter' tag={'objekt'} bilder={this.bilder.objekte} />} />
-                <Route exact path='/bilder/acryl' element={<Bilderwand titel={'Acrylmalerei'} beschreibung='Kunststoffdispersionismus' tag={'acryl'} bilder={this.bilder.acryl} />} />
-                <Route exact path='/bilder/suesses' element={<Bilderwand titel={'Süßstoff'} beschreibung='Süßes und Saures in bunter Mischung' tag={'suesses'} bilder={this.bilder.suesses} />} />
+                <Route exact path='/bilder/aquarelle' element={<Bilderwand key='1' titel={'Aquarelle'} beschreibung='Experimente mit Wasser und Farbe' tag={'aquarell'} bilder={this.bilder.aquarell} />} />
+                <Route exact path='/bilder/objekte' element={<Bilderwand key='2' titel={'Objektkunst'} beschreibung='Recyceltes aus dem frühen Industriezeitalter' tag={'objekt'} bilder={this.bilder.objekte} />} />
+                <Route exact path='/bilder/acryl' element={<Bilderwand key='3' titel={'Acrylmalerei'} beschreibung='Kunststoffdispersionismus' tag={'acryl'} bilder={this.bilder.acryl} />} />
+                <Route exact path='/bilder/suesses' element={<Bilderwand key='4' titel={'Süßstoff'} beschreibung='Süßes und Saures in bunter Mischung' tag={'suesses'} bilder={this.bilder.suesses} />} />
 
                 <Route exact path='/impressum' element={<Impressum />} />
                 <Route exact path='/login' element={<Login />} />
