@@ -100,7 +100,6 @@ class Scene extends React.Component {
 			}
 			
 			setTimeout(addStuff, 2200);
-			
 			let origMouseX, origMouseY
 			let mouseHasMoved = false
 
