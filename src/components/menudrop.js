@@ -119,10 +119,43 @@ class Scene extends React.Component {
 		    		if (mouseHasMoved) recordOrigMousePos()
 
 		    	})
+		    	el.addEventListener("touchstart", e => {
+		    		// hier soll dann etwas passieren. Es gibt aber schon den "navigate to href" Event Listener im Menulink Component
+		    		// man könnte noch irgendeinen Effekt der bei allen fallables passiert hier anbringen.
+		    		// TODO: get mouse position and navigate only when it hasn't changed much.
+		    		
+		    		const recordOrigMousePos = () => {
+			    		const event = window.event
+			    		origMouseX = event.pageX
+			    		origMouseY = event.pageY
+			    		// console.log(mouseHasMoved, origMouseX, origMouseY)
+		    		}
+		    		if (mouseHasMoved) recordOrigMousePos()
+
+		    	})
 		    	el.addEventListener("mousemove", e => {
 		    		mouseHasMoved = true
 		    	})
+		    	el.addEventListener("touchmove", e => {
+		    		mouseHasMoved = true
+		    	})
 		    	el.addEventListener("mouseup", e => {
+		    		// hier soll dann etwas passieren. Es gibt aber schon den "navigate to href" Event Listener im Menulink Component
+		    		// man könnte noch irgendeinen Effekt der bei allen fallables passiert hier anbringen.
+		    		// TODO: get mouse position and navigate only when it hasn't changed much.
+		    		const event = window.event
+		    		const newMouseX = event.pageX
+		    		const newMouseY = event.pageY
+		    		if (!( (newMouseX > origMouseX+5) || (newMouseY > origMouseY+5) || (newMouseY < origMouseY-5) || (newMouseX < origMouseX-5) )) {
+		    			// alert("OPosX:"+origMouseX+" OPosX:"+origMouseY+" NPosX:"+newMouseX+" NPosX:"+newMouseY)
+		    			// navigate to link target:
+		    			// hack: add class: "navigatable"
+		    			el.classList.add("clickable")
+		    			console.dir(el.classList)
+		    		}
+		    		mouseHasMoved = false
+		    	})
+		    	el.addEventListener("touchend", e => {
 		    		// hier soll dann etwas passieren. Es gibt aber schon den "navigate to href" Event Listener im Menulink Component
 		    		// man könnte noch irgendeinen Effekt der bei allen fallables passiert hier anbringen.
 		    		// TODO: get mouse position and navigate only when it hasn't changed much.
