@@ -27,7 +27,14 @@ class Menu extends Component {
 
 	numberOfDummies = 12
 	// IMG/aquarell.jpg IMG/objekt.png
-	elements() {return <><MenuLink imgUrl="" href={"/"} titel="Aquarelle" beschreibung="Experimente mit Wasser und Farbe" /><MenuLink imgUrl="" href={"/login"} titel="Objekte" beschreibung="Recyceltes aus dem frühen Industriezeitalter" /><MenuLink imgUrl="" href={"/kuenstlerin"} titel="zur Person" beschreibung="Informationen über die Künstlerin" /></>}
+	elements() {
+		return <>
+			<MenuLink imgUrl="" href={"/bilder/aquarelle"} titel="Aquarelle" />
+			<MenuLink imgUrl="" href={"/bilder/objekte"} titel="Objektkunst" />
+			<MenuLink imgUrl="" href={"/bilder/acryl"} titel="Acrylmalerei" />
+			<MenuLink imgUrl="" href={"/bilder/suesses"} titel="Süßstoff" />
+			<MenuLink imgUrl="" href={"/kuenstlerin"} titel="zur Person" />
+		</>}
 
 	// ab hier bricht das Syntax-Highlighting zusammen weil elements JSX enthält.
 
