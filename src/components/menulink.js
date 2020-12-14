@@ -6,11 +6,11 @@ const MenuLink = (props) => {
 
 	const navigate = useNavigate()
 
-	const links = (e) => {if(e.target.classList.contains('clickable')){e.target.classList.remove('clickable');navigate(props.href)}}
+	const links = (e) => {e.preventDefault(); if(e.target.classList.contains('clickable')){e.target.classList.remove('clickable');navigate(props.href)}}
 
 	return (
 		<Card 
-			onTouchEnd={(el) => links(el)}
+			onTouchStart={(el) => links(el)}
 			onClick={(el) => links(el)} 
 			className="blocks menulink fallable noselect xposrandom" 
 			style={{

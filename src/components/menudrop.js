@@ -109,12 +109,11 @@ class Scene extends React.Component {
 		    		// hier soll dann etwas passieren. Es gibt aber schon den "navigate to href" Event Listener im Menulink Component
 		    		// man könnte noch irgendeinen Effekt der bei allen fallables passiert hier anbringen.
 		    		// TODO: get mouse position and navigate only when it hasn't changed much.
-		    		
 		    		const recordOrigMousePos = () => {
 			    		const event = window.event
 			    		origMouseX = event.pageX
 			    		origMouseY = event.pageY
-			    		// console.log(mouseHasMoved, origMouseX, origMouseY)
+			    		// DEBUG: console.log(mouseHasMoved, origMouseX, origMouseY)
 		    		}
 		    		if (mouseHasMoved) recordOrigMousePos()
 
@@ -123,20 +122,22 @@ class Scene extends React.Component {
 		    		// hier soll dann etwas passieren. Es gibt aber schon den "navigate to href" Event Listener im Menulink Component
 		    		// man könnte noch irgendeinen Effekt der bei allen fallables passiert hier anbringen.
 		    		// TODO: get mouse position and navigate only when it hasn't changed much.
-		    		
+		    		e.preventDefault()
 		    		const recordOrigMousePos = () => {
 			    		const event = window.event
-			    		origMouseX = event.pageX
-			    		origMouseY = event.pageY
-			    		// console.log(mouseHasMoved, origMouseX, origMouseY)
+			    		// DEBUG: console.dir(event) // get touch event
+			    		origMouseX = event.changedTouches[0].pageX
+			    		origMouseY = event.changedTouches[0].pageY
+			    		// DEBUG: console.log(mouseHasMoved, origMouseX, origMouseY)
 		    		}
-		    		if (mouseHasMoved) recordOrigMousePos()
+		    		if (!mouseHasMoved) recordOrigMousePos()
 
 		    	})
 		    	el.addEventListener("mousemove", e => {
 		    		mouseHasMoved = true
 		    	})
 		    	el.addEventListener("touchmove", e => {
+		    		e.preventDefault()
 		    		mouseHasMoved = true
 		    	})
 		    	el.addEventListener("mouseup", e => {
@@ -147,11 +148,11 @@ class Scene extends React.Component {
 		    		const newMouseX = event.pageX
 		    		const newMouseY = event.pageY
 		    		if (!( (newMouseX > origMouseX+5) || (newMouseY > origMouseY+5) || (newMouseY < origMouseY-5) || (newMouseX < origMouseX-5) )) {
-		    			// alert("OPosX:"+origMouseX+" OPosX:"+origMouseY+" NPosX:"+newMouseX+" NPosX:"+newMouseY)
+		    			// DEBUG: alert("OPosX:"+origMouseX+" OPosX:"+origMouseY+" NPosX:"+newMouseX+" NPosX:"+newMouseY)
 		    			// navigate to link target:
 		    			// hack: add class: "navigatable"
 		    			el.classList.add("clickable")
-		    			console.dir(el.classList)
+		    			// DEBUG: console.dir(el.classList)
 		    		}
 		    		mouseHasMoved = false
 		    	})
@@ -159,15 +160,16 @@ class Scene extends React.Component {
 		    		// hier soll dann etwas passieren. Es gibt aber schon den "navigate to href" Event Listener im Menulink Component
 		    		// man könnte noch irgendeinen Effekt der bei allen fallables passiert hier anbringen.
 		    		// TODO: get mouse position and navigate only when it hasn't changed much.
+		    		e.preventDefault()
 		    		const event = window.event
 		    		const newMouseX = event.pageX
 		    		const newMouseY = event.pageY
 		    		if (!( (newMouseX > origMouseX+5) || (newMouseY > origMouseY+5) || (newMouseY < origMouseY-5) || (newMouseX < origMouseX-5) )) {
-		    			// alert("OPosX:"+origMouseX+" OPosX:"+origMouseY+" NPosX:"+newMouseX+" NPosX:"+newMouseY)
+		    			// DEBUG: alert("OPosX:"+origMouseX+" OPosX:"+origMouseY+" NPosX:"+newMouseX+" NPosX:"+newMouseY)
 		    			// navigate to link target:
 		    			// hack: add class: "navigatable"
 		    			el.classList.add("clickable")
-		    			console.dir(el.classList)
+		    			// DEBUG: console.dir(el.classList)
 		    		}
 		    		mouseHasMoved = false
 		    	})
@@ -229,3 +231,17 @@ class Scene extends React.Component {
 	}
 }
 export default Scene
+
+
+/*
+
+ if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        x = touch.pageX;
+        y = touch.pageY;
+    } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+        x = e.clientX;
+        y = e.clientY;
+    }
+
+*/
