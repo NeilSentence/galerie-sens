@@ -130,7 +130,7 @@ class Scene extends React.Component {
 			    		origMouseY = event.changedTouches[0].pageY
 			    		// DEBUG: console.log(mouseHasMoved, origMouseX, origMouseY)
 		    		}
-		    		if (!mouseHasMoved) recordOrigMousePos()
+		    		if (mouseHasMoved) recordOrigMousePos()
 
 		    	})
 		    	el.addEventListener("mousemove", e => {
@@ -162,8 +162,8 @@ class Scene extends React.Component {
 		    		// TODO: get mouse position and navigate only when it hasn't changed much.
 		    		e.preventDefault()
 		    		const event = window.event
-		    		const newMouseX = event.pageX
-		    		const newMouseY = event.pageY
+		    		const newMouseX = event.changedTouches[0].pageX
+			    	const newMouseY = event.changedTouches[0].pageY
 		    		if (!( (newMouseX > origMouseX+5) || (newMouseY > origMouseY+5) || (newMouseY < origMouseY-5) || (newMouseX < origMouseX-5) )) {
 		    			// DEBUG: alert("OPosX:"+origMouseX+" OPosX:"+origMouseY+" NPosX:"+newMouseX+" NPosX:"+newMouseY)
 		    			// navigate to link target:
