@@ -2,6 +2,17 @@ import React from "react"
 import Matter from "matter-js"
 import Dummy from './dummies'
 
+
+/*
+	set menu display state to false:
+	this.props.toggle({menuDrop:false})
+
+	get current state:
+	this.props.state()
+*/
+
+
+
 class Scene extends React.Component {
 	constructor(props){
 		super(props)
@@ -10,7 +21,7 @@ class Scene extends React.Component {
 	      	height: window.innerHeight,
 	      	width: window.innerWidth,
 	    }
-	    window.addEventListener("resize", this.update)
+	    window.addEventListener("resize", this.updateDimensions)
 	}
 
 	style = {
@@ -34,31 +45,46 @@ class Scene extends React.Component {
 	  		const Body = Matter.Body
 			const fallables = document.querySelectorAll(".fallable")
 			const delayed_fallables = document.querySelectorAll(".delayed-fallable")
+			const super_delayed_fallables = document.querySelectorAll(".super-delayed-fallable")
 
 			// switch var for left / right side image drop:
 			// let xPosSwitch = true
-			const engine = Matter.Engine.create({positionIterations: 2})
+			const engine = Matter.Engine.create({positionIterations:10,velocityIterations:8})
 
-			const stack1 = Matter.Composites.stack(	
+			const menulinks = Matter.Composites.stack(	
 		  		// xx, yy, columns, rows, columnGap, rowGap, cb
 		  		0, 0, fallables.length, 1, 0, 0,
 		  		(xx, yy, i) => {
 		  			const { width, height } = fallables[i].getBoundingClientRect();
-		  			let xPos, yPos
-		  			xPos = Math.floor((Math.random() * (this.state.width-200)) + 1)
-		  			yPos = -this.state.height+200		
+		  			const xPos = Math.floor((Math.random() * (this.state.width-200)) + 1)
+		  			const yPos = -this.state.height+200		
 		    		const box = Matter.Bodies.rectangle(xPos, yPos, width, height, {
 		      			//isStatic: i === 0 || i + 1 === fallables.length
 		    		})
 		    		const randomAngularV = () => (Math.random()>0.5)? 1 : -1;
-
-		    		if (fallables[i].classList.contains('dummies')) {console.log("yo");Body.setAngularVelocity( box, Math.PI/5*randomAngularV())}
-		    		else Body.setAngularVelocity( box, Math.PI/500*randomAngularV())
+		    		Body.setAngularVelocity( box, Math.PI/500*randomAngularV())
 		    		return box
 		    	}
 		    )	
+		    const colorblocks = Matter.Composites.stack(	
+			  		0, 0, super_delayed_fallables.length, 1, 0, 0,
+			  		(xx, yy, i) => {
+			  			const { width, height } = super_delayed_fallables[i].getBoundingClientRect();
+			  			const xPos = Math.floor((Math.random() * (this.state.width-200)) + 1)
+		  				const yPos = -this.state.height+200	
+			    		const box = Matter.Bodies.rectangle(xPos, yPos, width, height, {isStatic:true})
+			    		const randomAngularV = () => (Math.random()>0.5)? 1 : -1;
+			    		Body.setAngularVelocity( box, Math.PI/5*randomAngularV());
+			    		return box
+			    	}
+		    	)
+				Matter.World.add(engine.world,[colorblocks])
 
-			// console.log(typeof stack1) 'object'
+				super_delayed_fallables.forEach(e => {
+		  			e.style.position = "absolute"
+				})
+
+			// console.log(typeof menulinks) 'object'
 		    const wallThickness = 100
 			const wallHeight = this.state.height*2
 			const wallY = 0
@@ -75,13 +101,13 @@ class Scene extends React.Component {
 	  			engine, {element: document.querySelector("#mjs-wrapper")}
 			)
 
-			Matter.World.add(engine.world, [stack1, mouseConstraint, floor, wallL, wallR, ceil])
+			Matter.World.add(engine.world, [menulinks, mouseConstraint, floor, wallL, wallR, ceil])
 			
-			let stack2 = false
+			let htmlblocks = false
 
 			const addStuff = () => {
 
-				stack2 = Matter.Composites.stack(	
+				htmlblocks = Matter.Composites.stack(	
 			  		0, 0, delayed_fallables.length, 1, 0, 0,
 			  		(xx, yy, i) => {
 			  			const {x, y, width, height} = delayed_fallables[i].getBoundingClientRect();
@@ -93,14 +119,31 @@ class Scene extends React.Component {
 			    		return box
 			    	}
 		    	)
-				Matter.World.add(engine.world,[stack2])
+				Matter.World.add(engine.world,[htmlblocks])
 
 				delayed_fallables.forEach(e => {
 		  			e.style.position = "absolute"
 				})
 			}
+
+			const dropColors = () => {
+
+				colorblocks.bodies.forEach((block) => {
+					Matter.Body.setStatic(block, false)	
+				
+				// mach sie nur noch isStatic:false
+				})
+			}
+
 			
-			setTimeout(addStuff, 2200);
+			const removeStuff = wovon => {
+				// this.props.toggle({menuDrop:false})
+				const removeHTMLfromWorld = this.props.stateRemoveNonMenu
+				if (removeHTMLfromWorld === true) Matter.Composite.clear(wovon, false)
+			}
+			setTimeout(addStuff, 2000)
+			setTimeout(dropColors, 3200)
+
 			let origMouseX, origMouseY
 			let mouseHasMoved = false
 
@@ -175,15 +218,20 @@ class Scene extends React.Component {
 		    		mouseHasMoved = false
 		    	})
 		    	// TODO: garbage collect event listeners!
-		    	const wrld = Matter
-		    	console.dir(wrld)
 			});    	
 
 			(function update() {
 		  		requestAnimationFrame(update)
 
-			  	stack1.bodies.forEach((block, i) => {
+			  	menulinks.bodies.forEach((block, i) => {
 				    const thisFallable = fallables[i]
+
+				    /*
+				    TODO: adjust size of object on updaste to adjust for changing text blocks:
+				    const { width, height } = fallables[i].getBoundingClientRect();
+				    */
+				    
+
 				    const {x, y} = block.vertices[0]
 				    thisFallable.style.top = `${y}px`
 				    thisFallable.style.left = `${x}px`
@@ -191,9 +239,25 @@ class Scene extends React.Component {
 			                             rotate(${block.angle}rad) 
 			                             translate(50%, 50%)`
 				});
+				colorblocks.bodies.forEach((block, i) => {
+				    const thisFallable = super_delayed_fallables[i]
 
-				if (typeof stack2 === 'object') {
-						stack2.bodies.forEach((block, i) => {
+				    /*
+				    TODO: adjust size of object on updaste to adjust for changing text blocks:
+				    const { width, height } = fallables[i].getBoundingClientRect();
+				    */
+				    
+
+				    const {x, y} = block.vertices[0]
+				    thisFallable.style.top = `${y}px`
+				    thisFallable.style.left = `${x}px`
+				    thisFallable.style.transform = `translate(-50%, -50%) 
+			                             rotate(${block.angle}rad) 
+			                             translate(50%, 50%)`
+				});
+				if (typeof htmlblocks === 'object') {
+					removeStuff(htmlblocks)
+						htmlblocks.bodies.forEach((block, i) => {
 					    const thisFallable = delayed_fallables[i]
 					    const {x, y} = block.vertices[0]
 					    //console.log(y)
@@ -207,12 +271,11 @@ class Scene extends React.Component {
 	  			Matter.Engine.update(engine)
 			})();
 		}
-  	
 		runCode()
-		this.update()
+		this.updateDimensions()
 	}
 
-	update = () => {
+	updateDimensions = () => {
     	this.setState({
 	      	height: window.innerHeight,
 	      	width: window.innerWidth

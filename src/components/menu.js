@@ -20,12 +20,12 @@ class Menu extends Component {
 	constructor() {
 		// muss dort props rein, in constructor & super?
 		super()
-		this.state = {menuDrop:false}
+		this.state = {menuDrop:false, removeNonMenuStuff:false}
 		this.handleClick = this.handleClick.bind(this)
 		this.killMenu = this.killMenu.bind(this)
 	}
 
-	numberOfDummies = 12
+	numberOfDummies = 52
 	// IMG/aquarell.jpg IMG/objekt.png
 	elements() {
 		return <>
@@ -51,15 +51,18 @@ class Menu extends Component {
   		})
   	}
   	// erst wieder verwendet wenn es admin buttons (login usw gibt. dort nervt das Menü)
+  	
   	killMenu() {
-  		this.setState(prevState => {
-			return {
-				menuDrop:false
-			}			
-  		})
+  		this.setState({menuDrop:false})
+  	}
+  	menuAlfredo() {
+  		setTimeout(() => this.setState({menuDrop:true}),10000)
+  		
   	}
 
-
+  	componentDidMount(){this.menuAlfredo()}
+	
+  	
   	render() {
   		return (
 			<>
@@ -79,10 +82,9 @@ class Menu extends Component {
 						</div>
 					</MyToolbar>
 				</AppBar>
-				{this.state.menuDrop ? <Scene elements={this.elements()} numberOfDummies={this.numberOfDummies} menudrop={p=>{this.setState(p)}} /> : <div></div>}
+				{this.state.menuDrop ? <Scene elements={this.elements()} numberOfDummies={this.numberOfDummies} stateMenu={()=>{return this.state.menuDrop}} stateRemoveNonMenu={()=>{return this.state.removeNonMenuStuff}} toggle={p=>{this.setState(p)}} /> : <div></div>}
 			</>
 		)	
   	}	
 }
-
 export default Menu

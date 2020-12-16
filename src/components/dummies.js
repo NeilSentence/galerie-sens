@@ -1,9 +1,11 @@
 import React from 'react'
 
+const randomSize = () => {return Math.floor((Math.random() * 90) + 30)}
+
 const Dummy = () => {
 
 	const randomHue = () => {return Math.floor((Math.random() * 360) + 0)}
-	const randomSize = () => {return Math.floor((Math.random() * 90) + 30)}
+	
 	const hsla = hue => {return `${hue},43%,62%,1`}
 	//const breitehoehe = () => {return  Math.floor((Math.random() * 120) + 50)}
 	const dummiesStyle = () => {
@@ -11,7 +13,7 @@ const Dummy = () => {
 	    	//console.log(breiteHoehe)
 	    	const hslaStr = hsla(randomHue())
 	    	const randmSzStr = randomSize()
-	    	return {width:randmSzStr,height:randmSzStr,background:'hsla('+hslaStr+')',top:0,left:20,position:"absolute"}
+	    	return {width:50,height:50,background:'hsla('+hslaStr+')',top:0,left:20,position:"absolute"}
 	}
 	const switchColor = (e) => {
 		e.preventDefault();
@@ -27,7 +29,7 @@ const Dummy = () => {
 		setTimeout(rePaint, 500, el,tar,color)
 	}
 	return (
-		<div className='blocks dummies fallable xposrandom' onTouchStart={switchColor} onMouseDown={switchColor} style={dummiesStyle()}></div>
+		<div className='blocks dummies super-delayed-fallable xposrandom' onTouchStart={switchColor} onMouseDown={switchColor} style={dummiesStyle()}></div>
 	)
 }
 

@@ -23,7 +23,7 @@ const useStyles = makeStyles(styles)
 const AdminButton = (props) => {
 	const navigate = useNavigate()
 	const classes = useStyles()
-	return (<Button onClick={() => navigate(props.href)} className={classes.root}>{props.text}</Button>)
+	return (<Button onClick={() => {props.onPress();navigate(props.href)}} className={classes.root}>{props.text}</Button>)
 }
 
 export default AdminButton
