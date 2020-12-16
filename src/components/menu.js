@@ -40,6 +40,11 @@ class Menu extends Component {
 
   	handleClick() {
   		this.setState(prevState => {
+  			// immer, wenn der Menüknopf geklickt wird,
+  			// und es sich schließen soll,
+  			// werden die delayed-fallables mit der class "remove-fallable" versehen.
+  			// diese werden in menuDrop.js dann nicht zur Welt hinzugefügt
+  			// TODO: if(!menuDrop){foreach delayed-fallable:.classList.add("fallen")}    it.classList.contains("fallen"), remove ) all delayed-fallables will get class  
 			return {
 				menuDrop:!prevState.menuDrop
 			}			

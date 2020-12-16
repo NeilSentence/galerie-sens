@@ -31,14 +31,13 @@ class Scene extends React.Component {
   	componentDidMount(){
 
 	  	const runCode = () => {
-
 	  		const Body = Matter.Body
 			const fallables = document.querySelectorAll(".fallable")
 			const delayed_fallables = document.querySelectorAll(".delayed-fallable")
 
 			// switch var for left / right side image drop:
 			// let xPosSwitch = true
-			const engine = Matter.Engine.create()
+			const engine = Matter.Engine.create({positionIterations: 2})
 
 			const stack1 = Matter.Composites.stack(	
 		  		// xx, yy, columns, rows, columnGap, rowGap, cb
@@ -52,7 +51,9 @@ class Scene extends React.Component {
 		      			//isStatic: i === 0 || i + 1 === fallables.length
 		    		})
 		    		const randomAngularV = () => (Math.random()>0.5)? 1 : -1;
-		    		Body.setAngularVelocity( box, Math.PI/1000*randomAngularV());
+
+		    		if (fallables[i].classList.contains('dummies')) {console.log("yo");Body.setAngularVelocity( box, Math.PI/5*randomAngularV())}
+		    		else Body.setAngularVelocity( box, Math.PI/500*randomAngularV())
 		    		return box
 		    	}
 		    )	
@@ -88,7 +89,7 @@ class Scene extends React.Component {
 			  			xPos = x; yPos = y
 			    		const box = Matter.Bodies.rectangle(xPos, yPos, width, height, {})
 			    		const randomAngularV = () => (Math.random()>0.5)? 1 : -1;
-			    		Body.setAngularVelocity( box, Math.PI/10*randomAngularV());
+			    		Body.setAngularVelocity( box, Math.PI/1000*randomAngularV());
 			    		return box
 			    	}
 		    	)
@@ -174,6 +175,8 @@ class Scene extends React.Component {
 		    		mouseHasMoved = false
 		    	})
 		    	// TODO: garbage collect event listeners!
+		    	const wrld = Matter
+		    	console.dir(wrld)
 			});    	
 
 			(function update() {

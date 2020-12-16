@@ -1,12 +1,13 @@
 import React from 'react'
 import { Card } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
+import Matter from "matter-js"
 
 const MenuLink = (props) => {
 
 	const navigate = useNavigate()
-
-	const links = (e) => {e.preventDefault(); if(e.target.classList.contains('clickable')){e.target.classList.remove('clickable');navigate(props.href)}}
+	//const wrld = Matter.Composite.allBodies()
+	const links = (e) => {e.preventDefault(); if(e.target.classList.contains('clickable')){console.dir("");e.target.classList.remove('clickable');navigate(props.href)}}
 
 	return (
 		<Card 

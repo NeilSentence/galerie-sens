@@ -3,13 +3,15 @@ import React from 'react'
 const Dummy = () => {
 
 	const randomHue = () => {return Math.floor((Math.random() * 360) + 0)}
+	const randomSize = () => {return Math.floor((Math.random() * 90) + 30)}
 	const hsla = hue => {return `${hue},43%,62%,1`}
 	//const breitehoehe = () => {return  Math.floor((Math.random() * 120) + 50)}
 	const dummiesStyle = () => {
 	    	//const breiteHoehe = breitehoehe() 
 	    	//console.log(breiteHoehe)
 	    	const hslaStr = hsla(randomHue())
-	    	return {width:70,height:70,background:'hsla('+hslaStr+')',top:0,left:20,position:"absolute"}
+	    	const randmSzStr = randomSize()
+	    	return {width:randmSzStr,height:randmSzStr,background:'hsla('+hslaStr+')',top:0,left:20,position:"absolute"}
 	}
 	const switchColor = (e) => {
 		e.preventDefault();
