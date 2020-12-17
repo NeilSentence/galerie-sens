@@ -39,7 +39,16 @@ body {
   width: 100vw;
   height: 100vh;
 }
-.container {position:absolute;width:100%;height:calc(100vh - 50px);top:50px}
+.MuiAppBar-positionFixed {color: #232323;
+    box-shadow: none;
+    background: none;}
+
+.MuiAppBar-colorPrimary {
+  box-shadow: none !important;
+  background: none !important;
+}
+.MuiPaper-elevation1 {box-shadow: none !important}
+.container {position:absolute;width:100%;height:100vh;}
 .sctn {
   display: flex;
   align-items: center;
@@ -56,7 +65,7 @@ body {
 .sctn_body {padding-top: 2em;}
 .sctn_subheading {text-align: center;font-size:1.3rem;display: flex;flex-flow:wrap;}
 
-.page_titel {cursor:pointer;order:2;margin:0;display:block;text-align:center;width:100%;color:#eeeeee;}
+.page_titel {cursor:pointer;order:2;margin:0;display:block;text-align:center;width:100%;color:#787878;}
 .sctn_login {}
 /*.sctn_registrierung {margin-top:50px;}*/
 .sctn_impressum {}
@@ -80,7 +89,7 @@ body {
 }
 .sctn_artist .sctn_subheading {align-items: center;flex: 0 0 33.333%;}
 
-#mjs-wrapper {position:fixed;transition: background 0.2s ease;z-index: 1;}
+#mjs-wrapper {overflow:hidden;position:fixed;transition: background 0.2s ease;z-index: 1;}
 
 #mjs-wrapper ul {
   font-size: 14pt;

@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 
 const styles = {
 	root: {
-		background: '#333333',
+		background: 'none',
 		display: 'flex',
 		minHeight: '50px'
 	}

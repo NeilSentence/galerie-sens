@@ -1,19 +1,16 @@
 import React from 'react'
 
-const randomSize = () => {return Math.floor((Math.random() * 90) + 30)}
+const randomSize = () => {return Math.floor((Math.random() * 75) + 25)}
 
 const Dummy = () => {
 
 	const randomHue = () => {return Math.floor((Math.random() * 360) + 0)}
-	
 	const hsla = hue => {return `${hue},43%,62%,1`}
-	//const breitehoehe = () => {return  Math.floor((Math.random() * 120) + 50)}
 	const dummiesStyle = () => {
-	    	//const breiteHoehe = breitehoehe() 
-	    	//console.log(breiteHoehe)
 	    	const hslaStr = hsla(randomHue())
 	    	const randmSzStr = randomSize()
-	    	return {width:50,height:50,background:'hsla('+hslaStr+')',top:0,left:20,position:"absolute"}
+	    	// DEBUG: console.log("Called in: dummies.js; breiteHoehe: "+randmSzStr)
+	    	return {width:randmSzStr,height:randmSzStr,background:'hsla('+hslaStr+')',top:-5000,left:20,position:"absolute"}
 	}
 	const switchColor = (e) => {
 		e.preventDefault();

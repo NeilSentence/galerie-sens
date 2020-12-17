@@ -20,12 +20,13 @@ class Menu extends Component {
 	constructor() {
 		// muss dort props rein, in constructor & super?
 		super()
-		this.state = {menuDrop:false, removeNonMenuStuff:false}
+		this.state = {manualSet:false,menuDrop:false, removeNonMenuHtml:false}
 		this.handleClick = this.handleClick.bind(this)
 		this.killMenu = this.killMenu.bind(this)
+		this.menuAlfredo = this.menuAlfredo.bind(this)
 	}
 
-	numberOfDummies = 52
+	numberOfDummies = 32
 	// IMG/aquarell.jpg IMG/objekt.png
 	elements() {
 		return <>
@@ -46,7 +47,7 @@ class Menu extends Component {
   			// diese werden in menuDrop.js dann nicht zur Welt hinzugefügt
   			// TODO: if(!menuDrop){foreach delayed-fallable:.classList.add("fallen")}    it.classList.contains("fallen"), remove ) all delayed-fallables will get class  
 			return {
-				menuDrop:!prevState.menuDrop
+				menuDrop:!prevState.menuDrop, manualSet:true
 			}			
   		})
   	}
@@ -56,7 +57,7 @@ class Menu extends Component {
   		this.setState({menuDrop:false})
   	}
   	menuAlfredo() {
-  		setTimeout(() => this.setState({menuDrop:true}),10000)
+  		setTimeout(() => {if(!this.state.manualSet) this.setState({menuDrop:true})},6500)
   		
   	}
 
@@ -82,7 +83,7 @@ class Menu extends Component {
 						</div>
 					</MyToolbar>
 				</AppBar>
-				{this.state.menuDrop ? <Scene elements={this.elements()} numberOfDummies={this.numberOfDummies} stateMenu={()=>{return this.state.menuDrop}} stateRemoveNonMenu={()=>{return this.state.removeNonMenuStuff}} toggle={p=>{this.setState(p)}} /> : <div></div>}
+				{this.state.menuDrop ? <Scene elements={this.elements()} numberOfDummies={this.numberOfDummies} stateMenu={()=>{return this.state.menuDrop}} willNonMenuHtmlbeRemoved={()=>{return this.state.removeNonMenuHtml}} toggle={p=>{this.setState(p)}} /> : <div></div>}
 			</>
 		)	
   	}	
