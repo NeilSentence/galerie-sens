@@ -23,7 +23,7 @@ const MenuButton = (props) => {
 	const classes = useStyles()
 	return <Button 
 		className={classes.root} 
-		onTouchStart={(el) => {el.preventDefault();click()}}
+		onTouchStart={(el) => {click()}}
 		onClick={(el) => {el.preventDefault();click()}}
 	>Menü</Button>
 }

@@ -248,13 +248,13 @@ class Scene extends React.Component {
 			updateBoxes(colorblocks,super_delayed_fallables)
 			
 			if (!this.props.removeNonMenuHtml()){
-				console.log("removeNonMenuHtml false")
+				// DEBUG: console.log("removeNonMenuHtml false")
 				// each render cycle: declare new delayed fallables:				
 				updateBoxes(htmlblocks,delayed_fallables)
 			}
 			else {
-				console.log("removeNonMenuHtml true")
-				Matter.Composite.clear(htmlblocks, false)
+				// DEBUG: console.log("removeNonMenuHtml true")
+				if (typeof htmlblocks === 'object') Matter.Composite.clear(htmlblocks, false)
 			}
   			Engine.update(engine)
   			window.requestAnimationFrame(update)

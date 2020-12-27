@@ -19,7 +19,7 @@ const MenuLink = (props) => {
 
 	return (
 		<Card 
-			onTouchStart={(el) => {el.preventDefault();links(el)}}
+			onTouchStart={(el) => {links(el)}}
 			onClick={(el) => {el.preventDefault();links(el)}} 
 			className="blocks menulink fallable noselect xposrandom" 
 			style={{
