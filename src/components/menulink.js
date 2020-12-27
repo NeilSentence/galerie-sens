@@ -5,7 +5,17 @@ import { useNavigate } from 'react-router-dom'
 const MenuLink = (props) => {
 
 	const navigate = useNavigate()
-	const links = (e) => {if(e.target.classList.contains('clickable')){props.setRemoveNonMenuHtml();e.target.classList.remove('clickable');navigate('/');navigate(props.href)}}
+	const resetStyle = () => {
+		const delayed_fallables = document.querySelectorAll(".delayed-fallable")
+  		delayed_fallables.forEach((i) => {
+			// DEBUG: console.log(i)
+			i.style.position = 'initial'
+			i.style.left = 'auto'
+			i.style.top = 'auto'
+			i.style.transform = 'rotate(0rad)'
+		})
+	}
+	const links = (e) => {if(e.target.classList.contains('clickable')){props.setRemoveNonMenuHtml();e.target.classList.remove('clickable');navigate('/');navigate(props.href);resetStyle()}}
 
 	return (
 		<Card 
