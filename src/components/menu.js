@@ -32,7 +32,7 @@ function Menu (props) {
 			<MenuLink imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/acryl"} titel="Acrylmalerei" />
 			<MenuLink imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/suesses"} titel="Süßstoff" />
 			<MenuLink imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/kuenstlerin"} titel="zur Person" />
-			<MenuClose setShowMenu={()=>{setShowMenu(false)}} setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}}/>
+			<MenuClose kill={()=>{killMenu()}} setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}}/>
 			</>
 		)
 	}
@@ -49,17 +49,26 @@ function Menu (props) {
  	*/
 	
   	const handleClick = () => {
-  		setManualSet(true)
-  		setShowMenu(!showMenu)
   		if (!showMenu) {
-			//setRemoveNonMenuHtml(true)
+  			setManualSet(true)
+  			setShowMenu(true)
+  			setRemoveNonMenuHtml(false)
   		}
+  		else {killMenu()}
   	}
   	// erst wieder verwendet wenn es admin buttons (login usw gibt. dort nervt das Menü)
   	
   	const killMenu = () => {
-  		setShowMenu(false)
   		setRemoveNonMenuHtml(true)
+  		const delayed_fallables = document.querySelectorAll(".delayed-fallable")
+  		delayed_fallables.forEach((i) => {
+			// DEBUG: console.log(i)
+			i.style.position = 'initial'
+			i.style.left = 'auto'
+			i.style.top = 'auto'
+			i.style.transform = 'rotate(0rad)'
+		})
+
   	}
 
 
@@ -75,7 +84,9 @@ function Menu (props) {
 					<PageTitle classes="page_titel" href="/" text="Galerie Sens" />
 					<div style={styles.outerStyleL}>
 						<div style={styles.innerStyleL}>
-							<MenuButton onPress={handleClick} />
+							<MenuButton 
+								toggle={()=>{handleClick()}} 
+							/>
 						</div>
 					</div>
 					<div style={styles.outerStyleR}>
@@ -86,7 +97,14 @@ function Menu (props) {
 					</div>
 				</MyToolbar>
 			</AppBar>
-			{showMenu && <Scene elements={elements()} numberOfDummies={numberOfDummies} stateMenu={()=>{return showMenu}} removeNonMenuHtml={()=> {return removeNonMenuHtml}} />}
+			{showMenu && <Scene 
+				elements={elements()} 
+				numberOfDummies={numberOfDummies} 
+				stateMenu={()=>{return showMenu}} 
+				setShowMenu={()=>{setShowMenu(false)}}
+				removeNonMenuHtml={()=>{return removeNonMenuHtml}}
+				setRemoveNonMenuHtml={()=>{return setRemoveNonMenuHtml(false)}}
+				 />}
 		</>
 	)	
 }

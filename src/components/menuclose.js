@@ -5,10 +5,8 @@ const MenuClose = (props) => {
 
 	const close = (e) => {
 		if(e.target.classList.contains('clickable')){
-			// DEBUG: 
-			console.log("closed clicked!")
-			props.setShowMenu(false);
-			props.setRemoveNonMenuHtml();
+			// DEBUG: console.log("closed clicked!")
+			props.kill()
 			e.target.classList.remove('clickable');	
 		}
 	}

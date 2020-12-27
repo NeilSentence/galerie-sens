@@ -23,7 +23,6 @@ class Scene extends React.Component {
 		super(props)
 		// TODO: eigentlich muss window state ein paar Stufen höher und ge-propt werden.
 		this.state = {
-	    	removeNonMenuHtml: this.props.removeNonMenuHtml(),
 	    	height: window.innerHeight,
 	    	width: window.innerWidth
 	    }
@@ -249,7 +248,6 @@ class Scene extends React.Component {
 			updateBoxes(colorblocks,super_delayed_fallables)
 			
 			if (!this.props.removeNonMenuHtml()){
-				// this HAS to be factored out in some higher level state:
 				console.log("removeNonMenuHtml false")
 				// each render cycle: declare new delayed fallables:				
 				updateBoxes(htmlblocks,delayed_fallables)
@@ -257,13 +255,8 @@ class Scene extends React.Component {
 			else {
 				console.log("removeNonMenuHtml true")
 				Matter.Composite.clear(htmlblocks, false)
-				delayed_fallables.forEach((i) => {
-					// DEBUG: console.log(i)
-					i.style.position = 'initial'
-					i.style.left = 'auto'
-					i.style.top = 'auto'
-					i.style.transform = 'rotate(0rad)'
-				})
+				this.props.setRemoveNonMenuHtml() // reset to false
+				this.props.setShowMenu()
 			}
   			Engine.update(engine)
   			window.requestAnimationFrame(update)

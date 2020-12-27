@@ -18,9 +18,14 @@ const styles = {
 
 const useStyles = makeStyles(styles)
 
-const MenuButton = ({onPress}) => {
+const MenuButton = (props) => {
+	const click = () => {props.toggle()}
 	const classes = useStyles()
-	return <Button className={classes.root} onClick={onPress}>Menü</Button>
+	return <Button 
+		className={classes.root} 
+		onTouchStart={(el) => {el.preventDefault();click()}}
+		onClick={(el) => {el.preventDefault();click()}}
+	>Menü</Button>
 }
 
 export default MenuButton 
