@@ -258,13 +258,12 @@ class Scene extends React.Component {
 				console.log("removeNonMenuHtml true")
 				Matter.Composite.clear(htmlblocks, false)
 				delayed_fallables.forEach((i) => {
-				// DEBUG: console.log(i)
-				i.style.position = 'initial'
-				i.style.left = 'auto'
-				i.style.top = 'auto'
-				i.style.transform = 'rotate(0rad)'
-			})
-
+					// DEBUG: console.log(i)
+					i.style.position = 'initial'
+					i.style.left = 'auto'
+					i.style.top = 'auto'
+					i.style.transform = 'rotate(0rad)'
+				})
 			}
   			Engine.update(engine)
   			window.requestAnimationFrame(update)

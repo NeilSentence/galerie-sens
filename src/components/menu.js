@@ -50,33 +50,16 @@ function Menu (props) {
 	
   	const handleClick = () => {
   		setManualSet(true)
-  		setShowMenu(!showMenu) 
-  		setRemoveNonMenuHtml(false)
-  		if (showMenu) {
-  			const delayed_fallables = document.querySelectorAll(".delayed-fallable");
-			delayed_fallables.forEach((i) => {
-				// DEBUG: console.log(i);
-				i.style.position = 'initial';
-				i.style.left = 'auto !important';
-				i.style.top = 'auto !important';
-				i.style.transform = 'rotate(0rad) !important';
-			})
-			setRemoveNonMenuHtml(true)
+  		setShowMenu(!showMenu)
+  		if (!showMenu) {
+			//setRemoveNonMenuHtml(true)
   		}
   	}
   	// erst wieder verwendet wenn es admin buttons (login usw gibt. dort nervt das Menü)
   	
   	const killMenu = () => {
   		setShowMenu(false)
-  		const delayed_fallables = document.querySelectorAll(".delayed-fallable");
-		delayed_fallables.forEach((i) => {
-			// DEBUG: console.log(i)
-			i.style.position = 'initial'
-			i.style.left = 'auto !important'
-			i.style.top = 'auto !important'
-			i.style.transform = 'rotate(0rad) !important'
-			setRemoveNonMenuHtml(true)
-		})
+  		setRemoveNonMenuHtml(true)
   	}
 
 
