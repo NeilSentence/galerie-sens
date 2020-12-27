@@ -1,7 +1,9 @@
-import React, {Component} from 'react'
+import React, {Component, useState} from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import ReactDOM from 'react-dom'
+import Matter from 'matter-js'
+
 //import WidthDisplay from './components/utils/widthdisplay'
 
 // GDPR 
@@ -34,23 +36,65 @@ import Menu from './components/menu'
 import Artist from './pages/artist'
 import Bilderwand from './pages/bilderwand'
 
+let world, engine, runner
+
+const { Runner, World, Bodies, MouseConstraint, Composites, Body } = Matter
+
+const { Provider, Consumer } = React.createContext()
+
+
+// Das Update Loop muss zuerst gucken, was drin ist.
+// Verschiedene Click- und Navigate-Events haben darauf Einfluss
+ 
+
+const logikAktiveObjekte = () => {
+  // Vergleich aktuelleAktiveObjekte mit neu reinkommenden
+  // wenn neue dabei, zu World & Liste "aktiveObjekte" hinzufügen
+}
 
 
 
 
+const loopableStep = (aktiveObjekte) => {
+  
+}
 
 
+const App = () => {
 
-class App extends Component {
+  const screen_size = useState({
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
 
-  bilder = {
+  // ------------------------------------------------------//
+
+  // Liste von HTML-Elementen (DOM Nodes), die momentan herunterfallen sollen.
+
+  // Wird etwas aus dieser Liste entfernt, erhält es vom Update Loop keine CSS-Positionen
+  // außerdem wird es aus der World genommen.
+
+  // Kommt etwas neu hinzu, wird es zur World hinzugefügt, außerdem erhält es im Loop Werte
+
+  // bleibt etwas bestehen, erhält es nur Werte.
+
+  const aktive_objekte = useState([]) // "fallables"
+
+  // -------------------------------------------------------//
+
+
+  const matter = useState(Matter)
+
+
+  const bilder = {
     objekte:'',
     aquarell:'',
     acryl:'',
     suesses:''
   }
-  render() {
-    return (
+  
+  return (
+    <Provider value={bilder,screen_size,aktive_objekte,matter}>
       <React.Fragment>
         <div style={{background:"white"}}>
           <Router>
@@ -58,11 +102,10 @@ class App extends Component {
             <div className="container">
               <Routes>
                 <Route exact path='/' element={<Home />} />
-                <Route exact path='/bilder/aquarelle' element={<Bilderwand key='1' titel={'Aquarelle'} beschreibung='Experimente mit Wasser und Farbe' tag={'aquarell'} bilder={this.bilder.aquarell} />} />
-                <Route exact path='/bilder/objekte' element={<Bilderwand key='2' titel={'Objektkunst'} beschreibung='Recyceltes aus dem frühen Industriezeitalter' tag={'objekt'} bilder={this.bilder.objekte} />} />
-                <Route exact path='/bilder/acryl' element={<Bilderwand key='3' titel={'Acrylmalerei'} beschreibung='Kunststoffdispersionismus' tag={'acryl'} bilder={this.bilder.acryl} />} />
-                <Route exact path='/bilder/suesses' element={<Bilderwand key='4' titel={'Süßstoff'} beschreibung='Süßes und Saures in bunter Mischung' tag={'suesses'} bilder={this.bilder.suesses} />} />
-
+                <Route exact path='/bilder/aquarelle' element={<Bilderwand key='1' titel={'Aquarelle'} beschreibung='Experimente mit Wasser und Farbe' tag={'aquarell'} bilder={bilder.aquarell} />} />
+                <Route exact path='/bilder/objekte' element={<Bilderwand key='2' titel={'Objektkunst'} beschreibung='Recyceltes aus dem frühen Industriezeitalter' tag={'objekt'} bilder={bilder.objekte} />} />
+                <Route exact path='/bilder/acryl' element={<Bilderwand key='3' titel={'Acrylmalerei'} beschreibung='Kunststoffdispersionismus' tag={'acryl'} bilder={bilder.acryl} />} />
+                <Route exact path='/bilder/suesses' element={<Bilderwand key='4' titel={'Süßstoff'} beschreibung='Süßes und Saures in bunter Mischung' tag={'suesses'} bilder={bilder.suesses} />} />
                 <Route exact path='/impressum' element={<Impressum />} />
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/kuenstlerin' element={<Artist />} />
@@ -71,8 +114,8 @@ class App extends Component {
           </Router>
         </div>
       </React.Fragment>
-    )
-  }
+    </Provider>
+  )
 }
 
 const rootElement = document.getElementById("root");

@@ -1,0 +1,61 @@
+1. App.js:
+
+global MJS object / engine
+
+state: continuously updating object of participants (id, x, y)
+
+
+With modern React, state is simply a const [count, setCount] = useState(0)
+
+pass state method down to sub component props 
+
+
+In my case, it could be the matterObjects = [{id:"1",x:121.21,y:233.42},...]
+
+
+
+2. inside component I can create 'click event logic' (navigation etc.)
+
+Click logic can include: component css "subscribes" to matter
+
+
+generate list of active fallable objects first,
+
+so that update loop can simply loop through activeFallables
+
+
+
+
+
+
+
+
+
+An animate loop is just requestAnimationFrame(oneLoopIteration)
+
+function oneLoopIteration(){
+	// all animate code for one step: conditionals, x/y draws etc 
+	// this "loopable" needs data from Physics engine etc
+}
+
+
+
+
+
+
+
+Persistent data through sessions:
+
+localStorage.setItem("name", data) // stores data
+localStorage.getItem("name") // retrieves data even after refresh
+
+
+setState with a function to guarantee state is really what it is supposed to be at the time of read after set:
+
+this.setState((prevState, props) => {
+	return {correctData: !prevState.correctData}
+})
+
+
+
+

@@ -1,16 +1,15 @@
 import React from 'react'
 import { Card } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom'
-import Matter from "matter-js"
 
 const MenuLink = (props) => {
 
 	const navigate = useNavigate()
-	const links = (e) => {if(e.target.classList.contains('clickable')){e.target.classList.remove('clickable');navigate(props.href)}}
+	const links = (e) => {if(e.target.classList.contains('clickable')){props.setRemoveNonMenuHtml();e.target.classList.remove('clickable');navigate('/');navigate(props.href)}}
 
 	return (
 		<Card 
-			onTouchStart={(el) => links(el)}
+			onTouchStart={(el) => {el.preventDefault();links(el)}}
 			onClick={(el) => {el.preventDefault();links(el)}} 
 			className="blocks menulink fallable noselect xposrandom" 
 			style={{

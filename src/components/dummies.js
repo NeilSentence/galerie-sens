@@ -1,6 +1,6 @@
 import React from 'react'
 
-const randomSize = () => {return Math.floor((Math.random() * 75) + 25)}
+const randomSize = () => {return Math.floor((Math.random() * 55) + 25)}
 
 const Dummy = () => {
 
