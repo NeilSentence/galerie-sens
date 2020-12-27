@@ -255,8 +255,6 @@ class Scene extends React.Component {
 			else {
 				console.log("removeNonMenuHtml true")
 				Matter.Composite.clear(htmlblocks, false)
-				this.props.setRemoveNonMenuHtml() // reset to false
-				this.props.setShowMenu()
 			}
   			Engine.update(engine)
   			window.requestAnimationFrame(update)

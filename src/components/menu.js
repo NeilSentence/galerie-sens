@@ -60,6 +60,10 @@ function Menu (props) {
   	
   	const killMenu = () => {
   		setRemoveNonMenuHtml(true)
+  		
+  		const delayedClose = () => {
+  			setShowMenu(false)
+  		}
   		const delayed_fallables = document.querySelectorAll(".delayed-fallable")
   		delayed_fallables.forEach((i) => {
 			// DEBUG: console.log(i)
@@ -68,6 +72,7 @@ function Menu (props) {
 			i.style.top = 'auto'
 			i.style.transform = 'rotate(0rad)'
 		})
+		setTimeout(delayedClose,50)
 
   	}
 
@@ -100,10 +105,7 @@ function Menu (props) {
 			{showMenu && <Scene 
 				elements={elements()} 
 				numberOfDummies={numberOfDummies} 
-				stateMenu={()=>{return showMenu}} 
-				setShowMenu={()=>{setShowMenu(false)}}
 				removeNonMenuHtml={()=>{return removeNonMenuHtml}}
-				setRemoveNonMenuHtml={()=>{return setRemoveNonMenuHtml(false)}}
 				 />}
 		</>
 	)	
