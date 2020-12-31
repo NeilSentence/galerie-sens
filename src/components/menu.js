@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import MyToolbar from './myToolbar'
 import PageTitle from './pageTitle'
@@ -37,33 +37,15 @@ function Menu (props) {
 		)
 	}
 
-	function menuAlfredo(){
-  		if(!manualSet) setShowMenu(true)	
-  	}
-	setTimeout(menuAlfredo,6500)
- 
- 	/*
- 	useEffect(() => {	
-	  	
-	},[])
- 	*/
 	
-  	const handleClick = () => {
-  		if (!showMenu) {
-  			setManualSet(true)
-  			setShowMenu(true)
-  			setRemoveNonMenuHtml(false)
-  		}
-  		else {killMenu()}
-  	}
-  	// erst wieder verwendet wenn es admin buttons (login usw gibt. dort nervt das Menü)
-  	
-  	const killMenu = () => {
+	const killMenu = () => {
   		setRemoveNonMenuHtml(true)
+  		setManualSet(true)
   		
   		const delayedClose = () => {
   			setShowMenu(false)
   		}
+
   		const delayed_fallables = document.querySelectorAll(".delayed-fallable")
   		delayed_fallables.forEach((i) => {
 			// DEBUG: console.log(i)
@@ -73,8 +55,39 @@ function Menu (props) {
 			i.style.transform = 'rotate(0rad)'
 		})
 		setTimeout(delayedClose,50)
-
   	}
+	
+	const handleClick = () => {
+  		if (!showMenu) {
+  			setManualSet(true)
+  			setShowMenu(true)
+  			setRemoveNonMenuHtml(false)
+  		}
+  		else {killMenu()}
+	}
+ 
+ 	
+ 	useEffect(() => {	
+ 		function menuAlfredo(){
+ 			setManualSet((state) => {
+				if(!state) {
+	  				setShowMenu(true)
+	  			}
+				return state
+			})
+	  	}
+
+ 		const timeoutID = window.setTimeout(() => {
+        	menuAlfredo()
+        	
+    	}, 6500)
+    	return () => window.clearTimeout(timeoutID) 	
+
+	  	// erst wieder verwendet wenn es admin buttons (login usw gibt. dort nervt das Menü)
+	},[])
+ 	
+	
+  	
 
 
 

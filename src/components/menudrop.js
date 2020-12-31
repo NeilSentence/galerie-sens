@@ -227,7 +227,7 @@ class Scene extends React.Component {
 					const thisFallable = DomElements[i]
 					const {x, y} = block.vertices[0]
 					//console.log("Called in: menudrop.js; matterElement x,y:"+x+","+y)
-					thisFallable.style.position = 'absolute'
+					thisFallable.style.position = 'fixed'
 					thisFallable.style.top = `${y}px`
 					thisFallable.style.left = `${x}px`
 					thisFallable.style.transform = `translate(-50%, -50%) rotate(${block.angle}rad) translate(50%, 50%)`				
