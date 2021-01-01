@@ -19,12 +19,12 @@ const styles = {
 const useStyles = makeStyles(styles)
 
 const MenuButton = (props) => {
-	const click = () => {props.toggle()}
+	const click = (e) => {console.log(e.type);props.toggle(e)}
 	const classes = useStyles()
 	return <Button 
 		className={classes.root} 
-		onTouchStart={(el) => {click()}}
-		onClick={(el) => {el.preventDefault();click()}}
+		onTouchEnd={(e)=> {click(e)}}
+		onClick={(e)=> {click(e)}}
 	>Menü</Button>
 }
 

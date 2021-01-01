@@ -9,7 +9,7 @@ const styles = {
 		textTransform: 'none',
 		borderRadius: 10,
 		marginTop: '1em',
-    	flexBasis: '100%',
+    	flexBasis: 150,
     	margin: 'auto',
     	marginTop: '5em',
     	width: 0,
@@ -28,7 +28,7 @@ const ZurWand = (props) => {
 		className={classes.root} 
 		onTouchStart={(el) => {wandLaden()}}
 		onClick={(el) => {el.preventDefault();wandLaden()}}
-	>zur Bilderwand</Button>
+	>{props.label}</Button>
 }
 
 export default ZurWand 

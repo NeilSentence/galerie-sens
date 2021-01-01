@@ -16,9 +16,10 @@ let world, engine, runner
 const { Engine, Runner, World, Bodies, MouseConstraint, Composites, Body } = Matter
 
 class Scene extends React.Component {
-	shouldComponentUpdate(nextProps, nextState){
+	shouldComponentUpdate(nextProps, nextState) {
 	   return false
 	}
+	
 	constructor(props){
 		super(props)
 		// TODO: eigentlich muss window state ein paar Stufen höher und ge-propt werden.
@@ -44,6 +45,7 @@ class Scene extends React.Component {
 	    	// TODO: hier kann man schön conditional logic als breakpoints fahren, abhängig von this.state.width /.height
 	    }
   	}
+  	
   	run = () => {
 
   		// define DomElement Lists

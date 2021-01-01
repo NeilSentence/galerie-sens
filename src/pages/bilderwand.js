@@ -1,32 +1,31 @@
-import React, {Component} from 'react'
+import React from 'react'
 import ZurWand from './../components/zurwand'
 
-class Bilderwand extends Component {
-	constructor(props){
-		super(props)
-		// TODO: eigentlich muss window state ein paar Stufen höher und ge-propt werden.
-		this.state = {
-	      	scrollPosX: 0
-	    }
-	}
-	style = {
-		beschreibung:{
-			flexBasis: '100%'
+// hier müssen Bilder geladen werden
+// const bilder = []
+// bilder.map(...) erstelle <BildThumb />
+
+const Bilderwand = (props) => {
+	const style = {
+		wand:{
+			background:'#cccccc',
+			height:'100%',
+			width:'100%',
+			position:'relative'
 		}
 	}
-	render() {
-		return (
-			<div className="sctn sctn_bilderwand">
-				<h1 className="sctn_heading delayed-fallable">{this.props.titel}</h1>
-				<div className="sctn_body">
-					<div className="sctn_subheading">
-						<div style={this.style.beschreibung} className="delayed-fallable greybg">{this.props.beschreibung}</div>
-						<ZurWand wandLaden={() => {console.log(`Wand ${this.props.titel} wird geladen...`)}}>Zur Bilderwand</ZurWand>
-					</div>
+	
+	return (
+		<div className="sctn sctn_bilderwand">
+			<h1 className="sctn_heading delayed-fallable">{props.titel}</h1>
+			<ZurWand label="Anmerkungen der Künstlerin" wandLaden={() => {console.log(`Wand ${props.titel} wird geladen...`)}}>Anmerkungen der Künstlerin</ZurWand>
+			<div className="sctn_body">
+				<div className="sctn_wand" style={style.wand}>
+					<img src="/IMG/asfkba.jpg" />
 				</div>
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
 export default Bilderwand

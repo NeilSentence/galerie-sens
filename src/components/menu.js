@@ -40,8 +40,6 @@ function Menu (props) {
 	
 	const killMenu = () => {
   		setRemoveNonMenuHtml(true)
-  		setManualSet(true)
-  		
   		const delayedClose = () => {
   			setShowMenu(false)
   		}
@@ -57,16 +55,17 @@ function Menu (props) {
 		setTimeout(delayedClose,50)
   	}
 	
-	const handleClick = () => {
-  		if (!showMenu) {
-  			setManualSet(true)
-  			setShowMenu(true)
-  			setRemoveNonMenuHtml(false)
-  		}
-  		else {killMenu()}
+	const handleClick = (e) => {
+		if (e.type === 'click') {
+				if (!showMenu) {
+	  			setManualSet(true)
+	  			setShowMenu(true)
+	  			setRemoveNonMenuHtml(false)
+	  		}
+	  		else killMenu()
+		}
 	}
  
- 	
  	useEffect(() => {	
  		function menuAlfredo(){
  			setManualSet((state) => {
@@ -78,8 +77,7 @@ function Menu (props) {
 	  	}
 
  		const timeoutID = window.setTimeout(() => {
-        	menuAlfredo()
-        	
+        	menuAlfredo()	
     	}, 6500)
     	return () => window.clearTimeout(timeoutID) 	
 
@@ -88,8 +86,6 @@ function Menu (props) {
  	
 	
   	
-
-
 
   	
   	// how are we going to refactor setState()??
@@ -103,7 +99,7 @@ function Menu (props) {
 					<div style={styles.outerStyleL}>
 						<div style={styles.innerStyleL}>
 							<MenuButton 
-								toggle={()=>{handleClick()}} 
+								toggle={(e)=>{handleClick(e)}} 
 							/>
 						</div>
 					</div>
@@ -119,7 +115,7 @@ function Menu (props) {
 				elements={elements()} 
 				numberOfDummies={numberOfDummies} 
 				removeNonMenuHtml={()=>{return removeNonMenuHtml}}
-				 />}
+			/>}
 		</>
 	)	
 }

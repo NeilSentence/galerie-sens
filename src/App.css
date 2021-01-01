@@ -48,13 +48,21 @@ body {
   background: none !important;
 }
 .MuiPaper-elevation1 {box-shadow: none !important}
-.container {position:absolute;width:100%;height:100vh;}
+
+.container {
+  position:absolute;
+  width:100%;
+  height: calc(100vh - 50px);
+  top: 50px;
+}
 .sctn {
   display: flex;
   align-items: center;
   columns: 1;
+  height: 100%;
   flex-direction: column;
   padding: 5em 10em;
+  box-sizing: border-box;
 }
 
 .sctn_heading {margin: 0 !important;}
@@ -63,6 +71,7 @@ body {
   NEVER USE MARGIN ON FALLABLE OBJECTS!
 */
 .sctn_body {padding-top: 2em;}
+
 .sctn_subheading {text-align: center;font-size:1.3rem;display: flex;flex-flow:wrap;}
 
 .page_titel {cursor:pointer;order:2;margin:0;display:block;text-align:center;width:100%;color:#787878;}
@@ -71,9 +80,8 @@ body {
 .sctn_impressum {}
 
 .sctn_artist {
-  height: 100vh;
-  position: relative;
 }
+
 .sctn_artist:before {
     background: url(assets/IMG/portrait.jpg);
     background-size: cover;
@@ -82,12 +90,11 @@ body {
     position: absolute;
     content: ' ';
     display: block;
-    top: 0;
+    top: -50px;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
-.sctn_artist .sctn_subheading {align-items: center;flex: 0 0 33.333%;}
 
 #mjs-wrapper {overflow:hidden;position:fixed;transition: background 0.2s ease;z-index: 1;}
 
