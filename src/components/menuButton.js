@@ -4,15 +4,9 @@ import Button from '@material-ui/core/Button'
 
 const styles = {
 	root: {
-		background: '#333333',
-		color:'#eeeeee',
+		border: '1px solid #787878',
 		textTransform: 'none',
-		borderLeft: '1px solid black',
-		borderRight: '1px solid black',
-		borderRadius: 0,
-		"&:hover": {
-			background: '#000000'
-		}
+		borderRadius: 0
 	}
 }
 
@@ -22,7 +16,7 @@ const MenuButton = (props) => {
 	const click = (e) => {console.log(e.type);props.toggle(e)}
 	const classes = useStyles()
 	return <Button 
-		className={classes.root} 
+		className={classes.root+" navbarbutton"} 
 		onTouchEnd={(e)=> {click(e)}}
 		onClick={(e)=> {click(e)}}
 	>Menü</Button>

@@ -2,26 +2,23 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 
-const styles = {
-	root: {
-		background: '#777777',
-		color:'#eeeeee',
-		textTransform: 'none',
-		borderRadius: 10,
-		marginTop: '1em',
-    	flexBasis: 150,
-    	margin: 'auto',
-    	marginTop: '5em',
-    	width: 0,
-		"&:hover": {
-			background: '#655446'
+
+const ZurWand = props => {
+	const styles = {
+		root: {
+			background: '#333',
+			zIndex:1,
+			color:'lightgrey',
+			fontSize:12,
+			textTransform: 'none',
+			marginLeft: 4,
+			"&:hover": {
+				background: '#000'
+			}
 		}
 	}
-}
+	const useStyles = makeStyles(styles)
 
-const useStyles = makeStyles(styles)
-
-const ZurWand = (props) => {
 	const wandLaden = () => {props.wandLaden()}
 	const classes = useStyles()
 	return <Button 

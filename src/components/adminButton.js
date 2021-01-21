@@ -5,16 +5,13 @@ import { useNavigate } from 'react-router-dom'
 
 const styles = {
 	root: {
-		background: '#333333',
-		color:'#eeeeee',
 		textTransform: 'none',
 		borderRadius: 0,
-		borderRight: '1px solid black',
-		"&:hover": {
-			background: '#000000'
-		},
+		borderTop: '1px solid #787878',
+		borderBottom: '1px solid #787878',
+		borderRight: '1px solid #787878',
 		"&:nth-child(1)": {
-			borderLeft: '1px solid black'
+			borderLeft: '1px solid #787878'
 		}
 	}
 }
@@ -23,7 +20,7 @@ const useStyles = makeStyles(styles)
 const AdminButton = (props) => {
 	const navigate = useNavigate()
 	const classes = useStyles()
-	return (<Button onClick={() => {props.onPress();navigate(props.href)}} className={classes.root}>{props.text}</Button>)
+	return (<Button onClick={() => {props.onPress();navigate(props.href)}} className={classes.root+" navbarbutton"}>{props.text}</Button>)
 }
 
 export default AdminButton

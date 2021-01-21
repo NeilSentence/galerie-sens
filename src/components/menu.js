@@ -4,12 +4,12 @@ import MyToolbar from './myToolbar'
 import PageTitle from './pageTitle'
 import MenuButton from './menuButton'
 import AdminButton from './adminButton'
-import Scene from './menudrop' 
+import Scene from './drop' 
 import MenuLink from './menulink'
 import MenuClose from './menuclose'
 
 
-function Menu (props) {
+const Menu = props => {
 	const styles = {
 		outerStyleL: {width:"50%",display:"inline-block",position:"relative",left:"0"},
 		outerStyleR: {width:"50%",display:"inline-block",position:"relative",right:"0",order: 3},
@@ -21,29 +21,29 @@ function Menu (props) {
 	const [showMenu, setShowMenu] = useState(false)
 	const [removeNonMenuHtml, setRemoveNonMenuHtml] = useState(false)
 	
-	const numberOfDummies = 32
+	const numberOfDummies = 25
 	// IMG/aquarell.jpg IMG/objekt.png
 	
 	const elements = () => {
 		return (
 			<>
-			<MenuLink imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/aquarelle"} titel="Aquarelle" />
-			<MenuLink imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/objekte"} titel="Objektkunst" />
-			<MenuLink imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/acryl"} titel="Acrylmalerei" />
-			<MenuLink imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/suesses"} titel="Süßstoff" />
-			<MenuLink imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/kuenstlerin"} titel="zur Person" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/aquarelle"} titel="Aquarelle" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/objekte"} titel="Objektkunst" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/acryl"} titel="Acrylmalerei" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/suesses"} titel="Sweets" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/kuenstlerin"} titel="zur Person" />
 			<MenuClose kill={()=>{killMenu()}} setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}}/>
 			</>
 		)
 	}
-
 	
 	const killMenu = () => {
   		setRemoveNonMenuHtml(true)
   		const delayedClose = () => {
   			setShowMenu(false)
+  			// if .sctn_header exists
+  			// if (document.querySelector('.sctn_header') !== null) document.querySelector('.sctn_header').style.flexDirection = 'row'
   		}
-
   		const delayed_fallables = document.querySelectorAll(".delayed-fallable")
   		delayed_fallables.forEach((i) => {
 			// DEBUG: console.log(i)
@@ -51,6 +51,12 @@ function Menu (props) {
 			i.style.left = 'auto'
 			i.style.top = 'auto'
 			i.style.transform = 'rotate(0rad)'
+			i.style.background = 'rgb(240,240,240)'
+			i.style.color = '#787878'
+		})
+		const navbarbuttons = document.querySelectorAll(".navbarbutton")
+		navbarbuttons.forEach(el => {
+			el.classList.remove("navbarhover")
 		})
 		setTimeout(delayedClose,50)
   	}

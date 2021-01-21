@@ -6,7 +6,7 @@ const styles = {
 	root: {
 		background: 'none',
 		display: 'flex',
-		minHeight: '50px'
+		minHeight: 64
 	}
 }
 

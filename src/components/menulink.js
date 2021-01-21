@@ -1,8 +1,10 @@
 import React from 'react'
 import { Card } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import { useNavigate } from 'react-router-dom'
+import { hslaStr } from './utils/helpers'
 
-const MenuLink = (props) => {
+const MenuLink = props => {
 
 	const navigate = useNavigate()
 	const resetStyle = () => {
@@ -15,26 +17,43 @@ const MenuLink = (props) => {
 			i.style.transform = 'rotate(0rad)'
 		})
 	}
-	const links = (e) => {if(e.target.classList.contains('clickable')){props.setRemoveNonMenuHtml();e.target.classList.remove('clickable');navigate('/');navigate(props.href);resetStyle()}}
+	const links = (e) => {
+		console.log(e.target.classList.contains('clickable'))
+		if(e.target.classList.contains('clickable')) {
+			props.setRemoveNonMenuHtml()
+			e.target.classList.remove('clickable')
+			navigate('/');navigate(props.href)
+			resetStyle()
+			setTimeout(props.kill,1000)
+		}
+	}
+
+	const styles = {
+		root: {
+			width: '35vw',
+			height: '10vh',
+			textAlign: 'center',
+			display: 'flex',
+			alignItems: 'center',
+			textDecoration:"none",
+			padding: '1em',
+			cursor: 'pointer',
+			pointerEvents: 'all',
+			background:'hsla('+hslaStr()+')',
+			color: '#000',
+			"&:hover": {
+				opacity:0.5
+			}
+		}
+	}
+	const useStyles = makeStyles(styles)
+	const classes = useStyles()
 
 	return (
 		<Card 
-			onTouchStart={(el) => {links(el)}}
+			onTouchEnd={(el) => {links(el)}}
 			onClick={(el) => {el.preventDefault();links(el)}} 
-			className="blocks menulink fallable noselect xposrandom" 
-			style={{
-				height:90,
-				textAlign: "center",
-				display: "flex",
-				alignItems:"center",
-				textDecoration:"none",
-				width:300,
-				//backgroundColor:"lightgrey",
-				//background: `url(${props.imgUrl})`,
-				//backgroundPosition: "right",
-				backgroundSize:"50%",
-				backgroundRepeat: "no-repeat"
-		}}
+			className={classes.root+" blocks menulink fallable noselect xposrandom"}
 		>	
 			<h1>{props.titel}</h1>
 		</Card>

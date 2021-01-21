@@ -7,6 +7,10 @@
   src: local('Runen_germanisch'), url(./fonts/Runen_germanisch.ttf) format('truetype');
 }
 
+@keyframes fadein {
+  from {opacity: 0}
+  to {opacity: 1}
+}
 
 html,body {
   margin: 0;
@@ -39,7 +43,8 @@ body {
   width: 100vw;
   height: 100vh;
 }
-.MuiAppBar-positionFixed {color: #232323;
+.MuiAppBar-positionFixed {
+    color: #232323;
     box-shadow: none;
     background: none;}
 
@@ -56,17 +61,24 @@ body {
   top: 50px;
 }
 .sctn {
-  display: flex;
-  align-items: center;
-  columns: 1;
   height: 100%;
-  flex-direction: column;
-  padding: 5em 10em;
+  padding: 2em 10em;
   box-sizing: border-box;
 }
 
-.sctn_heading {margin: 0 !important;}
-.sctn_heading, .greybg {z-index:2;background: #484848;color:lightgrey;padding:1.5rem 12px 1.5rem 12px;pointer-events: none;margin-left:1px;}
+
+.MuiPaper-root, .MuiToolbar {pointer-events: none;}
+.MuiButtonBase-root {pointer-events: all;}
+
+.greybg {
+  z-index:4;
+  margin-bottom:1px;
+  background: rgb(240,240,240);
+  color:#787878;
+  padding:1.5rem 12px 1.5rem 12px;
+  pointer-events: none;
+  margin-left:1px;
+}
 /*
   NEVER USE MARGIN ON FALLABLE OBJECTS!
 */
@@ -74,17 +86,15 @@ body {
 
 .sctn_subheading {text-align: center;font-size:1.3rem;display: flex;flex-flow:wrap;}
 
-.page_titel {cursor:pointer;order:2;margin:0;display:block;text-align:center;width:100%;color:#787878;}
+.page_titel {pointer-events:all;cursor:pointer;order:2;margin:0;display:block;text-align:center;width:100%;color:#787878;}
 .sctn_login {}
 /*.sctn_registrierung {margin-top:50px;}*/
 .sctn_impressum {}
-
-.sctn_artist {
-}
+.sctn_artist {}
 
 .sctn_artist:before {
     background: url(assets/IMG/portrait.jpg);
-    background-size: cover;
+    background-size: 150%;
     background-position: center;
     opacity: 0.5;
     position: absolute;
@@ -98,20 +108,10 @@ body {
 
 #mjs-wrapper {overflow:hidden;position:fixed;transition: background 0.2s ease;z-index: 1;}
 
-#mjs-wrapper ul {
-  font-size: 14pt;
-  list-style: none;
-  user-select: none;
-  position: relative;
-  overflow: hidden;
-}
-#mjs-wrapper .menulink {
-  display: inline-block;
-  padding: 1em;
-  cursor: pointer;
-  background:lightgrey;
-}
-#mjs-wrapper .menulink:hover {
-  background:#f1f1f1;color:#545454;
-}
 #mjs-wrapper .menulink h1 {width:100%;font-size: 2rem;pointer-events: none;}
+
+.navbarbutton {background: rgba(0,0,0,0) !important; color:#787878 !important}
+.navbarbutton:hover {background:rgba(20,20,20,0.2) !important}
+
+.navbarhover {background: #323232 !important; color:rgb(240,240,240) !important}
+.navbarhover:hover,.menuclose:hover {background: rgba(0,0,0,0.5) !important}

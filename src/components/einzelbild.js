@@ -1,0 +1,81 @@
+import React from 'react'
+import Scene from './drop' 
+
+const Einzelbild = props => {
+	
+	// props.setEinzelAnsicht closes EBA
+	// props.bildinfos contains infos
+
+	/*
+		.titel
+		.beschreibung
+		.preis
+		.tags
+		.groesse.x/.y/.z
+		.gewicht
+		.altSrc // [filename2,filename3]
+		.source
+		.altTxt
+		.verkauft // true,false
+
+	*/
+	const bildinfos = props.bildinfos
+	const schliessen = props.schliessen
+
+	const style = {
+		wrapper: {
+			height: '100vh',
+			width: '100vw',
+			background:`url(${props.bildinfos.source})`,
+			backgroundSize:'cover',
+			backgroundPosition:'center',
+			position:'fixed',
+			left:0,
+			top:0,
+			zIndex:3,
+			animationName:'fadein',
+			animationDuration:'0.4s',
+			animationTimingFunction: 'ease'
+			//backgroundImage:props.
+		},
+		info: {
+			height: 200,
+			width:'100vw',
+			position:'absolute',
+			background:'rgba(255,255,255,0.85)',
+			bottom:0,
+			display:'flex'
+		},
+		leftside: {display:'flex',flexFlow:'column',left:0,width:'50vw',height:'100%',padding: '2em',boxSizing: 'border-box'},
+		rightside: {display:'flex',flexFlow:'column',right:0,width:'50vw',height:'100%',padding: '2em',boxSizing: 'border-box'},
+		closebutton: {display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer',width:50,height:50,position:'fixed',top:100,right:50,background:'#323232',color:'rgb(240,240,240)'},
+		x:{fontSize:'1.5em'},
+		artTitle:{marginTop:0},
+		tagWrapper:{display:'flex',flexFlow:'row',justifyContent:'space-evenly',marginTop:'2em'},
+		outerPreis:{display:'flex',flexFlow:'row'},
+		preis:{fontWeight:800}
+	}
+	
+
+	let tags = ''
+	bildinfos.tags.forEach((tag) => {tags+=`<div style="border:1px solid black;border-radius:6px;padding:0.4em">${tag}</div>`})
+	return (
+		<div className="einzelbild" style={style.wrapper}>
+			<div className="closebutton" style={style.closebutton} onClick={schliessen}><p style={style.x}>X</p></div>
+
+			<div className="infobereich" style={style.info}>
+				<div className="leftSide" style={style.leftside}>
+					<h1 className="artwork_title" style={style.artTitle}>{bildinfos.titel}</h1>
+					<div>{'Maße: '+bildinfos.groesse.x+' x '+bildinfos.groesse.y+' x '+bildinfos.groesse.z+' cm'}</div>
+					<div style={style.outerPreis}><div>'Preis: '</div><div style={style.preis}>{bildinfos.preis+' €'}</div></div>
+				</div>
+				<div className="rightSide" style={style.rightside}>
+					<div>{'Materialgedanke: '+bildinfos.beschreibung}</div>
+					<div style={style.tagWrapper} dangerouslySetInnerHTML={{__html:tags}}></div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+export default Einzelbild
