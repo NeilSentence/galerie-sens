@@ -51,7 +51,7 @@ const Bilderwand = props => {
 			top:0,
 			width:'calc(100% - 100px)',
 			justifyContent:'space-between',
-			fontSize:'2em',
+			fontSize:'2.5em',
 			flexDirection:'row-reverse',
 			pointerEvents:'none'
 		},
@@ -70,7 +70,8 @@ const Bilderwand = props => {
 			display: 'flex',
 		    flexDirection: 'row',
 		    alignItems: 'center',
-		    justifyContent: 'center'
+		    justifyContent: 'center',
+		    transition: 'left 1s ease'
 		},
 		image:{
 			cursor:'pointer',
@@ -81,10 +82,7 @@ const Bilderwand = props => {
 			animationDelay:'1s',
 			animationTimingFunction: 'ease',
 			animationFillMode: 'forwards',
-			height:'70%',
-			webkitBoxShadow: "0px 0px 52px 0px rgba(0, 0, 0, 1), ",
-			mozBoxShadow: "0px 0px 52px 0px rgba(0, 0, 0, 1)",
-			boxShadow: "0 0 10px rgba(0,0,0,1),0 0 30px rgba(0,0,0,0.85),0 0 40px rgba(0,0,0,0.45),0 0 50px rgba(0,0,0,0.3),0 0 60px rgba(0,0,0,0.25)"
+			height:'70%'
 		},
 		bildtitel:{
 			color: 'lightgrey'
@@ -118,39 +116,77 @@ const Bilderwand = props => {
 	const bilderHTML = bilder.map((bild) => {
 		const left = bild.id*100
 
-		const obj = JSON.stringify(style.imagewrapper)
-		const newstyle = JSON.parse(obj)
-		newstyle.left=left+'%'
-        return (<div key={bild.id} className="bilderwrapper" style={newstyle}><img id={bild.id} className="wandbild" style={style.image} alt={bilder[bild.id].altTxt} src={bilder[bild.id].source} onClick={(el)=>{diesesKunstwerk(el)}}/></div>)
+		const wrapperstyleobj = JSON.stringify(style.imagewrapper)
+		const newwrapperstyle = JSON.parse(wrapperstyleobj)
+		newwrapperstyle.left=left+'%'
+
+		const imgstyleobj = JSON.stringify(style.image)
+		const newimgstyle = JSON.parse(imgstyleobj)
+		if (bild.schatten) {
+			newimgstyle.webkitBoxShadow='0px 0px 52px 0px rgba(0, 0, 0, 1)'
+			newimgstyle.mozBoxShadow   ='0px 0px 52px 0px rgba(0, 0, 0, 1)'
+			newimgstyle.boxShadow      ='0 0 10px rgba(0,0,0,1),0 0 30px rgba(0,0,0,0.85),0 0 40px rgba(0,0,0,0.45),0 0 50px rgba(0,0,0,0.3),0 0 60px rgba(0,0,0,0.25)'
+		}
+
+        return (<div key={bild.id} className="bilderwrapper" style={newwrapperstyle}><img id={bild.id} className="wandbild" style={newimgstyle} alt={bilder[bild.id].altTxt} src={bilder[bild.id].source} onClick={(el)=>{diesesKunstwerk(el)}}/></div>)
     })
 
 
-    const arrowcontrols = (bilder) =>{
-    	if (bilder.length > 0) {
-			const bilderwrap = document.getElementsByClassName('.bilderwrapper')
+    const arrowcontrols = (bilder) => {
+    	if (bilder.length > 1) {
+			const bilderwrap = document.getElementsByClassName('bilderwrapper')
+			console.dir(bilderwrap)
+			
+			// getElementsByClassName returns HTMLCollection not nodelist! Deswegen muss man dort ein bisschen nachhelfen:
+			HTMLCollection.prototype.forEach = Array.prototype.forEach
+
 			const arrownavigation = (el) => {
+
+				const getZahl = (obj) => {
+					// get css value str:
+					const origLeft = obj.style.left
+					// cut off '%':
+					const nurZahl = origLeft.substring(0,origLeft.length-1)	
+					return(parseInt(nurZahl))
+					// return nurZahl
+				}
+
+				const checkForUnnecessaryArrows = () => {
+					if (bilderwrap[0].style.left === '0%') {
+						larrw.style.display = 'none'
+					} else {
+						larrw.style.display = 'block'
+					}
+					if (bilderwrap[bilderwrap.length-1].style.left === '0%') {
+						rarrw.style.display = 'none'
+					} else {
+						rarrw.style.display = 'block'
+					}
+				}
+				
 				if(el.currentTarget.id === "leftarrow") {
-					bilderwrap.forEach(wrap => {
-						const origLeft = wrap.style.left
-						// cut off '%'
-						// - 100
+					bilderwrap.forEach((wrap) => {
+						const zahl = getZahl(wrap)
+						wrap.style.left = (zahl+100)+'%'
 					})
 				}
 				else {
-					bilderwrap.forEach(wrap => {
-						const origLeft = wrap.style.left
-						// cut off '%'
-						// + 100
+					bilderwrap.forEach((wrap) => {
+						const zahl = getZahl(wrap)
+						wrap.style.left = (zahl-100)+'%'
 					})
 				}
+				const larrw = document.getElementById('leftarrow')
+				const rarrw = document.getElementById('rightarrow')
+				checkForUnnecessaryArrows()
 			}
 	    	return(
 		    	<div className="arrowcontrols" style={style.arrowcontrols}>
-			    	<style>
-	  					{`.arrow:hover{opacity:1 !important}`}
+					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="rightarrow" style={style.arrow}>&#x25E8;</div>
+					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="leftarrow" style={style.arrow}>&#x25E7;</div>
+					<style>
+		  				{`.arrow:hover{opacity:1 !important}#leftarrow{display:none}`}
 					</style>
-					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="rightarrow" style={style.arrow}>&gt;</div>
-					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="leftarrow" style={style.arrow}>&lt;</div>
 				</div>
 			)
 		}

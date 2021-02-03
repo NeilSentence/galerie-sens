@@ -63,7 +63,9 @@ import Artist from './pages/artist'
 import Bilderwand from './pages/bilderwand'
 
 import aquarell1 from './assets/hfu-3.jpg'
-import objekt1 from './assets/objekt-1.jpg'
+import objekt1 from './assets/objekt-11.jpg'
+import objekt2 from './assets/objekt-2.jpg'
+import objekt3 from './assets/objekt-3.jpg'
 import acrylic1 from './assets/acrylic-1.jpg'
 import eyecandy1 from './assets/eyecandy-1.jpg'
 
@@ -119,33 +121,36 @@ const App = () => {
     objekt:[
       {
         id:0,
-        titel:'Kontaktaufnahme 1',
+        titel:'Abgelaufen',
         source:objekt1,altSrc: ['filename2','filename3'],
         preis:'unverkäuflich',verkauft:false,
         tags:['objekt','abstrakt','metall','industrial','upcycling'],
         gewicht:0, groesse:{x:0,y:0,z:0},
         beschreibung: 'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
-        altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.'
+        altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.',
+        schatten:false
       },
       {
         id:1,
-        titel:'Kontaktaufnahme 1',
-        source:'',altSrc: ['filename2','filename3'],
+        titel:'Sonnenbader',
+        source:objekt2,altSrc: ['filename2','filename3'],
         preis:'unverkäuflich',verkauft:false,
         tags:['objekt','abstrakt','metall','industrial','upcycling'],
         gewicht:0, groesse:{x:0,y:0,z:0},
         beschreibung: 'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
-        altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.'
+        altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.',
+        schatten:false
       },
       {
         id:2,
-        titel:'Kontaktaufnahme 1',
-        source:'',altSrc: ['filename2','filename3'],
+        titel:'Kontaktaufnahme',
+        source:objekt3,altSrc: ['filename2','filename3'],
         preis:'unverkäuflich',verkauft:false,
         tags:['objekt','abstrakt','metall','industrial','upcycling'],
         gewicht:0, groesse:{x:0,y:0,z:0},
         beschreibung: 'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
-        altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.'
+        altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.',
+        schatten:false
       },
 
     ],
@@ -158,7 +163,8 @@ const App = () => {
         tags:['malerei','aquarell','abstrakt','experimentell'],
         gewicht:0, groesse:{x:25,y:30,z:3},
         beschreibung: '',
-        altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.'
+        altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.',
+        schatten:true
       }
     ],
     acryl:[
@@ -171,7 +177,8 @@ const App = () => {
         tags:[], 
         gewicht:0, groesse:{x:0,y:0,z:0}, 
         beschreibung: '',
-        altTxt:'ein paar Leute'
+        altTxt:'ein paar Leute',
+        schatten:true
       }
     ],
     eyecandy:[
@@ -183,7 +190,8 @@ const App = () => {
         tags:['ernährung','acryl','malerei','gegenständlich','muster'], 
         gewicht:0, groesse:{x:50,y:100,z:4},
         beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
-        altTxt:'ein regelmäßiges Muster aus Haribos'
+        altTxt:'ein regelmäßiges Muster aus Haribos',
+        schatten:true
       }
     ]
   }

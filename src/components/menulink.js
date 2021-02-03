@@ -31,6 +31,7 @@ const MenuLink = props => {
 	const styles = {
 		root: {
 			width: '35vw',
+			maxWidth:400,
 			height: '10vh',
 			textAlign: 'center',
 			display: 'flex',
