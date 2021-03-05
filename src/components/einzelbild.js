@@ -1,5 +1,4 @@
 import React from 'react'
-import Scene from './drop' 
 
 const Einzelbild = props => {
 	
@@ -18,7 +17,7 @@ const Einzelbild = props => {
 		.altTxt
 		.verkauft // true,false
 
-	*/
+ 	*/
 	const bildinfos = props.bildinfos
 	const schliessen = props.schliessen
 
@@ -58,9 +57,9 @@ const Einzelbild = props => {
 	
 
 	let tags = ''
-	bildinfos.tags.forEach((tag) => {tags+=`<div style="border:1px solid black;border-radius:6px;padding:0.4em">${tag}</div>`})
+	// bildinfos.tags.forEach((tag) => {tags+=`<div style="height:25px;border:1px solid black;border-radius:6px;padding:0.4em">${tag}</div>`})
 	return (
-		<div className="einzelbild" style={style.wrapper}>
+		<div key={bildinfos.key} className="einzelbild" id="einzelbild_ansicht" style={style.wrapper}>
 			<div className="closebutton" style={style.closebutton} onClick={schliessen}><p style={style.x}>X</p></div>
 
 			<div className="infobereich" style={style.info}>

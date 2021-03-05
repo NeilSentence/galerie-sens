@@ -8,8 +8,15 @@ import Einzelbild from './../components/einzelbild'
 
 
 const Bilderwand = props => {
+
 	const [einzelAnsicht, setEinzelAnsicht] = useState(false)
 	const [selectedArt, setSelectedArt] = useState(0)
+
+	let SingleArtView = einzelAnsicht
+
+	//setEinzelAnsicht(false) infinite loop because component re-renders
+
+	//alert(props.match.params)
 
 	// ### click auf Bild -> setEinzelAnsicht! && set Bildinfos
 
@@ -27,7 +34,6 @@ const Bilderwand = props => {
 		heading: {
 			height: 36,
 			zIndex:2,
-			background:'#333333',
 			color:'lightgrey',
 			pointerEvents: 'none',
 			fontSize:'1.5em'
@@ -111,6 +117,7 @@ const Bilderwand = props => {
 	const diesesKunstwerk = (el) => {
 		setSelectedArt(el.target.id)
 		setEinzelAnsicht(true)
+		SingleArtView = true
 	}
 
 	const bilderHTML = bilder.map((bild) => {
@@ -123,48 +130,92 @@ const Bilderwand = props => {
 		const imgstyleobj = JSON.stringify(style.image)
 		const newimgstyle = JSON.parse(imgstyleobj)
 		if (bild.schatten) {
-			newimgstyle.webkitBoxShadow='0px 0px 52px 0px rgba(0, 0, 0, 1)'
-			newimgstyle.mozBoxShadow   ='0px 0px 52px 0px rgba(0, 0, 0, 1)'
+			newimgstyle.WebkitBoxShadow='0px 0px 52px 0px rgba(0, 0, 0, 1)'
+			newimgstyle.MozBoxShadow   ='0px 0px 52px 0px rgba(0, 0, 0, 1)'
 			newimgstyle.boxShadow      ='0 0 10px rgba(0,0,0,1),0 0 30px rgba(0,0,0,0.85),0 0 40px rgba(0,0,0,0.45),0 0 50px rgba(0,0,0,0.3),0 0 60px rgba(0,0,0,0.25)'
 		}
 
         return (<div key={bild.id} className="bilderwrapper" style={newwrapperstyle}><img id={bild.id} className="wandbild" style={newimgstyle} alt={bilder[bild.id].altTxt} src={bilder[bild.id].source} onClick={(el)=>{diesesKunstwerk(el)}}/></div>)
     })
 
+	const getZahl = (obj) => {
+		// get css value str:
+		const origLeft = obj.style.left
+		// cut off '%':
+		const nurZahl = origLeft.substring(0,origLeft.length-1)	
+		return(parseInt(nurZahl))
+		// return nurZahl
+	}
 
-    const arrowcontrols = (bilder) => {
-    	if (bilder.length > 1) {
-			const bilderwrap = document.getElementsByClassName('bilderwrapper')
-			console.dir(bilderwrap)
-			
-			// getElementsByClassName returns HTMLCollection not nodelist! Deswegen muss man dort ein bisschen nachhelfen:
-			HTMLCollection.prototype.forEach = Array.prototype.forEach
+	const bilderwrap = document.getElementsByClassName('bilderwrapper')
+	// getElementsByClassName returns HTMLCollection not nodelist! Deswegen muss man dort ein bisschen nachhelfen:
+	HTMLCollection.prototype.forEach = Array.prototype.forEach
 
-			const arrownavigation = (el) => {
+	const checkForUnnecessaryArrows = () => {
 
-				const getZahl = (obj) => {
-					// get css value str:
-					const origLeft = obj.style.left
-					// cut off '%':
-					const nurZahl = origLeft.substring(0,origLeft.length-1)	
-					return(parseInt(nurZahl))
-					// return nurZahl
-				}
+		const larrw = document.getElementById('leftarrow')
+		const rarrw = document.getElementById('rightarrow')
 
-				const checkForUnnecessaryArrows = () => {
-					if (bilderwrap[0].style.left === '0%') {
-						larrw.style.display = 'none'
-					} else {
-						larrw.style.display = 'block'
-					}
-					if (bilderwrap[bilderwrap.length-1].style.left === '0%') {
-						rarrw.style.display = 'none'
-					} else {
-						rarrw.style.display = 'block'
+		if (bilderwrap[0].style.left === '0%') {
+			larrw.style.display = 'none'
+		} else {
+			larrw.style.display = 'block'
+		}
+		if (bilderwrap[bilderwrap.length-1].style.left === '0%') {
+			rarrw.style.display = 'none'
+		} else {
+			rarrw.style.display = 'block'
+		}
+	}
+
+
+	document.addEventListener('keydown',function(evt){
+		evt.stopImmediatePropagation()
+		if(document.querySelector('.bilderwrapper') !== null) {
+			evt = evt || window.event
+			if (bilderwrap.length > 1) {
+
+				if (evt.keyCode === 37) {
+					
+					if (bilderwrap[0].style.left !== '0%') {
+					
+						bilderwrap.forEach((wrap) => {
+
+							const zahl = getZahl(wrap)
+							wrap.style.left = (zahl+100)+'%'	
+							
+						})
+
 					}
 				}
 				
-				if(el.currentTarget.id === "leftarrow") {
+				else if (evt.keyCode === 39) {
+					
+					if (bilderwrap[bilderwrap.length-1].style.left !== '0%') {
+			    		
+			    		bilderwrap.forEach((wrap) => {
+
+							const zahl = getZahl(wrap)
+			    			wrap.style.left = (zahl-100)+'%'
+			    		})
+
+			    	}
+			    }
+
+			    // check buttons
+			    checkForUnnecessaryArrows()
+				
+			}
+		}
+	})
+
+
+    const arrowcontrols = (bilder) => {
+    	if (bilder.length > 1) {
+
+			const arrownavigation = (e) => {
+				
+				if (e.currentTarget.id === "leftarrow") {
 					bilderwrap.forEach((wrap) => {
 						const zahl = getZahl(wrap)
 						wrap.style.left = (zahl+100)+'%'
@@ -176,13 +227,12 @@ const Bilderwand = props => {
 						wrap.style.left = (zahl-100)+'%'
 					})
 				}
-				const larrw = document.getElementById('leftarrow')
-				const rarrw = document.getElementById('rightarrow')
+
 				checkForUnnecessaryArrows()
 			}
 	    	return(
 		    	<div className="arrowcontrols" style={style.arrowcontrols}>
-					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="rightarrow" style={style.arrow}>&#x25E8;</div>
+					<div className="arrow" onClick={(el) => {arrownavigation(el)}}  id="rightarrow" style={style.arrow}>&#x25E8;</div>
 					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="leftarrow" style={style.arrow}>&#x25E7;</div>
 					<style>
 		  				{`.arrow:hover{opacity:1 !important}#leftarrow{display:none}`}
@@ -204,7 +254,7 @@ const Bilderwand = props => {
 					{bilderHTML}
 				</div>
 			</div>
-			{einzelAnsicht && <Einzelbild bildinfos={bilder[selectedArt]} schliessen={()=>{setEinzelAnsicht(false)}} />}
+			{SingleArtView && <Einzelbild bildinfos={bilder[selectedArt]} schliessen={()=>{setEinzelAnsicht(false);SingleArtView = false}} />}
 		</div>
 	)
 }

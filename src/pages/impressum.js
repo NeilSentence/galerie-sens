@@ -4,6 +4,7 @@ import React from 'react'
 
 const Impressum = () => {
 	const style = {
+		section: {width:'100vw',overflowX:'hidden'},
 		heading: {
 			margin:0,
     		padding: 10,
@@ -16,7 +17,7 @@ const Impressum = () => {
 		}
 	}
 	return (
-		<div className="sctn sctn_impressum">
+		<div className="sctn sctn_impressum" style={style.section}>
 			<h1 className="sctn_heading delayed-fallable" style={style.heading}>Impressum</h1>
 			<div className="sctn_body">
 

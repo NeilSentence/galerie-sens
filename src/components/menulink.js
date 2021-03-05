@@ -18,13 +18,16 @@ const MenuLink = props => {
 		})
 	}
 	const links = (e) => {
+
 		console.log(e.target.classList.contains('clickable'))
-		if(e.target.classList.contains('clickable')) {
+
+		if(e.target.classList.contains('clickable')){
 			props.setRemoveNonMenuHtml()
 			e.target.classList.remove('clickable')
-			navigate('/');navigate(props.href)
+			navigate('/')
+			navigate(props.href)
 			resetStyle()
-			setTimeout(props.kill,1000)
+			setTimeout(props.kill,500)
 		}
 	}
 

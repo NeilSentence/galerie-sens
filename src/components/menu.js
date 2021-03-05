@@ -7,6 +7,7 @@ import AdminButton from './adminButton'
 import Scene from './drop' 
 import MenuLink from './menulink'
 import MenuClose from './menuclose'
+import useEscape from './utils/esckey'
 
 
 const Menu = props => {
@@ -20,6 +21,8 @@ const Menu = props => {
 	const [manualSet, setManualSet] = useState(false)
 	const [showMenu, setShowMenu] = useState(false)
 	const [removeNonMenuHtml, setRemoveNonMenuHtml] = useState(false)
+
+	let menuOpen = showMenu 
 	
 	const numberOfDummies = 25
 	// IMG/aquarell.jpg IMG/objekt.png
@@ -27,20 +30,25 @@ const Menu = props => {
 	const elements = () => {
 		return (
 			<>
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/aquarelle"} titel="Aquarelle" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/objekte"} titel="Objektkunst" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/acryl"} titel="Acrylmalerei" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/kfu"} titel="Kalligrafische Flugobjekte" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/oelsand"} titel="Oel & Sahara" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/upcycling"} titel="Upcycling" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/zufallsbegegnungen"} titel="Zufallsbegegnungen" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/portraits"} titel="Portraits" />
 			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/suesses"} titel="Sweets" />
 			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/kuenstlerin"} titel="zur Person" />
 			<MenuClose kill={()=>{killMenu()}} setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}}/>
 			</>
 		)
 	}
-	
+
+
+
 	const killMenu = () => {
   		setRemoveNonMenuHtml(true)
   		const delayedClose = () => {
   			setShowMenu(false)
+  			menuOpen = false
   			// if .sctn_header exists
   			// if (document.querySelector('.sctn_header') !== null) document.querySelector('.sctn_header').style.flexDirection = 'row'
   		}
@@ -60,23 +68,65 @@ const Menu = props => {
 		})
 		setTimeout(delayedClose,50)
   	}
+
+  	// EVENT LISTENER FOR ESCAPE KEY:
+  	/*
+  	let menuCheckForKeyEvent = false
+
+  	document.addEventListener('keydown',function(evt){
+		
+		//evt.stopImmediatePropagation()
+		
+		if (document.querySelector('.page_titel') !== null) {
+			evt = evt || window.event
+
+			if (evt.keyCode === 27) {
+				alert(menuCheckForKeyEvent)
+				if (menuCheckForKeyEvent) {
+					killMenu()
+					menuCheckForKeyEvent = false
+	  			}
+	  			else if (!menuCheckForKeyEvent) {
+	  				setManualSet(true)
+	  				setShowMenu(true)
+	  				setRemoveNonMenuHtml(false)
+	  				menuCheckForKeyEvent = true
+	  			}
+			}
+		}
+	})
+	*/
 	
+	useEscape(() => {
+		if (!menuOpen) {
+			setManualSet(true)
+  			setShowMenu(true)
+  			menuOpen = true
+  			setRemoveNonMenuHtml(false)
+		}
+		else killMenu()
+	})
+
 	const handleClick = (e) => {
 		if (e.type === 'click') {
-				if (!showMenu) {
+			if (!menuOpen) {
 	  			setManualSet(true)
 	  			setShowMenu(true)
+	  			menuOpen = true
 	  			setRemoveNonMenuHtml(false)
 	  		}
 	  		else killMenu()
-		}
+		} 
 	}
  
+	// state param of setManualSet fn holds the secret!!!:
+
  	useEffect(() => {	
  		function menuAlfredo(){
  			setManualSet((state) => {
 				if(!state) {
 	  				setShowMenu(true)
+	  				menuOpen = true
 	  			}
 				return state
 			})
@@ -117,7 +167,7 @@ const Menu = props => {
 					</div>
 				</MyToolbar>
 			</AppBar>
-			{showMenu && <Scene 
+			{menuOpen && <Scene 
 				elements={elements()} 
 				numberOfDummies={numberOfDummies} 
 				removeNonMenuHtml={()=>{return removeNonMenuHtml}}
