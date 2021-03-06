@@ -678,12 +678,12 @@ const App = () => {
           <div className="container">
             <Routes>
               <Route exact path='/' element={<Home />} />
-              <Route exact path='/bilder/kfu' element={<Bilderwand key='1' bilder={bilder.kfu.bilder} titel='Herbstliche Flugobjekte' />} />
-              <Route exact path='/bilder/oelsand' element={<Bilderwand key='2' bilder={bilder.oelsand.bilder} titel='Ölsand' />} />
+              <Route exact path='/bilder/kfu' element={<Bilderwand key='0' bilder={bilder.kfu.bilder} titel='Herbstliche Flugobjekte' />} />
+              <Route exact path='/bilder/oelsand' element={<Bilderwand key='1' bilder={bilder.oelsand.bilder} titel='Ölsand' />} />
               <Route exact path='/bilder/upcycling' element={<Bilderwand key='2' bilder={bilder.upcycling.bilder} titel='Upcycling' />} />
               <Route exact path='/bilder/zufallsbegegnungen' element={<Bilderwand key='3' bilder={bilder.leute.bilder} titel='Zufallsbegegnungen' />} />
-              <Route exact path='/bilder/portraits' element={<Bilderwand key='3' bilder={bilder.portraits.bilder} titel='Portraits' />} />
-              <Route exact path='/bilder/suesses' element={<Bilderwand key='4' bilder={bilder.eyecandy.bilder} titel='Sweets' />} />
+              <Route exact path='/bilder/portraits' element={<Bilderwand key='4' bilder={bilder.portraits.bilder} titel='Portraits' />} />
+              <Route exact path='/bilder/suesses' element={<Bilderwand key='5' bilder={bilder.eyecandy.bilder} titel='Sweets' />} />
               <Route exact path='/impressum' element={<Impressum />} />
               <Route exact path='/login' element={<Login />} />
               <Route exact path='/kuenstlerin' element={<Artist />} />
