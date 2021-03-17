@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 
-const useEscape = (onEscape) => {
+const UseEscape = onEscape => {
     useEffect(() => {
-        const handleEsc = (event) => {
+        const handleEsc = event => {
             if (event.keyCode === 27) 
                 onEscape();
         };
@@ -14,4 +14,4 @@ const useEscape = (onEscape) => {
     }, []);
 }
 
-export default useEscape
+export default UseEscape

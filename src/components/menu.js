@@ -7,14 +7,15 @@ import AdminButton from './adminButton'
 import Scene from './drop' 
 import MenuLink from './menulink'
 import MenuClose from './menuclose'
+import UseEscape from './utils/esckey'
 
 
 const Menu = props => {
 	const styles = {
 		outerStyleL: {width:"50%",display:"inline-block",position:"relative",left:"0"},
 		outerStyleR: {width:"50%",display:"inline-block",position:"relative",right:"0",order: 3},
-		innerStyleL: {display:"flex", justifyContent:"flex-start"},
-		innerStyleR: {display:"flex", justifyContent:"flex-end"}
+		innerStyleL: {display:"flex",justifyContent:"flex-start"},
+		innerStyleR: {display:"flex",justifyContent:"flex-end"}
 	}
 
 	const [manualSet, setManualSet] = useState(false)
@@ -42,9 +43,14 @@ const Menu = props => {
 
 
 	const killMenu = () => {
+		// alert("showmenu: "+showMenu)
   		setRemoveNonMenuHtml(true)
   		const delayedClose = () => {
   			setShowMenu(false)
+  			// alert("showmenu: "+showMenu)
+
+  			// ⚠️ PROBLEM: state wird zwar geändert, aber es ist asynch & wird in diesem Render nicht beachtet!
+
   			// if .sctn_header exists
   			// if (document.querySelector('.sctn_header') !== null) document.querySelector('.sctn_header').style.flexDirection = 'row'
   		}
@@ -62,18 +68,17 @@ const Menu = props => {
 		navbarbuttons.forEach(el => {
 			el.classList.remove("navbarhover")
 		})
-		setTimeout(delayedClose,25)
+		setTimeout(delayedClose,50)
+		return 
   	}
 
   	// EVENT LISTENER FOR ESCAPE KEY:
 
-  	document.addEventListener('keydown',function(evt){
+  	/* document.addEventListener('keydown',function(evt){
 		
 		//evt.stopImmediatePropagation()
-		
-		if (document.querySelector('.page_titel') !== null) {
+	    if (document.querySelector('.page_titel') !== null) {
 			evt = evt || window.event
-
 			if (evt.keyCode === 27) {
 	  			if (!showMenu) {
 	  				setManualSet(true)
@@ -84,7 +89,20 @@ const Menu = props => {
 			}
 		}
 	})
+
+	*/
+	UseEscape(() => {
+
+			alert("esc")
+			if (!showMenu) {
+				setManualSet(true)
+	  			setShowMenu(true)
+	  			setRemoveNonMenuHtml(false)
+			}
+			else killMenu()
+		
 	
+	})
 	const handleClick = (e) => {
 		if (e.type === 'click') {
 			if (!showMenu) {
@@ -95,7 +113,7 @@ const Menu = props => {
 	  		else killMenu()
 		}
 	}
- 
+ 	/*
  	useEffect(() => {	
  		function menuAlfredo(){
  			setManualSet((state) => {
@@ -112,8 +130,8 @@ const Menu = props => {
     	return () => window.clearTimeout(timeoutID) 	
 
 	  	// erst wieder verwendet wenn es admin buttons (login usw gibt. dort nervt das Menü)
-	},[])
- 	
+	},[manualSet, showMenu])
+ 	*/
 	
   	
 

@@ -48,6 +48,9 @@ dann unten im render:
   2. Runner.stop() stoppt den Runner nicht!
 
 
+  ⚠️ {{...style.bioItem, ...style.bioItemSubList}} DATS HOW you combine styles!
+
+
 
 */
 
@@ -61,6 +64,7 @@ import Impressum from './pages/impressum'
 import Menu from './components/menu'
 import Artist from './pages/artist'
 import Bilderwand from './pages/bilderwand'
+import Kontakt from './pages/kontakt'
 
 import oelsand1 from './assets/oelsand-1.jpg'
 import oelsand2 from './assets/oelsand-2.jpg'
@@ -687,6 +691,7 @@ const App = () => {
               <Route exact path='/impressum' element={<Impressum />} />
               <Route exact path='/login' element={<Login />} />
               <Route exact path='/kuenstlerin' element={<Artist />} />
+              <Route exact path='/kontakt' element={<Kontakt />} />
             </Routes>
           </div>
         </Router>

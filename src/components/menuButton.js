@@ -12,8 +12,8 @@ const styles = {
 
 const useStyles = makeStyles(styles)
 
-const MenuButton = (props) => {
-	const click = (e) => {props.toggle(e)}
+const MenuButton = props => {
+	const click = e => {props.toggle(e)}
 	const classes = useStyles()
 	return <Button 
 		className={classes.root+" navbarbutton"} 

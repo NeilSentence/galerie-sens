@@ -19,6 +19,7 @@ html,body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 .noselect {
@@ -103,7 +104,8 @@ body {
     top: -50px;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 2000px;
+    background-attachment: fixed;
 }
 
 #mjs-wrapper {overflow:hidden;position:fixed;transition: background 0.2s ease;z-index: 1;}
