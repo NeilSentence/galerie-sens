@@ -114,7 +114,28 @@ const Bilderwand = props => {
 			.verkauft // true,false
 	*/
 
-	const diesesKunstwerk = (el) => {
+
+	// NAVIGATION BY ARROW KEYS WILL NOT CALL CURRENTART FUNCTION !!!!!!
+	
+
+	const currentArt = () => {
+		const wrappers = document.getElementsByClassName('bilderwrapper')
+		let wrapper
+		for (const index in wrappers) {
+			if (typeof wrappers[index].style !== 'undefined') {
+				if (wrappers[index].style.left === '0%') {
+					wrapper = wrappers[index]
+				}
+			}
+		}
+		setSelectedArt(wrapper.querySelector('img').id)
+	}
+
+	
+
+
+
+	const singleArtView = (el) => {
 		setSelectedArt(el.target.id)
 		setEinzelAnsicht(true)
 		SingleArtView = true
@@ -135,7 +156,7 @@ const Bilderwand = props => {
 			newimgstyle.boxShadow      ='0 0 10px rgba(0,0,0,1),0 0 30px rgba(0,0,0,0.85),0 0 40px rgba(0,0,0,0.45),0 0 50px rgba(0,0,0,0.3),0 0 60px rgba(0,0,0,0.25)'
 		}
 
-        return (<div key={bild.id} className="bilderwrapper" style={newwrapperstyle}><img id={bild.id} className="wandbild" style={newimgstyle} alt={bilder[bild.id].altTxt} src={bilder[bild.id].source} onClick={(el)=>{diesesKunstwerk(el)}}/></div>)
+        return (<div key={bild.id} className="bilderwrapper" style={newwrapperstyle}><img id={bild.id} className="wandbild" style={newimgstyle} alt={bilder[bild.id].altTxt} src={bilder[bild.id].source} onClick={(el)=>{singleArtView(el)}}/></div>)
     })
 
 	const getZahl = (obj) => {
@@ -182,10 +203,9 @@ const Bilderwand = props => {
 						bilderwrap.forEach((wrap) => {
 
 							const zahl = getZahl(wrap)
-							wrap.style.left = (zahl+100)+'%'	
-							
+							wrap.style.left = (zahl+100)+'%'
 						})
-
+						currentArt()
 					}
 				}
 				
@@ -198,7 +218,7 @@ const Bilderwand = props => {
 							const zahl = getZahl(wrap)
 			    			wrap.style.left = (zahl-100)+'%'
 			    		})
-
+			    		currentArt()
 			    	}
 			    }
 
@@ -232,8 +252,8 @@ const Bilderwand = props => {
 			}
 	    	return(
 		    	<div className="arrowcontrols" style={style.arrowcontrols}>
-					<div className="arrow" onClick={(el) => {arrownavigation(el)}}  id="rightarrow" style={style.arrow}>&#x25E8;</div>
-					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="leftarrow" style={style.arrow}>&#x25E7;</div>
+					<div className="arrow" onClick={(el) => {arrownavigation(el);currentArt()}}  id="rightarrow" style={style.arrow}>&#x25E8;</div>
+					<div className="arrow" onClick={(el) => {arrownavigation(el);currentArt()}} id="leftarrow" style={style.arrow}>&#x25E7;</div>
 					<style>
 		  				{`.arrow:hover{opacity:1 !important}#leftarrow{display:none}`}
 					</style>

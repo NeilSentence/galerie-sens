@@ -108,6 +108,10 @@ body {
     background-attachment: fixed;
 }
 
+.kontakt:hover {
+    background: rgb(240,240,240) !important;
+}
+
 #mjs-wrapper {overflow:hidden;position:fixed;transition: background 0.2s ease;z-index: 1;}
 
 #mjs-wrapper .menulink h1 {width:100%;font-size: 2rem;pointer-events: none;}

@@ -52,7 +52,7 @@ const Artist = props => {
 		kontaktContainer: {
 			display:'flex',justifyContent:'center',marginTop:'3em',position:'relative'
 		},
-		kontaktBtn: {padding:'0.8em',fontSize:'1.3em', border: 'none', fontFamily:'Delius-Regular',background: 'rgb(240,240,240)',color: 'rgb(120,120,120)',cursor:'pointer'}
+		kontaktBtn: {transition: 'background 1s ease', padding:'0.8em',fontSize:'1.3em', border: '1px solid grey', fontFamily:'Delius-Regular',background: 'none',color: 'rgb(120,120,120)',cursor:'pointer'}
 	}
 
 	return (

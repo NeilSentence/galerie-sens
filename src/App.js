@@ -34,9 +34,11 @@ dann unten im render:
   COMPLETION 
   1. Menu auto drop nur bei Home! 
   2. Home = Menu schon offen, delay Text ("delayed_fallables") länger.
-  3. Tabellarischer LL unter "zur Person" V
+  3. Tabellarischer LL Ok aber Text (Zufall, Fundstücke, Computer als Werkzeug der Verfremdung) "zur Person"
   4. Text: "Einladung zum Klötzchen-Spiel" 
-  5. Bilderliste für Infoseiten vorbereiten (GDocs). V
+  5. Anmerkungen zur Serie wie Einzelansicht, weißer Balken oben
+  6. Kontaktformular einbauen
+  7. Glitch Art, Fotocollagen
 
   BONUS FEATURES
   1. 
@@ -79,12 +81,14 @@ import kfu4 from './assets/kfu-4.jpg'
 import kfu5 from './assets/kfu-5.jpg'
 import kfu6 from './assets/kfu-6.jpg'
 import kfu7 from './assets/kfu-7.jpg'
+import kfu8 from './assets/kfu-7.jpg'
 
 import upcycling1 from './assets/objekt-11.jpg'
 import upcycling2 from './assets/objekt-2.jpg'
 import upcycling3 from './assets/objekt-3.jpg'
 import upcycling4 from './assets/objekt-4.jpg'
 import upcycling5 from './assets/objekt-5.jpg'
+import upcycling6 from './assets/objekt-6.jpg'
 
 import leute1 from './assets/leute-1.jpg'
 import leute2 from './assets/leute-2.jpg'
@@ -159,264 +163,299 @@ const App = () => {
   const matter = useState(Matter)
 
   const bilder = {
+    fotocollagen: {
+      infosSerie:'',
+      bilder:[]
+    },
+    glitches: {
+      infosSerie:'',
+      bilder:[]
+    },
     upcycling: {
       infosSerie: '',
       bilder: [
         {
           key:0,
           id:0,
-          titel:'Abgelaufen',
+          titel:'Redezeit abgelaufen',
           source:upcycling1,altSrc: ['filename2','filename3'],
-          preis:'unverkäuflich',verkauft:false,
+          preis:200,verkauft:false,
           tags:['objekt','abstrakt','metall','industrial','upcycling'],
-          gewicht:0, groesse:{x:0,y:0,z:0},
-          beschreibung: 'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
+          gewicht:0, groesse:{x:50,y:'?',z:40},
+          beschreibung: 'Objekt aus Fundstücken: Metall, Marmor, Holzplatte.',
           altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.',
           schatten:false
         },
         {
           key:1,
           id:1,
-          titel:'Sonnenbader',
+          titel:'Monolog',
           source:upcycling2,altSrc: ['filename2','filename3'],
-          preis:'unverkäuflich',verkauft:false,
+          preis:200,verkauft:false,
           tags:['objekt','abstrakt','metall','industrial','upcycling'],
-          gewicht:0, groesse:{x:0,y:0,z:0},
-          beschreibung: 'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
-          altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.',
+          gewicht:0, groesse:'Höhe ca. 25 cm',
+          beschreibung: 'Objekt aus Fundstücken: Metall, Holz, Draht',
+          altTxt:'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
           schatten:false
         },
         {
           key:2,
           id:2,
-          titel:'Kontaktaufnahme',
+          titel:'Unterhaltung auf hohem Niveau',
           source:upcycling3,altSrc: ['filename2','filename3'],
-          preis:'unverkäuflich',verkauft:false,
+          preis:200,verkauft:false,
           tags:['objekt','abstrakt','metall','industrial','upcycling'],
-          gewicht:0, groesse:{x:0,y:0,z:0},
-          beschreibung: 'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
+          gewicht:0, groesse:'Höhe ca. 40 cm',
+          beschreibung: 'Objekt aus Fundstücken: Metall, Holz, Gips.',
           altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.',
           schatten:false
         },
         {
           key:3,
           id:3,
-          titel:'ungleiches Paar',
+          titel:'Auf gleicher Augenhöhe',
           source:upcycling4,altSrc: ['filename2','filename3'],
           preis:'unverkäuflich',verkauft:false,
           tags:['objekt','abstrakt','metall','industrial','upcycling'],
-          gewicht:0, groesse:{x:0,y:0,z:0},
-          beschreibung: 'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
+          gewicht:0, groesse:'Höhe ca. 40 cm',
+          beschreibung: 'Objekt aus Fundstücken: Metall, Holz, Papier.',
           altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.',
           schatten:false
         },
         {
           key:4,
           id:4,
-          titel:'ungleiches Paar',
+          titel:'Ins Gespräch vertieft',
           source:upcycling5,altSrc: ['filename2','filename3'],
-          preis:'unverkäuflich',verkauft:false,
+          preis:200,verkauft:false,
           tags:['objekt','abstrakt','metall','industrial','upcycling'],
-          gewicht:0, groesse:{x:0,y:0,z:0},
-          beschreibung: 'Stahlfedern, die wie zwei Gestalten voreinander stehen. In einem schweren Sockel aus mit Pappmaché verkleidetem Holz.',
+          gewicht:0, groesse:'Höhe: ca. 30 cm',
+          beschreibung: 'Objekt aus Fundstücken: Metall, Holz, Gips.',
           altTxt:'ein Kunstobjekt aus zwei rostigen Stahlfedern die wie Gestalten voreinanderstehen.',
+          schatten:false
+        },
+        {
+          key:5,
+          id:5,
+          titel:'Kaum reicht man den kleinem Finger ...',
+          source:upcycling6,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['objekt','abstrakt','metall','industrial','upcycling'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Ein kleines Objekt aus Fundstücken: Holz, Metall.',
+          altTxt:'ein Kunstobjekt aus ....',
           schatten:false
         }
       ]
+
+
     },
     kfu: {
-      infosSerie:'Mit einem breiten Kalligraphiepinsel sind diese großformatigen Aquarelle entstanden.',
+      infosSerie:'Mit Schwung und Drehung "ganz entspannt im Hier und Jetzt" und mit einem breiten Kalligraphiepinsel sind diese großformatigen Aquarelle entstanden.',
       bilder:[
         {
           key:5,
           id:0,
-          titel:'Flugobjekt 1',
+          titel:'#1',
           source:kfu1,altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
+          preis:200, verkauft:false, 
           tags:['malerei','aquarell','abstrakt','experimentell'],
-          gewicht:0, groesse:{x:25,y:30,z:3},
-          beschreibung: '',
+          gewicht:0, groesse:{x:'60?',y:'80?',z:'?'},
+          beschreibung: 'Aquarell auf Karton',
           altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.',
           schatten:true
         },
         {
           key:6,
           id:1,
-          titel:'Flugobjekt 2',
+          titel:'#2',
           source:kfu2,altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
+          preis:200, verkauft:false, 
           tags:['malerei','aquarell','abstrakt','experimentell'],
           gewicht:0, groesse:{x:25,y:30,z:3},
-          beschreibung: '',
+          beschreibung: 'Aquarell auf Karton',
           altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.',
           schatten:true
         },
         {
           key:7,
           id:2,
-          titel:'Flugobjekt 3',
+          titel:'#3',
           source:kfu3,altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
+          preis:200, verkauft:false, 
           tags:['malerei','aquarell','abstrakt','experimentell'],
-          gewicht:0, groesse:{x:25,y:30,z:3},
-          beschreibung: '',
+          gewicht:0, groesse:{x:'60?',y:'80?',z:'?'},
+          beschreibung: 'Aquarell auf Karton',
           altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.',
           schatten:true
         },
         {
           key:8,
           id:3,
-          titel:'Flugobjekt 4',
+          titel:'#4',
           source:kfu4,altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
+          preis:200, verkauft:false, 
           tags:['malerei','aquarell','abstrakt','experimentell'],
-          gewicht:0, groesse:{x:25,y:30,z:3},
-          beschreibung: '',
+          gewicht:0, groesse:{x:'60?',y:'80?',z:'?'},
+          beschreibung: 'Aquarell auf Karton',
           altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.',
           schatten:true
         },
         {
           key:9,
           id:4,
-          titel:'Flugobjekt 5',
+          titel:'#5',
           source:kfu5,altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
+          preis:200, verkauft:false, 
           tags:['malerei','aquarell','abstrakt','experimentell'],
-          gewicht:0, groesse:{x:25,y:30,z:3},
-          beschreibung: '',
+          gewicht:0, groesse:{x:'60?',y:'80?',z:'?'},
+          beschreibung: 'Aquarell auf Karton',
           altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.',
           schatten:true
         },
         {
           key:10,
           id:5,
-          titel:'Flugobjekt 6',
+          titel:'#6',
           source:kfu6,altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
+          preis:200, verkauft:false, 
           tags:['malerei','aquarell','abstrakt','experimentell'],
-          gewicht:0, groesse:{x:25,y:30,z:3},
-          beschreibung: '',
+          gewicht:0, groesse:{x:'60?',y:'80?',z:'?'},
+          beschreibung: 'Aquarell auf Karton',
           altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.',
           schatten:true
         },
         {
           key:11,
           id:6,
-          titel:'Flugobjekt 6',
+          titel:'#7',
           source:kfu7,altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
-          tags:['malerei','aquarell','abstrakt','experimentell'],
-          gewicht:0, groesse:{x:25,y:30,z:3},
-          beschreibung: '',
+          preis:350, verkauft:false, 
+          tags:['malerei','aquarell','abstrakt','experimentell', 'Großformat'],
+          gewicht:0, groesse:{x:'80?',y:'100?',z:'?'},
+          beschreibung: '<p>Aquarell auf Karton.</p><p>Großformat.</p>',
           altTxt:'ein Aquarell-Experiment, dass einem geschwungenen, leicht sichelförmigen Herbstblatt aus Rot- und Grüntönen ähnelt.',
+          schatten:true
+        },
+        {
+          key:12,
+          id:7,
+          titel:'Anatomie 1',
+          source:kfu8,altSrc:['filename2','filename3'],
+          preis:150, verkauft:false, 
+          tags:['malerei','aquarell','abstrakt','experimentell', 'gerahmt'],
+          gewicht:0, groesse:{x:'30?',y:'30?',z:'5?'},
+          beschreibung: '<p>Wasserfarben und Chinatusche, Passepartoutausschnitt ca. 25 x 25 cm, hochwertige Rahmung mit doppelter Verglasung. </p><p>Aquarell auf Karton</p>',
+          altTxt:'',
           schatten:true
         }
       ]
     },
+    // Kalligrafie 1/2/3..., Anatomie 1/2/3... einfügen!
     leute: {
       infosSerie: 'Zufällige Begegnungen und Alltagssituationen in Acryl auf Leinwand gebannt.',
       bilder:[
         {
           key:12,
           id:0,
-          titel:'Social Experiment 1',
+          titel:'#1',
           source:leute1,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:250, verkauft:false, 
           tags:[], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'50? x 80? cm', 
+          beschreibung: '<p>Acryl auf Leinwand.</p><p>Auf der Straße.</p><p>Hintergrung nicht dargestellt, um Begegnung / Beziehung hervorzuheben.</p>',
           altTxt:'ein paar Leute',
           schatten:true
         },
         {
           key:13,
           id:1,
-          titel:'Social Experiment 1',
+          titel:'Ballett',
           source:leute2,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:350, verkauft:false, 
           tags:[], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'80? x 100? cm', 
+          beschreibung: '<p>Acryl auf Leinwand.</p><p>Szene aus dem TV.</p>',
           altTxt:'ein paar Leute',
           schatten:true
         },
         {
           key:14,
           id:2,
-          titel:'Social Experiment 1',
+          titel:'Filmszene',
           source:leute3,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:300, verkauft:false, 
           tags:[], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'80? x 60? cm', 
+          beschreibung: '<p>Acryl auf Leinwand.</p><p>Szene aus dem TV.</p>',
           altTxt:'ein paar Leute',
           schatten:true
         },
         {
           key:15,
           id:3,
-          titel:'Social Experiment 1',
+          titel:'Chorsängerinnen',
           source:leute4,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:300, verkauft:false, 
           tags:[], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'80? x 60? cm', 
+          beschreibung: '<p>Acryl auf Leinwand.</p><p>Szene aus dem TV.</p>',
           altTxt:'ein paar Leute',
           schatten:true
         },
         {
           key:16,
           id:4,
-          titel:'Social Experiment 1',
+          titel:'Vor dem Live-Konzert',
           source:leute5,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:300, verkauft:false, 
           tags:[], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'80? x 60? cm', 
+          beschreibung: 'Acryl auf Leinwand.',
           altTxt:'ein paar Leute',
           schatten:true
         },
         {
           key:17,
           id:5,
-          titel:'Social Experiment 1',
+          titel:'#6',
           source:leute6,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:250, verkauft:false, 
           tags:[], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'50? x 80? cm', 
+          beschreibung: '<p>Acryl auf Leinwand.</p><p>Auf der Straße.</p><p>Hintergrung nicht dargestellt, um Begegnung / Beziehung hervorzuheben.</p>',
           altTxt:'ein paar Leute',
           schatten:true
         },
         {
           key:18,
           id:6,
-          titel:'Social Experiment 1',
+          titel:'#7',
           source:leute7,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:300, verkauft:false, 
           tags:[], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'60? x 80? cm', 
+          beschreibung: '<p>Acryl auf Leinwand.</p><p>Auf der Straße.</p><p>Hintergrung nicht dargestellt, um Begegnung / Beziehung hervorzuheben.</p>',
           altTxt:'ein paar Leute',
           schatten:true
         },
         {
           key:19,
           id:7,
-          titel:'Social Experiment 1',
+          titel:'Im Fischladen',
           source:leute8,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:250, verkauft:false, 
           tags:[], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'50? x 80? cm', 
+          beschreibung: '<p>Acryl auf Leinwand.</p>',
           altTxt:'ein paar Leute',
           schatten:true
         }
@@ -431,10 +470,10 @@ const App = () => {
           titel:'Selfie',
           source:portrait1,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:true, 
+          preis:600, verkauft:true, 
           tags:['menschen','portraits','acryl','malerei'], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'120 x 80 cm', 
+          beschreibung: 'Acryl auf Leinwand',
           altTxt:'zwei tolle Frauen',
           schatten:true
         },
@@ -444,10 +483,10 @@ const App = () => {
           titel:'Profilbild',
           source:portrait2,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:true, 
+          preis:300, verkauft:true, 
           tags:['menschen','portraits','acryl','malerei'], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'60 x 80 cm', 
+          beschreibung: 'Acryl auf Pappe',
           altTxt:'Das langjährige Profilbild des Entwicklers dieser Webseite',
           schatten:true
         },
@@ -457,11 +496,11 @@ const App = () => {
           titel:'Playing the Blues',
           source:portrait3,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:true, 
+          preis:300, verkauft:true, 
           tags:['menschen','portraits','acryl','malerei'], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
-          altTxt:'ein Arzt und Gitarrist',
+          gewicht:0, groesse:'60 x 80 cm',
+          beschreibung: 'Acryl auf Pappe',
+          altTxt:'ein Arzt und Musiker',
           schatten:true
         },
         {
@@ -470,10 +509,10 @@ const App = () => {
           titel:'Abgetaucht',
           source:portrait4,
           altSrc:['filename2','filename3'],
-          preis:0, verkauft:true, 
+          preis:300, verkauft:true, 
           tags:['menschen','portraits','acryl','malerei'], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'60 x 80 cm',
+          beschreibung: 'Acryl auf Pappe',
           altTxt:'ein Herr mit Brille',
           schatten:true
         },
@@ -483,10 +522,10 @@ const App = () => {
           titel:'S.',
           source:portrait5,
           altSrc:['filename2','filename3'],
-          preis:600, verkauft:false, 
+          preis:600, verkauft:true, 
           tags:['menschen','portraits','acryl','malerei'], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'80 x 120 cm',
+          beschreibung: 'Acryl auf Leinwand',
           altTxt:'eine dunkelhaarige Dame mit blumiger Bluse',
           schatten:true
         },
@@ -496,129 +535,129 @@ const App = () => {
           titel:'H.D.',
           source:portrait6,
           altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
+          preis:500, verkauft:true, 
           tags:['menschen','portraits','acryl','malerei'], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
-          altTxt:'eine dunkelhaarige Dame mit blumiger Bluse',
+          gewicht:0, groesse:'80 x 100 cm',
+          beschreibung: 'Acryl auf Leinwand',
+          altTxt:'eine rothaarige Dame mit weißer Bluse',
           schatten:true
         },
         {
           key:26,
           id:6,
-          titel:'?',
+          titel:'S.G.',
           source:portrait7,
           altSrc:['filename2','filename3'],
-          preis:500, verkauft:false, 
+          preis:500, verkauft:true, 
           tags:['menschen','portraits','acryl','malerei'], 
-          gewicht:0, groesse:{x:0,y:0,z:0}, 
-          beschreibung: '',
+          gewicht:0, groesse:'80 x 100 cm',
+          beschreibung: 'Acryl auf Leinwand',
           altTxt:'eine dunkelhaarige Dame mit blumiger Bluse',
           schatten:true
         }
       ]
     },
     eyecandy: {
-      infosSerie:'Süßigkeiten, stark herangezoomt.',
+      infosSerie:'Süßigkeiten, einige stark herangezoomt.',
       bilder: [
         {
           key:28,
           id:0,
-          titel:'Sweets Nr. 7',
+          titel:'#10',
           source:eyecandy1,altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
-          tags:['ernährung','acryl','malerei','gegenständlich','musterhaft'], 
-          gewicht:0, groesse:{x:30,y:30,z:3},
-          beschreibung:'Acryl auf LW',
-          altTxt:'ein regelmäßiges Muster aus Haribos',
+          preis:500, verkauft:false, 
+          tags:['acryl','malerei','gegenständlich','musterhaft'], 
+          gewicht:0, groesse:'80 x 120 cm',
+          beschreibung:'<p>Acryl auf Leinwand</p><p>Kartoffeldruck & Mischtechnik</p>',
+          altTxt:'',
           schatten:true
         },
         {
           key:29,
           id:1,
-          titel:'Eye Candy 1',
+          titel:'#11',
           source:eyecandy2,altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
-          tags:['ernährung','acryl','malerei','gegenständlich','musterhaft'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          preis:400, verkauft:false, 
+          tags:['acryl','malerei','gegenständlich','musterhaft'],
+          gewicht:0, groesse:'80 x 100 cm',
+          beschreibung:'<p>Acryl auf Leinwand</p><p>Nahansicht</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:true
         },
         {
           key:30,
           id:2,
-          titel:'Eye Candy 1',
+          titel:'#12',
           source:eyecandy3,altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
-          tags:['ernährung','acryl','malerei','gegenständlich','musterhaft'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          preis:400, verkauft:false, 
+          tags:['acryl','malerei','gegenständlich','musterhaft'],
+          gewicht:0, groesse:'80 x 100 cm',
+          beschreibung:'<p>Acryl auf Leinwand</p><p>Nahansicht</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:true
         },
         {
           key:31,
           id:3,
-          titel:'Eye Candy 1',
+          titel:'#13',
           source:eyecandy4,altSrc:['filename2','filename3'],
           preis:0, verkauft:false, 
-          tags:['ernährung','acryl','malerei','gegenständlich','musterhaft'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          tags:['acryl','malerei','gegenständlich','musterhaft'],
+          gewicht:0, groesse:'40 x 40 cm',
+          beschreibung:'<p>Acryl auf Leinwand</p><p>Detailansicht</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:true
         },
         {
           key:32,
           id:4,
-          titel:'Eye Candy 1',
+          titel:'#14',
           source:eyecandy5,altSrc:['filename2','filename3'],
           preis:0, verkauft:false, 
-          tags:['ernährung','acryl','malerei','gegenständlich','musterhaft'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          tags:['acryl','malerei','gegenständlich','musterhaft'],
+          gewicht:0, groesse:'40 x 40 cm',
+          beschreibung:'<p>Acryl auf Leinwand</p><p>Detailansicht</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:true
         },
         {
           key:33,
           id:5,
-          titel:'Eye Candy 1',
+          titel:'#15',
           source:eyecandy6,altSrc:['filename2','filename3'],
           preis:0, verkauft:false, 
-          tags:['ernährung','acryl','malerei','gegenständlich','musterhaft'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          tags:['acryl','malerei','gegenständlich','musterhaft'],
+          gewicht:0, groesse:'40 x 40 cm',
+          beschreibung:'<p>Acryl auf Leinwand</p><p>Detailansicht</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:true
         },
         {
           key:34,
           id:6,
-          titel:'Eye Candy 1',
+          titel:'#16',
           source:eyecandy7,altSrc:['filename2','filename3'],
           preis:0, verkauft:false, 
-          tags:['ernährung','acryl','malerei','gegenständlich','musterhaft'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          tags:['acryl','malerei','gegenständlich','musterhaft'],
+          gewicht:0, groesse:'40 x 40 cm',
+          beschreibung:'<p>Acryl auf Leinwand</p><p>Detailansicht</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:true
         }
       ]
     },
     oelsand: {
-      infosSerie:'dsgsdgdfg',
+      infosSerie:'Hier wurden Naturmaterialien (Weserschlick, Wüstensand) mit Öl- oder Acrylfarbe kombiniert.',
       bilder:[
         {
           key:35,
           id:0,
-          titel:'Ölsand 1',
+          titel:'Rot 1',
           source:oelsand1,altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:80, verkauft:false, 
           tags:['öl','malerei','spachtelmasse','abstrakt','organisch'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'',
+          gewicht:0, groesse:'25 x 25 cm',
+          beschreibung:'<p>Experiment mit Farben und Naturmaterialien.</p><p>Ölfarbe, Spachtelmasse & Sahara-Sand.</p>',
           altTxt:"",
           schatten:false
         },
@@ -627,10 +666,10 @@ const App = () => {
           id:1,
           titel:'Weserschlick 1',
           source:oelsand2,altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:80, verkauft:false, 
           tags:['acryl','malerei','abstrakt','organisch'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          gewicht:0, groesse:'25 x 25 cm',
+          beschreibung:'<p>Experiment mit Farben und Naturmaterialien.</p><p>Acrylfarbe, Weserschlick.</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:false
         },
@@ -639,10 +678,10 @@ const App = () => {
           id:2,
           titel:'Weserschlick 2',
           source:oelsand3,altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:80, verkauft:false, 
           tags:['acryl','malerei','schlicksand','abstrakt','organisch'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          gewicht:0, groesse:'25 x 25 cm',
+          beschreibung:'<p>Experiment mit Farben und Naturmaterialien.</p><p>Acrylfarbe, Weserschlick.</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:false
         },
@@ -651,10 +690,10 @@ const App = () => {
           id:3,
           titel:'Weserschlick 3',
           source:oelsand4,altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:80, verkauft:false, 
           tags:['acryl','malerei','abstrakt','organisch'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          gewicht:0, groesse:'25 x 25 cm',
+          beschreibung:'<p>Experiment mit Farben und Naturmaterialien.</p><p>Acrylfarbe, Weserschlick.</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:false
         },
@@ -663,10 +702,10 @@ const App = () => {
           id:4,
           titel:'Ölsand 5',
           source:oelsand5,altSrc:['filename2','filename3'],
-          preis:0, verkauft:false, 
+          preis:80, verkauft:false, 
           tags:['öl','malerei','spachtelmasse','abstrakt','organisch'], 
-          gewicht:0, groesse:{x:50,y:100,z:4},
-          beschreibung:'Die Formen und Farben des bekannten Naschzeugs dienten als Inspiration für ein bedrohliches Muster. Ein Minenfeld präzise ausgebreiteter kleiner Zuckerbomben, dass hervorragend in eine Hipsterwohnung passt.',
+          gewicht:0, groesse:'25 x 25 cm',
+          beschreibung:'<p>Experiment mit Farben und Naturmaterialien.</p><p>Ölfarbe, Spachtelmasse & Sahara-Sand.</p>',
           altTxt:'ein regelmäßiges Muster aus Haribos',
           schatten:false  
         }
@@ -682,12 +721,14 @@ const App = () => {
           <div className="container">
             <Routes>
               <Route exact path='/' element={<Home />} />
-              <Route exact path='/bilder/kfu' element={<Bilderwand key='0' bilder={bilder.kfu.bilder} titel='Herbstliche Flugobjekte' />} />
-              <Route exact path='/bilder/oelsand' element={<Bilderwand key='1' bilder={bilder.oelsand.bilder} titel='Ölsand' />} />
-              <Route exact path='/bilder/upcycling' element={<Bilderwand key='2' bilder={bilder.upcycling.bilder} titel='Upcycling' />} />
-              <Route exact path='/bilder/zufallsbegegnungen' element={<Bilderwand key='3' bilder={bilder.leute.bilder} titel='Zufallsbegegnungen' />} />
-              <Route exact path='/bilder/portraits' element={<Bilderwand key='4' bilder={bilder.portraits.bilder} titel='Portraits' />} />
-              <Route exact path='/bilder/suesses' element={<Bilderwand key='5' bilder={bilder.eyecandy.bilder} titel='Sweets' />} />
+              <Route exact path='/bilder/kfu' element={<Bilderwand key='0' bilder={bilder.kfu.bilder} titel='Kalligrafische Experimente' />} />
+              <Route exact path='/bilder/fotocollagen' element={<Bilderwand key='1' bilder={bilder.fotocollagen.bilder} titel='Fotocollagen' />} />
+              <Route exact path='/bilder/glitches' element={<Bilderwand key='2' bilder={bilder.glitches.bilder} titel='Glitches' />} />
+              <Route exact path='/bilder/oelsand' element={<Bilderwand key='3' bilder={bilder.oelsand.bilder} titel='Naturstoffe' />} />
+              <Route exact path='/bilder/upcycling' element={<Bilderwand key='4' bilder={bilder.upcycling.bilder} titel='Upcycling' />} />
+              <Route exact path='/bilder/zufallsbegegnungen' element={<Bilderwand key='5' bilder={bilder.leute.bilder} titel='Zufallsbegegnungen' />} />
+              <Route exact path='/bilder/portraits' element={<Bilderwand key='6' bilder={bilder.portraits.bilder} titel='Portraits' />} />
+              <Route exact path='/bilder/suesses' element={<Bilderwand key='7' bilder={bilder.eyecandy.bilder} titel='Sweets' />} />
               <Route exact path='/impressum' element={<Impressum />} />
               <Route exact path='/login' element={<Login />} />
               <Route exact path='/kuenstlerin' element={<Artist />} />

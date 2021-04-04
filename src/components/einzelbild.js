@@ -21,6 +21,11 @@ const Einzelbild = props => {
 	const bildinfos = props.bildinfos
 	const schliessen = props.schliessen
 
+	const groesse = (groessenProp) => {
+		if (typeof groessenProp === "string") return groessenProp
+		else return `Maße: ${groessenProp.x} (B) x ${groessenProp.y} (T) x ${groessenProp.z} (H) cm`
+	} 
+
 	const style = {
 		wrapper: {
 			height: '100vh',
@@ -65,11 +70,11 @@ const Einzelbild = props => {
 			<div className="infobereich" style={style.info}>
 				<div className="leftSide" style={style.leftside}>
 					<h1 className="artwork_title" style={style.artTitle}>{bildinfos.titel}</h1>
-					<div>{'Maße: '+bildinfos.groesse.x+' x '+bildinfos.groesse.y+' x '+bildinfos.groesse.z+' cm'}</div>
+					<div>{groesse(bildinfos.groesse)}</div>
 					<div style={style.outerPreis}><div>'Preis: '</div><div style={style.preis}>{bildinfos.preis+' €'}</div></div>
 				</div>
 				<div className="rightSide" style={style.rightside}>
-					<div>{'Materialgedanke: '+bildinfos.beschreibung}</div>
+					<div dangerouslySetInnerHTML={{ __html: `Materialgedanke: ${bildinfos.beschreibung}` }}></div>
 					<div style={style.tagWrapper} dangerouslySetInnerHTML={{__html:tags}}></div>
 				</div>
 			</div>

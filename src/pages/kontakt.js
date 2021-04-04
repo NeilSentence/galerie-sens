@@ -2,7 +2,9 @@ import React from 'react'
 
 const Kontakt = props => {
 
-
+	// geiler Effekt:
+	// backdropFilter: blur(10px) 
+	
 	const style = {
 		section: {},
 		heading: {
