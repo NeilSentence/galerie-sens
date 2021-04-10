@@ -7,6 +7,7 @@ import { hslaStr } from './utils/helpers'
 const MenuLink = props => {
 
 	const navigate = useNavigate()
+	
 	const resetStyle = () => {
 		const delayed_fallables = document.querySelectorAll(".delayed-fallable")
   		delayed_fallables.forEach((i) => {

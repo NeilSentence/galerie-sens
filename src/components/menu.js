@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import MyToolbar from './myToolbar'
 import PageTitle from './pageTitle'
@@ -28,14 +28,14 @@ const Menu = props => {
 	const elements = () => {
 		return (
 			<>
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/kfu"} titel="Kalligrafische Experimente" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/glitches"} titel="Glitches" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/fotocollagen"} titel="Fotocollagen" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/oelsand"} titel="Naturstoffe" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/upcycling"} titel="Upcycling" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/zufallsbegegnungen"} titel="Zufallsbegegnungen" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/portraits"} titel="Portraits" />
-			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/suesses"} titel="Sweets" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/kfu/0"} titel="Kalligrafische Experimente" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/glitches/0"} titel="Glitches" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/fotocollagen/0"} titel="Fotocollagen" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/oelsand/0"} titel="Naturstoffe" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/upcycling/0"} titel="Upcycling" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/zufallsbegegnungen/0"} titel="Zufallsbegegnungen" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/portraits/0"} titel="Portraits" />
+			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/bilder/suesses/0"} titel="Sweets" />
 			<MenuLink  kill={()=>{killMenu()}} imgUrl="" setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}} href={"/kuenstlerin"} titel="zur Person" />
 			<MenuClose kill={()=>{killMenu()}} setRemoveNonMenuHtml={()=>{setRemoveNonMenuHtml(true)}}/>
 			</>

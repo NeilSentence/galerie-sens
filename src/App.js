@@ -1,7 +1,12 @@
 import React, {useState} from 'react'
 import './App.css'
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useParams
+} from "react-router-dom"
 import Matter from 'matter-js'
 
 //import WidthDisplay from './components/utils/widthdisplay'
@@ -713,26 +718,26 @@ const App = () => {
     }
   }
 
-  return (
+  return(
     <Provider value={{ bilder, screen_size, aktive_objekte, matter }}>
       <React.Fragment>
         <Router>
           <Menu /> 
           <div className="container">
             <Routes>
-              <Route exact path='/' element={<Home />} />
-              <Route exact path='/bilder/kfu' element={<Bilderwand key='0' bilder={bilder.kfu.bilder} titel='Kalligrafische Experimente' />} />
-              <Route exact path='/bilder/fotocollagen' element={<Bilderwand key='1' bilder={bilder.fotocollagen.bilder} titel='Fotocollagen' />} />
-              <Route exact path='/bilder/glitches' element={<Bilderwand key='2' bilder={bilder.glitches.bilder} titel='Glitches' />} />
-              <Route exact path='/bilder/oelsand' element={<Bilderwand key='3' bilder={bilder.oelsand.bilder} titel='Naturstoffe' />} />
-              <Route exact path='/bilder/upcycling' element={<Bilderwand key='4' bilder={bilder.upcycling.bilder} titel='Upcycling' />} />
-              <Route exact path='/bilder/zufallsbegegnungen' element={<Bilderwand key='5' bilder={bilder.leute.bilder} titel='Zufallsbegegnungen' />} />
-              <Route exact path='/bilder/portraits' element={<Bilderwand key='6' bilder={bilder.portraits.bilder} titel='Portraits' />} />
-              <Route exact path='/bilder/suesses' element={<Bilderwand key='7' bilder={bilder.eyecandy.bilder} titel='Sweets' />} />
-              <Route exact path='/impressum' element={<Impressum />} />
-              <Route exact path='/login' element={<Login />} />
-              <Route exact path='/kuenstlerin' element={<Artist />} />
-              <Route exact path='/kontakt' element={<Kontakt />} />
+              <Route exact path='/'><Home/></Route>
+              <Route exact path='/bilder/kfu/:leftValue'><Bilderwand key='0' id='0' bilder={bilder.kfu.bilder} titel='Kalligrafische Experimente'/></Route>
+              <Route exact path='/bilder/fotocollagen/:leftValue'><Bilderwand key='1' id='1' bilder={bilder.fotocollagen.bilder} titel='Fotocollagen'/></Route>
+              <Route exact path='/bilder/glitches/:leftValue'><Bilderwand key='2' id='2' bilder={bilder.glitches.bilder} titel='Glitches'/></Route>
+              <Route exact path='/bilder/oelsand/:leftValue'><Bilderwand key='3' id='3' bilder={bilder.oelsand.bilder} titel='Naturstoffe'/></Route>
+              <Route exact path='/bilder/upcycling/:leftValue'><Bilderwand key='4' id='4' bilder={bilder.upcycling.bilder} titel='Upcycling'/></Route>
+              <Route exact path='/bilder/zufallsbegegnungen/:leftValue'><Bilderwand key='5' id='5' bilder={bilder.leute.bilder} titel='Zufallsbegegnungen'/></Route>
+              <Route exact path='/bilder/portraits/:leftValue'><Bilderwand key='6' id='6' bilder={bilder.portraits.bilder} titel='Portraits'/></Route>
+              <Route exact path='/bilder/suesses/:leftValue'><Bilderwand key='7' id='7' bilder={bilder.eyecandy.bilder} titel='Sweets'/></Route>
+              <Route exact path='/impressum'><Impressum/></Route>
+              <Route exact path='/login'><Login/></Route>
+              <Route exact path='/kuenstlerin'><Artist/></Route>
+              <Route exact path='/kontakt'><Kontakt/></Route>
             </Routes>
           </div>
         </Router>

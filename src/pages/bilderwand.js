@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState/*, useEffect*/ } from 'react'
 import ZurWand from './../components/zurwand'
 import Einzelbild from './../components/einzelbild'
+// import { useParams } from 'react-router-dom'
 
 // hier müssen Bilder geladen werden
 // const bilder = []
@@ -8,6 +9,155 @@ import Einzelbild from './../components/einzelbild'
 
 
 const Bilderwand = props => {
+
+	// getElementsByClassName returns HTMLCollection not nodelist! Deswegen muss man dort ein bisschen nachhelfen:
+	HTMLCollection.prototype.forEach = Array.prototype.forEach
+
+
+	const checkForUnnecessaryArrows = () => {
+
+		const wrappers = document.getElementsByClassName('bilderwrapper')
+		const larrw = document.getElementById('leftarrow')
+		const rarrw = document.getElementById('rightarrow')
+
+		if (wrappers[0].style.left === '0%') {
+			larrw.style.display = 'none'
+		} else {
+			larrw.style.display = 'block'
+		}
+		if (wrappers[wrappers.length-1].style.left === '0%') {
+			rarrw.style.display = 'none'
+		} else {
+			rarrw.style.display = 'block'
+		}
+	}
+
+	const getZahl = (obj) => {
+		// get css value str:
+		const origLeft = obj.style.left
+		// cut off '%':
+		const nurZahl = origLeft.substring(0,origLeft.length-1)	
+		return(parseInt(nurZahl))
+		// return nurZahl
+	}
+
+	const slide = dir => {
+		const wrappers = document.getElementsByClassName('bilderwrapper')
+		if (dir === "left") {
+			wrappers.forEach((wrap) => {
+				const zahl = getZahl(wrap)
+				console.log(zahl)
+				wrap.style.left = (zahl+100)+'%'
+			})
+		}
+		else {
+			wrappers.forEach((wrap) => {
+				const zahl = getZahl(wrap)
+				console.log(zahl)
+				wrap.style.left = (zahl-100)+'%'
+			})
+		}
+	}
+
+
+	const arrownavigation = (e) => {
+				
+		console.log("leftValues")
+		if (e.currentTarget.id === "leftarrow") {
+			slide('left')
+		}
+		else {
+			slide('right')
+		}
+		currentArt()
+		checkForUnnecessaryArrows()
+	}
+
+
+	// let { pathParams } = useParams(); abandoned due to REACT ISSUES...
+	// useEffect(()=>{console.log(pathParams)},[pathParams]);
+
+	
+
+	const currentArt = () => {
+
+		// sets the state of selected art to the id number of the currently centered img 
+		// used for arrow navigation including inside single art (arrow keys)
+
+		const wrappers = document.getElementsByClassName('bilderwrapper')
+
+		let wrapper
+		for (const index in wrappers) {
+			if (typeof wrappers[index].style !== 'undefined') {
+				if (wrappers[index].style.left === '0%') {
+					wrapper = wrappers[index]
+				}
+			}
+		}
+		// console.dir(wrapper)
+		setSelectedArt(wrapper.querySelector('img').id)
+	}
+
+
+	// Funktion, die je nach dem URL-Parameter oben in der Addresszeile 
+	// (z.B. https://galerie-sens.de/bilder/suesses/3) auf das entsprechende Bild "fährt". 
+	// Das brauchte etwas Bastelei:
+
+	const urlParamNumber = () => {
+
+		// aktualisiere die oben definierte Variable die die Bildelemente enthält: 
+		const wrappers = document.getElementsByClassName('bilderwrapper')
+
+		// wenn es mehr als eins sind, muss das Programm überhaupt erst aktiv werden, sonst springe nach unten:
+		if (wrappers.length > 1) {
+			// test: console.log("es gibt mehr als ein Bild")
+
+			// erstelle eine Variable, die den genauen Text der URL, inkl. der Bildnummer, enthält:
+			const CSSleftValueIndex = window.location.href
+
+			// erstelle eine Variable, die eine Liste der Positionsnummern des Zeichens "/" enthält:
+			// (z.B. ist das letzte / an 5., 6., 12. und 32. Position, dann soll hier [5,6,12,21] erzeugt werden)
+			let indices = []
+			// eine Wiederholung, die diese URL-Zeichenkette Stelle für Stelle durchgeht, 
+			// und wenn das jeweilige Zeichen ein / ist, dann füge diese Stelle der indices-Liste hinzu.
+			for(let i=0; i<CSSleftValueIndex.length;i++) {
+		    	if (CSSleftValueIndex[i] === "/") indices.push(i)
+			}
+			// erzeuge eine neue Zeichenkette, 
+			// die alles von der obigen URL-Textvariablen abschneidet was vor und inkl. dem letzten "/" steht.
+			// Oder andersherum: die nur die Bild-Zahl am Ende übriglässt.
+			const outputStr = CSSleftValueIndex.slice(indices[indices.length-1]+1)
+
+			// Neue Variable: multipliziere diese Zahl mit 100, damit wir zu Positions-Prozenten für die Bewegung des Layouts kommen:
+			// diese Multiplikation macht aus der Zeichenkette automatisch eine Zahl
+			// Bsp. oben: das 4. Bild (ausgehend vom 0.) also sollten, 
+			// ausgehend von left:0% alle Bilder um -3*100% nach links verschoben werden. 
+			const leftIntegerValue = outputStr*100
+			
+			// wrappers sind die die Bilder umschließenden HTML-divs, für jeden dieser Elemente einmal das Style-Attribut "links" 
+			// als reine Zahl auslesen (getZahl erledigt dies),
+			// und dann die oben ermittelte Hunderterzahl davon abziehen.
+
+			wrappers.forEach((wrap) => {
+				const zahl = getZahl(wrap)
+				wrap.style.left = (zahl-leftIntegerValue)+'%'
+			})
+
+			// funktioniert! Jetzt muss ich nur noch die Navigation links / rechts anpassen:
+
+			checkForUnnecessaryArrows()
+		}
+	}
+
+	setTimeout(urlParamNumber(),100)
+
+	// CSS left value of all image wrappers must now deduct this value fron its current value.
+
+
+	// test: alert(urlParamNumber())
+
+
+
 
 	const [einzelAnsicht, setEinzelAnsicht] = useState(false)
 	const [selectedArt, setSelectedArt] = useState(0)
@@ -116,30 +266,19 @@ const Bilderwand = props => {
 
 
 	// NAVIGATION BY ARROW KEYS WILL NOT CALL CURRENTART FUNCTION !!!!!!
-	
 
-	const currentArt = () => {
-		const wrappers = document.getElementsByClassName('bilderwrapper')
-		let wrapper
-		for (const index in wrappers) {
-			if (typeof wrappers[index].style !== 'undefined') {
-				if (wrappers[index].style.left === '0%') {
-					wrapper = wrappers[index]
-				}
-			}
-		}
-		setSelectedArt(wrapper.querySelector('img').id)
-	}
-
-	
 
 
 
 	const singleArtView = (el) => {
+
+		// switching of single art 
+
 		setSelectedArt(el.target.id)
 		setEinzelAnsicht(true)
 		SingleArtView = true
 	}
+
 
 	const bilderHTML = bilder.map((bild) => {
 		const left = bild.id*100
@@ -159,101 +298,49 @@ const Bilderwand = props => {
         return (<div key={bild.id} className="bilderwrapper" style={newwrapperstyle}><img id={bild.id} className="wandbild" style={newimgstyle} alt={bilder[bild.id].altTxt} src={bilder[bild.id].source} onClick={(el)=>{singleArtView(el)}}/></div>)
     })
 
-	const getZahl = (obj) => {
-		// get css value str:
-		const origLeft = obj.style.left
-		// cut off '%':
-		const nurZahl = origLeft.substring(0,origLeft.length-1)	
-		return(parseInt(nurZahl))
-		// return nurZahl
-	}
-
-	const bilderwrap = document.getElementsByClassName('bilderwrapper')
-	// getElementsByClassName returns HTMLCollection not nodelist! Deswegen muss man dort ein bisschen nachhelfen:
-	HTMLCollection.prototype.forEach = Array.prototype.forEach
-
-	const checkForUnnecessaryArrows = () => {
-
-		const larrw = document.getElementById('leftarrow')
-		const rarrw = document.getElementById('rightarrow')
-
-		if (bilderwrap[0].style.left === '0%') {
-			larrw.style.display = 'none'
-		} else {
-			larrw.style.display = 'block'
-		}
-		if (bilderwrap[bilderwrap.length-1].style.left === '0%') {
-			rarrw.style.display = 'none'
-		} else {
-			rarrw.style.display = 'block'
-		}
-	}
+	
 
 
-	document.addEventListener('keydown',function(evt){
-		evt.stopImmediatePropagation()
-		if(document.querySelector('.bilderwrapper') !== null) {
-			evt = evt || window.event
-			if (bilderwrap.length > 1) {
+
+	React.useEffect(function setupListener() {
+	    function handleKeyPress(evt) {
+
+			const wrappers = document.getElementsByClassName('bilderwrapper')
+			if(document.querySelector('.bilderwrapper') !== null) {
+				//evt = evt || window.event
+				//alert(evt.keyCode)
 
 				if (evt.keyCode === 37) {
-					
-					if (bilderwrap[0].style.left !== '0%') {
-					
-						bilderwrap.forEach((wrap) => {
 
-							const zahl = getZahl(wrap)
-							wrap.style.left = (zahl+100)+'%'
-						})
-						currentArt()
-					}
+					if (wrappers[0].style.left !== '0%') slide('left')
 				}
-				
 				else if (evt.keyCode === 39) {
-					
-					if (bilderwrap[bilderwrap.length-1].style.left !== '0%') {
-			    		
-			    		bilderwrap.forEach((wrap) => {
 
-							const zahl = getZahl(wrap)
-			    			wrap.style.left = (zahl-100)+'%'
-			    		})
-			    		currentArt()
-			    	}
+					if (wrappers[wrappers.length-1].style.left !== '0%') slide('right')
 			    }
-
+				// re-focus on now centered art
+				currentArt()
 			    // check buttons
 			    checkForUnnecessaryArrows()
-				
 			}
-		}
-	})
+	
+	    }
+	    window.addEventListener('keydown', handleKeyPress)
+
+	    return function cleanupListener() {
+	      window.removeEventListener('keydown', handleKeyPress)
+	    }
+  	})
+
 
 
     const arrowcontrols = (bilder) => {
     	if (bilder.length > 1) {
 
-			const arrownavigation = (e) => {
-				
-				if (e.currentTarget.id === "leftarrow") {
-					bilderwrap.forEach((wrap) => {
-						const zahl = getZahl(wrap)
-						wrap.style.left = (zahl+100)+'%'
-					})
-				}
-				else {
-					bilderwrap.forEach((wrap) => {
-						const zahl = getZahl(wrap)
-						wrap.style.left = (zahl-100)+'%'
-					})
-				}
-
-				checkForUnnecessaryArrows()
-			}
 	    	return(
 		    	<div className="arrowcontrols" style={style.arrowcontrols}>
-					<div className="arrow" onClick={(el) => {arrownavigation(el);currentArt()}}  id="rightarrow" style={style.arrow}>&#x25E8;</div>
-					<div className="arrow" onClick={(el) => {arrownavigation(el);currentArt()}} id="leftarrow" style={style.arrow}>&#x25E7;</div>
+					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="rightarrow" style={style.arrow}>&#x25E8;</div>
+					<div className="arrow" onClick={(el) => {arrownavigation(el)}} id="leftarrow"  style={style.arrow}>&#x25E7;</div>
 					<style>
 		  				{`.arrow:hover{opacity:1 !important}#leftarrow{display:none}`}
 					</style>
@@ -269,12 +356,12 @@ const Bilderwand = props => {
 				<ZurWand label="Anmerkungen" wandLaden={() => {console.log(`Wand ${props.titel} wird geladen...`)}}>Anmerkungen der Künstlerin</ZurWand>
 			</div>
 			<div className="sctn_body">
-				{arrowcontrols(bilder)}
+				{arrowcontrols(props.bilder)}
 				<div className="sctn_wand" style={style.wand}>
 					{bilderHTML}
 				</div>
 			</div>
-			{SingleArtView && <Einzelbild bildinfos={bilder[selectedArt]} schliessen={()=>{setEinzelAnsicht(false);SingleArtView = false}} />}
+			{SingleArtView && <Einzelbild key={props.id} bildinfos={props.bilder[selectedArt]} schliessen={()=>{setEinzelAnsicht(false);SingleArtView = false}} />}
 		</div>
 	)
 }
