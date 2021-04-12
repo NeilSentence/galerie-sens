@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import MyToolbar from './myToolbar'
 import PageTitle from './pageTitle'
@@ -95,7 +95,7 @@ const Menu = props => {
 	*/
 	UseEscape(() => {
 
-			alert("esc")
+			//alert("esc")
 			if (!showMenu) {
 				setManualSet(true)
 	  			setShowMenu(true)
@@ -115,12 +115,13 @@ const Menu = props => {
 	  		else killMenu()
 		}
 	}
- 	/*
+ 	
  	useEffect(() => {	
  		function menuAlfredo(){
  			setManualSet((state) => {
 				if(!state) {
 	  				setShowMenu(true)
+	  				setManualSet(true)
 	  			}
 				return state
 			})
@@ -128,12 +129,12 @@ const Menu = props => {
 
  		const timeoutID = window.setTimeout(() => {
         	menuAlfredo()	
-    	}, 6500)
+    	}, 500)
     	return () => window.clearTimeout(timeoutID) 	
 
 	  	// erst wieder verwendet wenn es admin buttons (login usw gibt. dort nervt das Menü)
 	},[manualSet, showMenu])
- 	*/
+ 	
 	
   	
 

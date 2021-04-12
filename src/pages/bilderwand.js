@@ -1,4 +1,4 @@
-import React, { useState/*, useEffect*/ } from 'react'
+import React, { useLocation,useState/*, useEffect*/ } from 'react'
 import ZurWand from './../components/zurwand'
 import Einzelbild from './../components/einzelbild'
 // import { useParams } from 'react-router-dom'
@@ -9,6 +9,8 @@ import Einzelbild from './../components/einzelbild'
 
 
 const Bilderwand = props => {
+
+	const [firstRender, setFirstRender] = useState(false)
 
 	// getElementsByClassName returns HTMLCollection not nodelist! Deswegen muss man dort ein bisschen nachhelfen:
 	HTMLCollection.prototype.forEach = Array.prototype.forEach
@@ -32,29 +34,29 @@ const Bilderwand = props => {
 		}
 	}
 
-	const getZahl = (obj) => {
+	const getCSSLeftAsBareNumber = (obj) => {
 		// get css value str:
 		const origLeft = obj.style.left
 		// cut off '%':
-		const nurZahl = origLeft.substring(0,origLeft.length-1)	
-		return(parseInt(nurZahl))
-		// return nurZahl
+		const bareNum = origLeft.substring(0,origLeft.length-1)	
+		return(parseInt(bareNum))
+		// return bareNum
 	}
 
 	const slide = dir => {
 		const wrappers = document.getElementsByClassName('bilderwrapper')
 		if (dir === "left") {
 			wrappers.forEach((wrap) => {
-				const zahl = getZahl(wrap)
-				console.log(zahl)
-				wrap.style.left = (zahl+100)+'%'
+				const number = getCSSLeftAsBareNumber(wrap)
+				console.log(number)
+				wrap.style.left = (number+100)+'%'
 			})
 		}
-		else {
+		else if (dir === "right"){
 			wrappers.forEach((wrap) => {
-				const zahl = getZahl(wrap)
-				console.log(zahl)
-				wrap.style.left = (zahl-100)+'%'
+				const number = getCSSLeftAsBareNumber(wrap)
+				console.log(number)
+				wrap.style.left = (number-100)+'%'
 			})
 		}
 	}
@@ -103,53 +105,70 @@ const Bilderwand = props => {
 	// (z.B. https://galerie-sens.de/bilder/suesses/3) auf das entsprechende Bild "fährt". 
 	// Das brauchte etwas Bastelei:
 
-	const urlParamNumber = () => {
+	let match = useLocation;
 
-		// aktualisiere die oben definierte Variable die die Bildelemente enthält: 
-		const wrappers = document.getElementsByClassName('bilderwrapper')
+	React.useEffect(() => {
 
-		// wenn es mehr als eins sind, muss das Programm überhaupt erst aktiv werden, sonst springe nach unten:
-		if (wrappers.length > 1) {
-			// test: console.log("es gibt mehr als ein Bild")
+		if (!firstRender) {
+			// aktualisiere die oben definierte Variable die die Bildelemente enthält: 
+			const wrappers = document.getElementsByClassName('bilderwrapper')
 
-			// erstelle eine Variable, die den genauen Text der URL, inkl. der Bildnummer, enthält:
-			const CSSleftValueIndex = window.location.href
+			// wenn es mehr als eins sind, muss das Programm überhaupt erst aktiv werden, sonst springe nach unten:
+			if (wrappers.length > 1) {
+				// test: console.log("es gibt mehr als ein Bild")
 
-			// erstelle eine Variable, die eine Liste der Positionsnummern des Zeichens "/" enthält:
-			// (z.B. ist das letzte / an 5., 6., 12. und 32. Position, dann soll hier [5,6,12,21] erzeugt werden)
-			let indices = []
-			// eine Wiederholung, die diese URL-Zeichenkette Stelle für Stelle durchgeht, 
-			// und wenn das jeweilige Zeichen ein / ist, dann füge diese Stelle der indices-Liste hinzu.
-			for(let i=0; i<CSSleftValueIndex.length;i++) {
-		    	if (CSSleftValueIndex[i] === "/") indices.push(i)
+				// erstelle eine Variable, die den genauen Text der URL, inkl. der Bildnummer, enthält:
+				const CSSleftValueIndex = window.location.href
+
+				
+				alert(match)
+
+				// erstelle eine Variable, die eine Liste der Positionsnummern des Zeichens "/" enthält:
+				// (z.B. ist das letzte / an 5., 6., 12. und 32. Position, dann soll hier [5,6,12,21] erzeugt werden)
+				let indices = []
+				// eine Wiederholung, die diese URL-Zeichenkette Stelle für Stelle durchgeht, 
+				// und wenn das jeweilige Zeichen ein / ist, dann füge diese Stelle der indices-Liste hinzu.
+				for(let i=0; i<CSSleftValueIndex.length;i++) {
+			    	if (CSSleftValueIndex[i] === "/") indices.push(i)
+				}
+				// erzeuge eine neue Zeichenkette, 
+				// die alles von der obigen URL-Textvariablen abschneidet was vor und inkl. dem letzten "/" steht.
+				// Oder andersherum: die nur die Bild-Zahl am Ende übriglässt.
+				const outputStr = CSSleftValueIndex.slice(indices[indices.length-1]+1)
+
+				// Neue Variable: multipliziere diese Zahl mit 100, damit wir zu Positions-Prozenten für die Bewegung des Layouts kommen:
+				// diese Multiplikation macht aus der Zeichenkette automatisch eine Zahl
+				// Bsp. oben: das 4. Bild (ausgehend vom 0.) also sollten, 
+				// ausgehend von left:0% alle Bilder um -3*100% nach links verschoben werden. 
+				const leftIntegerValue = outputStr*100
+				
+				// wrappers sind die die Bilder umschließenden HTML-divs, für jeden dieser Elemente einmal das Style-Attribut "links" 
+				// als reine Zahl auslesen (getCSSLeftAsBareNumber erledigt dies),
+				// und dann die oben ermittelte Hunderterzahl davon abziehen.
+
+				wrappers.forEach((wrap) => {
+					const zahl = getCSSLeftAsBareNumber(wrap)
+
+					//console.log("orig: ")
+					//console.log(zahl)
+					const outputNumber = (zahl-leftIntegerValue)+'%' 
+					//console.log("output: ")
+					//console.log(outputNumber)
+					wrap.style.left = outputNumber
+				})
+
+				// funktioniert! Jetzt muss ich nur noch die Navigation links / rechts anpassen:
+
+				checkForUnnecessaryArrows()
+				setFirstRender(true)
 			}
-			// erzeuge eine neue Zeichenkette, 
-			// die alles von der obigen URL-Textvariablen abschneidet was vor und inkl. dem letzten "/" steht.
-			// Oder andersherum: die nur die Bild-Zahl am Ende übriglässt.
-			const outputStr = CSSleftValueIndex.slice(indices[indices.length-1]+1)
+		}//hier
+		
+	})
 
-			// Neue Variable: multipliziere diese Zahl mit 100, damit wir zu Positions-Prozenten für die Bewegung des Layouts kommen:
-			// diese Multiplikation macht aus der Zeichenkette automatisch eine Zahl
-			// Bsp. oben: das 4. Bild (ausgehend vom 0.) also sollten, 
-			// ausgehend von left:0% alle Bilder um -3*100% nach links verschoben werden. 
-			const leftIntegerValue = outputStr*100
-			
-			// wrappers sind die die Bilder umschließenden HTML-divs, für jeden dieser Elemente einmal das Style-Attribut "links" 
-			// als reine Zahl auslesen (getZahl erledigt dies),
-			// und dann die oben ermittelte Hunderterzahl davon abziehen.
+		
 
-			wrappers.forEach((wrap) => {
-				const zahl = getZahl(wrap)
-				wrap.style.left = (zahl-leftIntegerValue)+'%'
-			})
-
-			// funktioniert! Jetzt muss ich nur noch die Navigation links / rechts anpassen:
-
-			checkForUnnecessaryArrows()
-		}
-	}
-
-	setTimeout(urlParamNumber(),100)
+	
 
 	// CSS left value of all image wrappers must now deduct this value fron its current value.
 

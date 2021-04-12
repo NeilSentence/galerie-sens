@@ -46,7 +46,6 @@ dann unten im render:
   7. Glitch Art, Fotocollagen
 
   BONUS FEATURES
-  1. 
   3. smooth color transitions on menu toggle!
   4. smooth color transitions on image load!
 
@@ -720,7 +719,7 @@ const App = () => {
 
   return(
     <Provider value={{ bilder, screen_size, aktive_objekte, matter }}>
-      <React.Fragment>
+      <>
         <Router>
           <Menu /> 
           <div className="container">
@@ -741,7 +740,7 @@ const App = () => {
             </Routes>
           </div>
         </Router>
-      </React.Fragment>
+      </>
     </Provider>
   )
 }
