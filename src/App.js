@@ -37,13 +37,13 @@ dann unten im render:
 /* TODOS:
 
   COMPLETION 
-  1. Menu auto drop nur bei Home! 
-  2. Home = Menu schon offen, delay Text ("delayed_fallables") länger.
+  1. Menu auto drop nur bei Home! ✔️
+  2. Home = Menu schon offen, delay Text ("delayed_fallables") länger. 
   3. Tabellarischer LL Ok aber Text (Zufall, Fundstücke, Computer als Werkzeug der Verfremdung) "zur Person"
   4. Text: "Einladung zum Klötzchen-Spiel" 
   5. Anmerkungen zur Serie wie Einzelansicht, weißer Balken oben
   6. Kontaktformular einbauen
-  7. Glitch Art, Fotocollagen
+  7. Glitch Art, Fotocollagen 
 
   BONUS FEATURES
   3. smooth color transitions on menu toggle!

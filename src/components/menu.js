@@ -4,7 +4,7 @@ import MyToolbar from './myToolbar'
 import PageTitle from './pageTitle'
 import MenuButton from './menuButton'
 import AdminButton from './adminButton'
-import Scene from './drop' 
+import MatterScene from './drop' 
 import MenuLink from './menulink'
 import MenuClose from './menuclose'
 import UseEscape from './utils/esckey'
@@ -93,55 +93,64 @@ const Menu = props => {
 	})
 
 	*/
+
+	const menuCall = () => {
+		if (!showMenu) {
+  			//setManualSet(true)
+  			setShowMenu(true)
+  			setRemoveNonMenuHtml(false)
+	  	}
+	  	else killMenu()
+	}
+
 	UseEscape(() => {
 
-			//alert("esc")
-			if (!showMenu) {
-				setManualSet(true)
-	  			setShowMenu(true)
-	  			setRemoveNonMenuHtml(false)
-			}
-			else killMenu()
-		
-	
+		//console.log("esc")
+		menuCall()
+
 	})
+
 	const handleClick = (e) => {
 		if (e.type === 'click') {
-			if (!showMenu) {
-	  			setManualSet(true)
-	  			setShowMenu(true)
-	  			setRemoveNonMenuHtml(false)
-	  		}
-	  		else killMenu()
+			menuCall()
 		}
 	}
  	
- 	useEffect(() => {	
- 		function menuAlfredo(){
- 			setManualSet((state) => {
-				if(!state) {
-	  				setShowMenu(true)
-	  				setManualSet(true)
-	  			}
-				return state
-			})
-	  	}
+	/*function getTranslationMap(choice) {
+		const choices = {
+		   "true": "do something",
+		   "false": "do something else"
+		}
+  
+  		return choices[choice.toString()] ?? "not found";
+	}*/
 
- 		const timeoutID = window.setTimeout(() => {
-        	menuAlfredo()	
-    	}, 500)
-    	return () => window.clearTimeout(timeoutID) 	
+	useEffect(() => {
+		// console.log("vor urlcheck")
+		if (window.location.href === "http://localhost:3000/"){
+		const timeoutID = window.setTimeout(() => {
+			// console.log("im timeout, vor menuAlfredo")
+	    	menuAlfredo()
+		}, 250)
+		// return () => window.clearTimeout(timeoutID)
+    }
+	},[])
 
-	  	// erst wieder verwendet wenn es admin buttons (login usw gibt. dort nervt das Menü)
-	},[manualSet, showMenu])
- 	
-	
+	const menuAlfredo = () => {
+		// console.log("im menuAlfredo")
+		setShowMenu((state) => {
+			if(!state){
+  		        setShowMenu(true)
+  			}
+			return state
+		})		
+  	}
+
   	
 
   	
   	// how are we going to refactor setState()??
 
-  	
 	return (
 		<>
 			<AppBar>
@@ -162,7 +171,7 @@ const Menu = props => {
 					</div>
 				</MyToolbar>
 			</AppBar>
-			{showMenu && <Scene 
+			{showMenu && <MatterScene 
 				elements={elements()} 
 				numberOfDummies={numberOfDummies} 
 				removeNonMenuHtml={()=>{return removeNonMenuHtml}}

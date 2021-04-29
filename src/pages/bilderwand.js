@@ -1,4 +1,4 @@
-import React, { useLocation,useState/*, useEffect*/ } from 'react'
+import React, { useLocation, useState, useEffect } from 'react'
 import ZurWand from './../components/zurwand'
 import Einzelbild from './../components/einzelbild'
 // import { useParams } from 'react-router-dom'
@@ -44,21 +44,33 @@ const Bilderwand = props => {
 	}
 
 	const slide = dir => {
+		let bildnummer
 		const wrappers = document.getElementsByClassName('bilderwrapper')
 		if (dir === "left") {
 			wrappers.forEach((wrap) => {
 				const number = getCSSLeftAsBareNumber(wrap)
-				console.log(number)
+				console.log("before: "+number)
 				wrap.style.left = (number+100)+'%'
+				console.log(number+100)
+				if (number === 0) {
+					bildnummer = parseInt(wrap.children[0].id)
+				}
 			})
+			//window.setTimeout(window.location.href = "http://localhost:3000/bilder/upcycling/"+(bildnummer-1),2000)
 		}
 		else if (dir === "right"){
 			wrappers.forEach((wrap) => {
 				const number = getCSSLeftAsBareNumber(wrap)
-				console.log(number)
+				console.log("before: "+number)
 				wrap.style.left = (number-100)+'%'
+				console.log(number-100)
+				if (number === 0) {
+					bildnummer = parseInt(wrap.children[0].id)
+				}
 			})
+			//window.setTimeout(window.location.href = "http://localhost:3000/bilder/upcycling/"+(bildnummer+1),2000)
 		}
+		console.log(bildnummer)
 	}
 
 
@@ -107,7 +119,7 @@ const Bilderwand = props => {
 
 	let match = useLocation;
 
-	React.useEffect(() => {
+	useEffect(() => {
 
 		if (!firstRender) {
 			// aktualisiere die oben definierte Variable die die Bildelemente enthält: 
@@ -118,23 +130,23 @@ const Bilderwand = props => {
 				// test: console.log("es gibt mehr als ein Bild")
 
 				// erstelle eine Variable, die den genauen Text der URL, inkl. der Bildnummer, enthält:
-				const CSSleftValueIndex = window.location.href
+				const urlString = window.location.href
 
 				
-				alert(match)
+				//lert(match)
 
 				// erstelle eine Variable, die eine Liste der Positionsnummern des Zeichens "/" enthält:
 				// (z.B. ist das letzte / an 5., 6., 12. und 32. Position, dann soll hier [5,6,12,21] erzeugt werden)
 				let indices = []
 				// eine Wiederholung, die diese URL-Zeichenkette Stelle für Stelle durchgeht, 
 				// und wenn das jeweilige Zeichen ein / ist, dann füge diese Stelle der indices-Liste hinzu.
-				for(let i=0; i<CSSleftValueIndex.length;i++) {
-			    	if (CSSleftValueIndex[i] === "/") indices.push(i)
+				for(let i=0; i<urlString.length;i++) {
+			    	if (urlString[i] === "/") indices.push(i)
 				}
 				// erzeuge eine neue Zeichenkette, 
 				// die alles von der obigen URL-Textvariablen abschneidet was vor und inkl. dem letzten "/" steht.
 				// Oder andersherum: die nur die Bild-Zahl am Ende übriglässt.
-				const outputStr = CSSleftValueIndex.slice(indices[indices.length-1]+1)
+				const outputStr = urlString.slice(indices[indices.length-1]+1)
 
 				// Neue Variable: multipliziere diese Zahl mit 100, damit wir zu Positions-Prozenten für die Bewegung des Layouts kommen:
 				// diese Multiplikation macht aus der Zeichenkette automatisch eine Zahl

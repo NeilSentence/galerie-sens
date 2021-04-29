@@ -1,6 +1,4 @@
 import React from 'react'
-import { Card } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 import { useNavigate } from 'react-router-dom'
 import { hslaStr } from './utils/helpers'
 
@@ -34,14 +32,14 @@ const MenuLink = props => {
 
 	const styles = {
 		root: {
-			width: '35vw',
+			width: '25vw',
 			maxWidth:400,
 			height: '10vh',
 			textAlign: 'center',
 			display: 'flex',
 			alignItems: 'center',
 			textDecoration:"none",
-			padding: '1em',
+			padding: '0.9em',
 			cursor: 'pointer',
 			pointerEvents: 'all',
 			background:'hsla('+hslaStr()+')',
@@ -49,19 +47,23 @@ const MenuLink = props => {
 			"&:hover": {
 				opacity:0.5
 			}
+		},
+		h1: {
+			fontSize:22,
+			width:'100%',
+			pointerEvents: 'none'
 		}
 	}
-	const useStyles = makeStyles(styles)
-	const classes = useStyles()
 
 	return (
-		<Card 
+		<div 
 			onTouchEnd={(el) => {links(el)}}
 			onClick={(el) => {el.preventDefault();links(el)}} 
-			className={classes.root+" blocks menulink fallable noselect xposrandom"}
+			className="blocks menulink fallable noselect xposrandom"
+			style={styles.root}
 		>	
-			<h1>{props.titel}</h1>
-		</Card>
+			<h1 style={styles.h1}>{props.titel}</h1>
+		</div>
 	)
 }
 

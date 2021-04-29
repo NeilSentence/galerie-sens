@@ -43,6 +43,7 @@ body {
   position: absolute;
   width: 100vw;
   height: 100vh;
+  background:rgb(50,50,50);
 }
 .MuiAppBar-positionFixed {
     color: #232323;
@@ -114,7 +115,6 @@ body {
 
 #mjs-wrapper {overflow:hidden;position:fixed;transition: background 0.2s ease;z-index: 1;}
 
-#mjs-wrapper .menulink h1 {width:100%;font-size: 2rem;pointer-events: none;}
 
 .navbarbutton {background: rgba(0,0,0,0) !important; color:#787878 !important}
 .navbarbutton:hover {background:rgba(20,20,20,0.2) !important}

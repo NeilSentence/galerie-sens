@@ -15,7 +15,7 @@ let world, engine, runner
 
 const { Engine, Runner, World, Bodies, MouseConstraint, Composites, Body } = Matter
 
-class Scene extends React.Component {
+class MatterScene extends React.Component {
 	shouldComponentUpdate(nextProps, nextState) {
 	   return false
 	}
@@ -38,7 +38,7 @@ class Scene extends React.Component {
 	      height:     '100vh',
 	      width:      '100vw',
 	      position:   'fixed',
-	      background: 'rgba(25,25,25,0.88)',
+	      background: 'rgb(50,50,50)',
 	      zIndex: 4
 	    },
 	    blocks: {},
@@ -220,7 +220,7 @@ class Scene extends React.Component {
 	    		const event = window.event
 	    		const newMouseX = event.changedTouches[0].pageX
 		    	const newMouseY = event.changedTouches[0].pageY
-		    	console.log('newMouseX: '+newMouseX+', newMouseY: '+newMouseY+', origMouseX: '+origMouseX+', origMouseY: '+origMouseY)
+		    	//console.log('newMouseX: '+newMouseX+', newMouseY: '+newMouseY+', origMouseX: '+origMouseX+', origMouseY: '+origMouseY)
 	    		if (!( (newMouseX > origMouseX+5) || (newMouseY > origMouseY+5) || (newMouseY < origMouseY-5) || (newMouseX < origMouseX-5) )) {
 	    			// DEBUG: alert("OPosX:"+origMouseX+" OPosX:"+origMouseY+" NPosX:"+newMouseX+" NPosX:"+newMouseY)
 	    			// navigate to link target:
@@ -249,9 +249,9 @@ class Scene extends React.Component {
 					thisFallable.style.transform = `translate(-50%, -50%) rotate(${block.angle}rad) translate(50%, 50%)`				
 				})
 			} 
-			else {
+			/* DEBUG: else {
 				console.log('Matter Composite Stack not (yet) instantiated.')
-			}
+			}*/
 		}
 
 	    const update = () => {
@@ -315,7 +315,7 @@ class Scene extends React.Component {
 		)
 	}
 }
-export default Scene
+export default MatterScene
 
 
 
