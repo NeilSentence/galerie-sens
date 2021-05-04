@@ -11,7 +11,8 @@ const Artist = props => {
 		navigate('/kontakt')
 	}
 	
-
+	const rootForBGChange = document.getElementById('root')
+	rootForBGChange.style.background = 'rgb(240,240,240)'
 
 
 	const artistInfo = {

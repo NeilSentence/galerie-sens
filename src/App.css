@@ -15,8 +15,7 @@
 html,body {
   margin: 0;
   font-family: Delius-Regular, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -31,7 +30,10 @@ html,body {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
-
+button[type=submit]{
+    font-family: Delius-Regular, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
 body {
   height: 100vh;
   width: 100vw;
@@ -43,7 +45,6 @@ body {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background:rgb(50,50,50);
 }
 .MuiAppBar-positionFixed {
     color: #232323;
@@ -73,7 +74,6 @@ body {
 .MuiButtonBase-root {pointer-events: all;}
 
 .greybg {
-  z-index:4;
   margin-bottom:1px;
   background: rgb(240,240,240);
   color:#787878;

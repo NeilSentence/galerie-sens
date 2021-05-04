@@ -70,7 +70,7 @@ import Impressum from './pages/impressum'
 import Menu from './components/menu'
 import Artist from './pages/artist'
 import Bilderwand from './pages/bilderwand'
-import Kontakt from './pages/kontakt'
+import KontaktDisclaimer from './pages/kontaktDisclaimer'
 
 import oelsand1 from './assets/oelsand-1.jpg'
 import oelsand2 from './assets/oelsand-2.jpg'
@@ -736,7 +736,7 @@ const App = () => {
               <Route exact path='/impressum'><Impressum/></Route>
               <Route exact path='/login'><Login/></Route>
               <Route exact path='/kuenstlerin'><Artist/></Route>
-              <Route exact path='/kontakt'><Kontakt/></Route>
+              <Route exact path='/kontakt'><KontaktDisclaimer/></Route>
             </Routes>
           </div>
         </Router>

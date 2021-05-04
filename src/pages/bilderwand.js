@@ -15,6 +15,8 @@ const Bilderwand = props => {
 	// getElementsByClassName returns HTMLCollection not nodelist! Deswegen muss man dort ein bisschen nachhelfen:
 	HTMLCollection.prototype.forEach = Array.prototype.forEach
 
+	const rootBG = document.getElementById('root')
+	rootBG.style.background = 'background:rgb(50,50,50)'
 
 	const checkForUnnecessaryArrows = () => {
 
@@ -46,6 +48,7 @@ const Bilderwand = props => {
 	const slide = dir => {
 		let bildnummer
 		const wrappers = document.getElementsByClassName('bilderwrapper')
+		
 		if (dir === "left") {
 			wrappers.forEach((wrap) => {
 				const number = getCSSLeftAsBareNumber(wrap)
