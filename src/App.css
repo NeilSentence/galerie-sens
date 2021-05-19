@@ -65,7 +65,7 @@ body {
 }
 .sctn {
   height: 100%;
-  padding: 2em 10em;
+  padding: 2em 12%;
   box-sizing: border-box;
 }
 .greybg {z-index: 4}
@@ -88,7 +88,7 @@ body {
 
 .sctn_subheading {text-align: center;font-size:1.3rem;display: flex;flex-flow:wrap;}
 
-.page_titel {pointer-events:all;cursor:pointer;order:2;margin:0;display:block;text-align:center;width:100%;color:#787878;}
+.page_titel {pointer-events:all;cursor:pointer;order:2;margin:0;display:block;text-align:center;width:300px;color:#787878;}
 .sctn_login {}
 /*.sctn_registrierung {margin-top:50px;}*/
 .sctn_impressum {}

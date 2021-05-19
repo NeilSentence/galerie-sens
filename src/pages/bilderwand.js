@@ -1,5 +1,6 @@
 import React, { useLocation, useState, useEffect } from 'react'
 import ZurWand from './../components/zurwand'
+import WandInfo from './../components/bilderwandInfo'
 import Einzelbild from './../components/einzelbild'
 // import { useParams } from 'react-router-dom'
 
@@ -179,24 +180,23 @@ const Bilderwand = props => {
 			}
 		}//hier
 		
-	})
+	}, [firstRender])
 
 		
-
 	
 
 	// CSS left value of all image wrappers must now deduct this value fron its current value.
-
 
 	// test: alert(urlParamNumber())
 
 
 
-
 	const [einzelAnsicht, setEinzelAnsicht] = useState(false)
+	const [wandInfo, setWandInfo] = useState(false)
 	const [selectedArt, setSelectedArt] = useState(0)
 
 	let SingleArtView = einzelAnsicht
+	let WandInfoView = wandInfo
 
 	//setEinzelAnsicht(false) infinite loop because component re-renders
 
@@ -280,10 +280,13 @@ const Bilderwand = props => {
 	}
 
 	// clickEvent auf IMG, 
-	// dann <p className="bild_titel" style={style.bildtitel}>{props.bilder[0].titel}</p> 
+	// dann <p className="bild_titel" style={style.bildtitel}>{bilder[0].titel}</p> 
 	// unter Einzelbildansicht (EBA)
 
-	const bilder = props.bilder
+	const bilderwand = props.bilder
+	const bilder = bilderwand.bilder
+
+	console.dir(bilder)
 	/*
 		[i]
 			.titel
@@ -302,7 +305,10 @@ const Bilderwand = props => {
 	// NAVIGATION BY ARROW KEYS WILL NOT CALL CURRENTART FUNCTION !!!!!!
 
 
-
+	const wandInfoView = () => {
+		setWandInfo(true)
+		WandInfoView = true
+	}
 
 	const singleArtView = (el) => {
 
@@ -387,15 +393,16 @@ const Bilderwand = props => {
 		<div className="sctn sctn_bilderwand">
 			<div className="sctn_header" style={style.header}>
 				<h1 className="sctn_heading" style={style.heading}>{props.titel}</h1>
-				<ZurWand label="Anmerkungen" wandLaden={() => {console.log(`Wand ${props.titel} wird geladen...`)}}>Anmerkungen der Künstlerin</ZurWand>
+				<ZurWand label="Anmerkungen" wandLaden={() => {wandInfoView()}} />
 			</div>
 			<div className="sctn_body">
-				{arrowcontrols(props.bilder)}
+				{arrowcontrols(bilder)}
 				<div className="sctn_wand" style={style.wand}>
 					{bilderHTML}
 				</div>
 			</div>
-			{SingleArtView && <Einzelbild key={props.id} bildinfos={props.bilder[selectedArt]} schliessen={()=>{setEinzelAnsicht(false);SingleArtView = false}} />}
+			{WandInfoView && <WandInfo titel={props.titel} wandinfos={bilderwand.infosSerie} schliessen={()=>{setWandInfo(false);WandInfoView = false}} />}
+			{SingleArtView && <Einzelbild key={props.id} bildinfos={bilder[selectedArt]} schliessen={()=>{setEinzelAnsicht(false);SingleArtView = false}} />}
 		</div>
 	)
 }

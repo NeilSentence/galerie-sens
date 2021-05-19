@@ -14,7 +14,7 @@ const Kontakt = props => {
 	
 	const style = {
 		section: {zIndex:2000,width:'100vw',height:'100vh',position:'fixed',left:0,top:0,background:'rgb(240,240,240)',display:'flex',alignItems: 'center', justifyContent: 'center'},
-		formular:{padding:'2em',border:'1px solid rgb(200,200,200)', alignSelf: 'center',minWidth: '750px', maxWidth: '1800px'},
+		formular:{padding:'3em',border:'1px solid rgb(200,200,200)', alignSelf: 'center',minWidth: '750px', maxWidth: '1800px'},
 		heading: {
 			margin:0,
     		padding: 10,
@@ -29,7 +29,7 @@ const Kontakt = props => {
 		formularItem: {padding:20,textAlign:'center'},
 		kontaktInput: {marginTop:'1em',height:40,fontSize:'1.2em',textAlign:'center',padding:'20',minWidth:'450px'},
 		submitButton: {padding:'1.5em',fontSize:'1.1em',textAlign:'center',margin: '1em auto 0.5em',display:'inherit'},
-		cancelButton: {padding:'1em',fontSize:'0.85em',marginTop:'1em'}
+		cancelButton: {padding:'1em',fontSize:'0.85em',marginTop:'3em'}
 	}
 
 	const rootForBGChange = document.getElementById('root')

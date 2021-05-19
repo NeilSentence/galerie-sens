@@ -9,7 +9,7 @@ const KontaktDisclaimer = props => {
 	const [showKontakt, setShowKontakt] = useState(false)
 	
 	const style = {
-		section: /*{display:'flex',alignItems: 'center', justifyContent: 'center', width: '100vw'}*/{},
+		section: {display:'flex',alignItems:'center',justifyContent: 'center'},
 		formular:/*{position:'fixed',padding:'2em',border:'1px solid rgb(200,200,200)', alignSelf: 'center',minWidth: '750px', maxWidth: '1800px'}*/{},
 		greys:/*{marginBottom:'2em'}*/{},
 		heading: {
@@ -24,7 +24,7 @@ const KontaktDisclaimer = props => {
 		},
 		formularItem: {marginBottom:'2em',padding:20,textAlign:'center'},
 		kontaktInput: {height:40,fontSize:'1.2em',textAlign:'center',padding:'20',minWidth:'450px'},
-		okButton: {padding:'1.5em',fontSize:'1.1em',textAlign:'center',margin: '0 auto',display:'inherit',marginBottom:'2em'}
+		okButton: {padding:'1.5em',fontSize:'1.1em',textAlign:'center',margin: '30px auto',display:'inherit'}
 	}
 
 	const rootForBGChange = document.getElementById('root')

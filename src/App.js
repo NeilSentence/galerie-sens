@@ -176,7 +176,7 @@ const App = () => {
       bilder:[]
     },
     upcycling: {
-      infosSerie: '',
+      infosSerie: 'Fundstücken aus der Vergangenheit wurde hier eine Seele eingehaucht. Sie ergeben eine Serie, die menschliche Interaktion zum Thema hat.',
       bilder: [
         {
           key:0,
@@ -725,14 +725,14 @@ const App = () => {
           <div className="container">
             <Routes>
               <Route exact path='/'><Home/></Route>
-              <Route exact path='/bilder/kfu/:leftValue'><Bilderwand key='0' id='0' bilder={bilder.kfu.bilder} titel='Kalligrafische Experimente'/></Route>
-              <Route exact path='/bilder/fotocollagen/:leftValue'><Bilderwand key='1' id='1' bilder={bilder.fotocollagen.bilder} titel='Fotocollagen'/></Route>
-              <Route exact path='/bilder/glitches/:leftValue'><Bilderwand key='2' id='2' bilder={bilder.glitches.bilder} titel='Glitches'/></Route>
-              <Route exact path='/bilder/oelsand/:leftValue'><Bilderwand key='3' id='3' bilder={bilder.oelsand.bilder} titel='Naturstoffe'/></Route>
-              <Route exact path='/bilder/upcycling/:leftValue'><Bilderwand key='4' id='4' bilder={bilder.upcycling.bilder} titel='Upcycling'/></Route>
-              <Route exact path='/bilder/zufallsbegegnungen/:leftValue'><Bilderwand key='5' id='5' bilder={bilder.leute.bilder} titel='Zufallsbegegnungen'/></Route>
-              <Route exact path='/bilder/portraits/:leftValue'><Bilderwand key='6' id='6' bilder={bilder.portraits.bilder} titel='Portraits'/></Route>
-              <Route exact path='/bilder/suesses/:leftValue'><Bilderwand key='7' id='7' bilder={bilder.eyecandy.bilder} titel='Sweets'/></Route>
+              <Route exact path='/bilder/kfu/:leftValue'><Bilderwand key='0' id='0' bilder={bilder.kfu} titel='Kalligrafische Experimente'/></Route>
+              <Route exact path='/bilder/fotocollagen/:leftValue'><Bilderwand key='1' id='1' bilder={bilder.fotocollagen} titel='Fotocollagen'/></Route>
+              <Route exact path='/bilder/glitches/:leftValue'><Bilderwand key='2' id='2' bilder={bilder.glitches} titel='Glitches'/></Route>
+              <Route exact path='/bilder/oelsand/:leftValue'><Bilderwand key='3' id='3' bilder={bilder.oelsand} titel='Naturstoffe'/></Route>
+              <Route exact path='/bilder/upcycling/:leftValue'><Bilderwand key='4' id='4' bilder={bilder.upcycling} titel='Upcycling'/></Route>
+              <Route exact path='/bilder/zufallsbegegnungen/:leftValue'><Bilderwand key='5' id='5' bilder={bilder.leute} titel='Zufallsbegegnungen'/></Route>
+              <Route exact path='/bilder/portraits/:leftValue'><Bilderwand key='6' id='6' bilder={bilder.portraits} titel='Portraits'/></Route>
+              <Route exact path='/bilder/suesses/:leftValue'><Bilderwand key='7' id='7' bilder={bilder.eyecandy} titel='Sweets'/></Route>
               <Route exact path='/impressum'><Impressum/></Route>
               <Route exact path='/login'><Login/></Route>
               <Route exact path='/kuenstlerin'><Artist/></Route>
