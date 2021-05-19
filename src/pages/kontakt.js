@@ -1,14 +1,20 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Kontakt = props => {
 
 	// geiler Effekt:
 	// backdropFilter: blur(10px) 
+
+	const navigate = useNavigate()
+	const zuKuenstler = () => {
+		navigate('/')
+		navigate('/kuenstlerin')
+	}
 	
 	const style = {
-		section: {width:'100vw',height:'100vh',position:'absolute',left:0,top:0,background: 'rgb(240,240,240)',display:'flex',alignItems: 'center', justifyContent: 'center', width: '100vw'},
+		section: {zIndex:2000,width:'100vw',height:'100vh',position:'fixed',left:0,top:0,background:'rgb(240,240,240)',display:'flex',alignItems: 'center', justifyContent: 'center'},
 		formular:{padding:'2em',border:'1px solid rgb(200,200,200)', alignSelf: 'center',minWidth: '750px', maxWidth: '1800px'},
-		greys:{marginBottom:'2em'},
 		heading: {
 			margin:0,
     		padding: 10,
@@ -19,9 +25,11 @@ const Kontakt = props => {
     		zIndex: 4,
     		pointerEvents: 'none'
 		},
-		formularItem: {marginBottom:'2em',padding:20,textAlign:'center'},
-		kontaktInput: {height:40,fontSize:'1.2em',textAlign:'center',padding:'20',minWidth:'450px'},
-		submitButton: {padding:'1.5em',fontSize:'1.1em',textAlign:'center',margin: '0 auto',display:'inherit',marginBottom:'2em'}
+		greys:{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center'},
+		formularItem: {padding:20,textAlign:'center'},
+		kontaktInput: {marginTop:'1em',height:40,fontSize:'1.2em',textAlign:'center',padding:'20',minWidth:'450px'},
+		submitButton: {padding:'1.5em',fontSize:'1.1em',textAlign:'center',margin: '1em auto 0.5em',display:'inherit'},
+		cancelButton: {padding:'1em',fontSize:'0.85em',marginTop:'1em'}
 	}
 
 	const rootForBGChange = document.getElementById('root')
@@ -40,7 +48,8 @@ const Kontakt = props => {
 				<div className="formular_item" id="message" style={style.formularItem}>
 					<input placeholder="Eine Nachricht hinterlassen (optional)" type="text" id="input_message" className="kontakt_input" style={style.kontaktInput}/>
 				</div>
-				<button type="submit" style={style.submitButton}>Absenden</button>
+				<button type="submit" onClick={zuKuenstler} style={style.submitButton}>Absenden</button>
+				<button type="cancel" onClick={zuKuenstler} style={{...style.submitButton, ...style.cancelButton}}>Abbrechen</button>
 			</div>
 			
 

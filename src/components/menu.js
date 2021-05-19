@@ -165,6 +165,7 @@ const Menu = props => {
 					</div>
 					<div style={styles.outerStyleR}>
 						<div style={styles.innerStyleR}>
+							<AdminButton onPress={killMenu} href="/kontakt" text="Kontakt" />
 							<AdminButton onPress={killMenu} href="/" text="Startseite" />
 							<AdminButton onPress={killMenu} href="/impressum" text="Impressum" />
 						</div>

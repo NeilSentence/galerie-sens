@@ -68,7 +68,7 @@ body {
   padding: 2em 10em;
   box-sizing: border-box;
 }
-
+.greybg {z-index: 4}
 
 .MuiPaper-root, .MuiToolbar {pointer-events: none;}
 .MuiButtonBase-root {pointer-events: all;}
@@ -98,6 +98,7 @@ body {
     background: url(assets/IMG/portrait.jpg);
     background-size: 150%;
     background-position: center;
+    background-repeat: no-repeat;
     opacity: 0.25;
     position: absolute;
     content: ' ';

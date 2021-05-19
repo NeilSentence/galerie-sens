@@ -27,9 +27,9 @@ class MatterScene extends React.Component {
 	    	height: window.innerHeight,
 	    	width: window.innerWidth
 	    }
-	    window.addEventListener("resize", this.updateDimensions)
+	  /*  window.addEventListener("resize", this.updateDimensions)
 	    this.updateDimensions = this.updateDimensions.bind(this)
-	    this.run = this.run.bind(this)
+	    this.run = this.run.bind(this)*/
 	}
 
 	style = {
@@ -279,11 +279,11 @@ class MatterScene extends React.Component {
 	}
   	componentDidMount(){
 		this.run()
-		this.updateDimensions()
+		//this.updateDimensions()
 	}
 
 	componentDidUpdate(){
-		this.updateDimensions()
+		//this.updateDimensions()
 	}
 	componentWillUnmount(){
 		// cancel matter
@@ -294,12 +294,12 @@ class MatterScene extends React.Component {
         // set removeNonMenuHtml flag
 	} 
 
-	updateDimensions = () => {
+	/*updateDimensions = () => {
     	this.setState({
 	      	height: window.innerHeight,
 	      	width: window.innerWidth
     	})
-   	}
+   	}*/
    	
    	render(){
 		const Dummies = []
