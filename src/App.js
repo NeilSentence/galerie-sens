@@ -9,6 +9,13 @@ import {
 } from "react-router-dom"
 import Matter from 'matter-js'
 
+
+
+// ANATOMIE !!!!!!
+
+
+
+
 //import WidthDisplay from './components/utils/widthdisplay'
 
 // GDPR 
@@ -72,6 +79,25 @@ import Artist from './pages/artist'
 import Bilderwand from './pages/bilderwand'
 import KontaktDisclaimer from './pages/kontaktDisclaimer'
 
+import glitches0 from './assets/error.gif'
+import glitches1 from './assets/error-1.jpg'
+import glitches2 from './assets/error-2.jpg'
+import glitches3 from './assets/error-3.jpg'
+import glitches4 from './assets/error-4.jpg'
+import glitches5 from './assets/error-5.jpg'
+import glitches6 from './assets/error-6.jpg'
+import glitches7 from './assets/error-7.jpg'
+import glitches8 from './assets/error-8.jpg'
+
+
+import collage1 from './assets/collagen-1.jpg'
+import collage2 from './assets/collagen-2.jpg'
+import collage3 from './assets/collagen-3.jpg'
+import collage4 from './assets/collagen-4.jpg'
+import collage5 from './assets/collagen-5.jpg'
+import collage6 from './assets/collagen-6.jpg'
+import collage7 from './assets/collagen-7.jpg'
+
 import oelsand1 from './assets/oelsand-1.jpg'
 import oelsand2 from './assets/oelsand-2.jpg'
 import oelsand3 from './assets/oelsand-3.jpg'
@@ -85,7 +111,7 @@ import kfu4 from './assets/kfu-4.jpg'
 import kfu5 from './assets/kfu-5.jpg'
 import kfu6 from './assets/kfu-6.jpg'
 import kfu7 from './assets/kfu-7.jpg'
-import kfu8 from './assets/kfu-7.jpg'
+import kfu8 from './assets/kfu-8.jpg'
 
 import upcycling1 from './assets/objekt-11.jpg'
 import upcycling2 from './assets/objekt-2.jpg'
@@ -149,7 +175,7 @@ const App = () => {
     width: window.innerWidth
   })
 
-  // ------------------------------------------------------//
+  //------------------------------------------------------//
 
   // Liste von HTML-Elementen (DOM Nodes), die momentan herunterfallen sollen.
 
@@ -168,18 +194,105 @@ const App = () => {
 
   const bilder = {
     fotocollagen: {
-      infosSerie:'',
-      bilder:[]
-    },
-    glitches: {
-      infosSerie:'',
-      bilder:[]
-    },
-    upcycling: {
-      infosSerie: 'Fundstücken aus der Vergangenheit wurde hier eine Seele eingehaucht. Sie ergeben eine Serie, die menschliche Interaktion zum Thema hat.',
-      bilder: [
+      infosSerie:'Basierend auf Fotografien banaler Alltagsgegenstände hat die Künstlerin durch Vervielfältigung, Drehung und Rekombination aus konkreten Bildgegenständen (Kopieren-Einfügen) abstrakte Muster erzeugt. Das Bild wird zum Bildelement / -Bestandteil. Diese Muster sind allerdings nicht "geometrisch-starr" sondern leicht versetzt, so dass Regelmäßigkeit aufgelöst wird und Lebendigkeit entsteht.',
+      entstanden:'ca. 2013-2014',
+      bilder:[
         {
           key:0,
+          id:0,
+          titel:'Fachwerk',
+          source:collage1,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['fotografie','digital','collage'],
+          gewicht:0, groesse:{x:'?',y:'?',z:'?'},
+          beschreibung: 'Collage aus digitalen Fotos.',
+          altTxt:'Ein musterhaftes Bild das aus einzelnen Fotos zusammengesetzt ist.',
+          schatten:true
+        },
+        {
+          key:1,
+          id:1,
+          titel:'Fenster',
+          source:collage2,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['fotografie','digital','collage'],
+          gewicht:0, groesse:{x:'?',y:'?',z:'?'},
+          beschreibung: 'Collage aus digitalen Fotos.',
+          altTxt:'Ein musterhaftes Bild das aus einzelnen Fotos zusammengesetzt ist.',
+          schatten:true
+        },
+        {
+          key:2,
+          id:2,
+          titel:'Kissen',
+          source:collage3,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['fotografie','digital','collage'],
+          gewicht:0, groesse:{x:'?',y:'?',z:'?'},
+          beschreibung: 'Collage aus digitalen Fotos.',
+          altTxt:'Ein musterhaftes Bild das aus einzelnen Fotos zusammengesetzt ist.',
+          schatten:true
+        },{
+          key:3,
+          id:3,
+          titel:'Selbstportrait',
+          source:collage4,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['fotografie','digital','collage'],
+          gewicht:0, groesse:{x:'?',y:'?',z:'?'},
+          beschreibung: 'Collage aus digitalen Fotos.',
+          altTxt:'Ein musterhaftes Bild das aus einzelnen Fotos zusammengesetzt ist.',
+          schatten:true
+        },
+        {
+          key:4,
+          id:4,
+          titel:'Eisenkette',
+          source:collage5,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['fotografie','digital','collage'],
+          gewicht:0, groesse:{x:'?',y:'?',z:'?'},
+          beschreibung: 'Collage aus digitalen Fotos.',
+          altTxt:'Ein musterhaftes Bild das aus einzelnen Fotos zusammengesetzt ist.',
+          schatten:true
+        },
+        {
+          key:5,
+          id:5,
+          titel:'Kühe',
+          source:collage6,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['fotografie','digital','collage'],
+          gewicht:0, groesse:{x:'?',y:'?',z:'?'},
+          beschreibung: 'Collage aus digitalen Fotos.',
+          altTxt:'Ein musterhaftes Bild das aus einzelnen Fotos zusammengesetzt ist.',
+          schatten:true
+        },
+        {
+          key:56,
+          id:6,
+          titel:'Schattenzaun',
+          source:collage7,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['fotografie','digital','collage'],
+          gewicht:0, groesse:{x:'?',y:'?',z:'?'},
+          beschreibung: 'Collage aus digitalen Fotos.',
+          altTxt:'Ein musterhaftes Bild das aus einzelnen Fotos zusammengesetzt ist.',
+          schatten:true
+        }
+      ]
+    },
+    anatomie: {
+      infosSerie: 'Kleinformate aus stark verdünnter, oder verdickter Farbmischung. Dadurch entstehen quasi körperhafte Formen.',
+      entstanden:'ca. 2014',
+      bilder: []
+    },
+    upcycling: {
+      infosSerie: 'Fundstücken vom Schrottplatz wurde hier eine neue Seele eingehaucht. Sie ergeben eine Serie, die menschliche Interaktion zum Thema hat.',
+      entstanden:'ca. 2016 / 2017',
+      bilder: [
+        {
+          key:6,
           id:0,
           titel:'Redezeit abgelaufen',
           source:upcycling1,altSrc: ['filename2','filename3'],
@@ -191,7 +304,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:1,
+          key:7,
           id:1,
           titel:'Monolog',
           source:upcycling2,altSrc: ['filename2','filename3'],
@@ -203,7 +316,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:2,
+          key:8,
           id:2,
           titel:'Unterhaltung auf hohem Niveau',
           source:upcycling3,altSrc: ['filename2','filename3'],
@@ -215,7 +328,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:3,
+          key:9,
           id:3,
           titel:'Auf gleicher Augenhöhe',
           source:upcycling4,altSrc: ['filename2','filename3'],
@@ -227,7 +340,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:4,
+          key:10,
           id:4,
           titel:'Ins Gespräch vertieft',
           source:upcycling5,altSrc: ['filename2','filename3'],
@@ -239,7 +352,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:5,
+          key:11,
           id:5,
           titel:'Kaum reicht man den kleinem Finger ...',
           source:upcycling6,altSrc: ['filename2','filename3'],
@@ -251,14 +364,127 @@ const App = () => {
           schatten:false
         }
       ]
-
-
     },
-    kfu: {
-      infosSerie:'Mit Schwung und Drehung "ganz entspannt im Hier und Jetzt" und mit einem breiten Kalligraphiepinsel sind diese großformatigen Aquarelle entstanden.',
+    glitches: {
+      infosSerie:'Digitale Fehldrucke haben die Künstlerin im ersten Corona-Lockdown zu diesen Bildern angeregt, weil dieses lesbare aber nicht verständliche Zeichengewirr als Metapher für diese Situation in der niemand richtig Bescheid wusste stehen kann. Sie hat bunte Farben gewählt, um aus der Tristesse des Eingesperrtseins heraus einen Hoffnungsschimmer aufzuzeigen. Andererseits ist es aber auch ein Statement der digitalen Unmöglichkeiten die im Home-Office die Menschen belasten.',
+      entstanden:'März-Mai 2020',
       bilder:[
         {
-          key:5,
+          key:12,
+          id:0,
+          titel:'Home Office - Animation',
+          source:glitches0,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['animation', 'druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Als GIF animiert: Die Bilderserie basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        },
+        {
+          key:48,
+          id:1,
+          titel:'Home Office 1',
+          source:glitches1,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        },
+        {
+          key:49,
+          id:2,
+          titel:'Home Office 2',
+          source:glitches2,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        },
+        {
+          key:50,
+          id:3,
+          titel:'Home Office 3',
+          source:glitches3,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        },
+        {
+          key:51,
+          id:4,
+          titel:'Home Office 4',
+          source:glitches4,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        },
+        {
+          key:52,
+          id:5,
+          titel:'Home Office 5',
+          source:glitches5,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        },
+        {
+          key:53,
+          id:6,
+          titel:'Home Office 6',
+          source:glitches6,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        },
+        {
+          key:54,
+          id:7,
+          titel:'Home Office 7',
+          source:glitches7,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        },
+        {
+          key:55,
+          id:8,
+          titel:'Home Office 8',
+          source:glitches8,altSrc: ['filename2','filename3'],
+          preis:200,verkauft:false,
+          tags:['druck','schrift','malerei','2020','malerei', 'öl'],
+          gewicht:0, groesse:'Höhe ca. 30 cm',
+          beschreibung: 'Basierend auf einem Fehldruck - Öl auf Leinwand.',
+          altTxt:'....',
+          schatten:true
+        }
+      ]
+    },
+    kfu: {
+      infosSerie:'Mit Schwung und Drehung, ganz entspannt im "Hier und Jetzt", und mit einem breiten Kalligraphiepinsel sind diese überwiegend großformatigen Aquarelle entstanden. Das Experiment: erst auf der Pinselfläche wurden die Aquarellfarben gemischt. Dadurch war die Farbentwicklung auf dem Papier nicht direkt vorhersehbar.',
+      entstanden:'ca. 2019',
+      bilder:[
+        {
+          key:13,
           id:0,
           titel:'#1',
           source:kfu1,altSrc:['filename2','filename3'],
@@ -270,7 +496,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:6,
+          key:14,
           id:1,
           titel:'#2',
           source:kfu2,altSrc:['filename2','filename3'],
@@ -282,7 +508,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:7,
+          key:15,
           id:2,
           titel:'#3',
           source:kfu3,altSrc:['filename2','filename3'],
@@ -294,7 +520,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:8,
+          key:16,
           id:3,
           titel:'#4',
           source:kfu4,altSrc:['filename2','filename3'],
@@ -306,7 +532,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:9,
+          key:17,
           id:4,
           titel:'#5',
           source:kfu5,altSrc:['filename2','filename3'],
@@ -318,7 +544,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:10,
+          key:18,
           id:5,
           titel:'#6',
           source:kfu6,altSrc:['filename2','filename3'],
@@ -330,7 +556,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:11,
+          key:19,
           id:6,
           titel:'#7',
           source:kfu7,altSrc:['filename2','filename3'],
@@ -342,7 +568,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:12,
+          key:20,
           id:7,
           titel:'Anatomie 1',
           source:kfu8,altSrc:['filename2','filename3'],
@@ -357,10 +583,11 @@ const App = () => {
     },
     // Kalligrafie 1/2/3..., Anatomie 1/2/3... einfügen!
     leute: {
-      infosSerie: 'Zufällige Begegnungen und Alltagssituationen in Acryl auf Leinwand gebannt.',
+      infosSerie: 'In dieser Serie hat die Künstlerin die „ganz normalen Menschen auf der Straße“ gemalt, die sie beobachtet und unbemerkt fotografiert hat. Es sind spontane, ungestellte Augenblicke ausgewählt, wobei die Beziehungen der Menschen untereinander sichtbar werden. Um den Blick auf das Wesentliche zu fokussieren, ist in vielen Bildern der Hintergrund (wie Straßen, Räume etc.) weitgehend weggelassen. Die Personen befinden sich in einem „leeren“ Farbraum und sprechen für sich.',
+      entstanden:'ungefähr zu der Zeit, als die Handys populär wurden',
       bilder:[
         {
-          key:12,
+          key:21,
           id:0,
           titel:'#1',
           source:leute1,
@@ -373,7 +600,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:13,
+          key:22,
           id:1,
           titel:'Ballett',
           source:leute2,
@@ -386,7 +613,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:14,
+          key:23,
           id:2,
           titel:'Filmszene',
           source:leute3,
@@ -399,7 +626,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:15,
+          key:24,
           id:3,
           titel:'Chorsängerinnen',
           source:leute4,
@@ -412,7 +639,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:16,
+          key:25,
           id:4,
           titel:'Vor dem Live-Konzert',
           source:leute5,
@@ -425,7 +652,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:17,
+          key:26,
           id:5,
           titel:'#6',
           source:leute6,
@@ -438,7 +665,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:18,
+          key:27,
           id:6,
           titel:'#7',
           source:leute7,
@@ -451,7 +678,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:19,
+          key:28,
           id:7,
           titel:'Im Fischladen',
           source:leute8,
@@ -466,10 +693,11 @@ const App = () => {
       ]
     },
     portraits: {
-      infosSerie: 'Grundlage der Serie "Portraits" sind Fotos, die erst digital bearbeitet wurden und dann auf der Leinwand noch einmal analog.',
+      infosSerie: 'Grundlage der Serie "Portraits" sind Fotos, die erst digital bearbeitet wurden und dann auf der Leinwand noch einmal analog. Abgebildet wurden Personen aus dem Familien- und Bekanntenkreis.',
+      entstanden:'ca. 2009-2010',
       bilder:[
         {
-          key:20,
+          key:29,
           id:0,
           titel:'Selfie',
           source:portrait1,
@@ -482,7 +710,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:21,
+          key:30,
           id:1,
           titel:'Profilbild',
           source:portrait2,
@@ -495,7 +723,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:22,
+          key:31,
           id:2,
           titel:'Playing the Blues',
           source:portrait3,
@@ -508,7 +736,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:23,
+          key:32,
           id:3,
           titel:'Abgetaucht',
           source:portrait4,
@@ -521,7 +749,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:24,
+          key:33,
           id:4,
           titel:'S.',
           source:portrait5,
@@ -534,7 +762,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:25,
+          key:34,
           id:5,
           titel:'H.D.',
           source:portrait6,
@@ -547,7 +775,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:26,
+          key:35,
           id:6,
           titel:'S.G.',
           source:portrait7,
@@ -562,10 +790,11 @@ const App = () => {
       ]
     },
     eyecandy: {
-      infosSerie:'Süßigkeiten, einige stark herangezoomt.',
+      infosSerie:'Die Formen und Farben der bekannten Süßigkeiten haben die Künstlerin inspiriert. Dadurch entstehen Ausschnitte und wallpaperartige Muster.',
+      entstanden:'ca. 2000',
       bilder: [
         {
-          key:28,
+          key:36,
           id:0,
           titel:'#10',
           source:eyecandy1,altSrc:['filename2','filename3'],
@@ -577,7 +806,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:29,
+          key:37,
           id:1,
           titel:'#11',
           source:eyecandy2,altSrc:['filename2','filename3'],
@@ -589,7 +818,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:30,
+          key:38,
           id:2,
           titel:'#12',
           source:eyecandy3,altSrc:['filename2','filename3'],
@@ -601,7 +830,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:31,
+          key:39,
           id:3,
           titel:'#13',
           source:eyecandy4,altSrc:['filename2','filename3'],
@@ -613,7 +842,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:32,
+          key:40,
           id:4,
           titel:'#14',
           source:eyecandy5,altSrc:['filename2','filename3'],
@@ -625,7 +854,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:33,
+          key:41,
           id:5,
           titel:'#15',
           source:eyecandy6,altSrc:['filename2','filename3'],
@@ -637,7 +866,7 @@ const App = () => {
           schatten:true
         },
         {
-          key:34,
+          key:42,
           id:6,
           titel:'#16',
           source:eyecandy7,altSrc:['filename2','filename3'],
@@ -651,10 +880,11 @@ const App = () => {
       ]
     },
     oelsand: {
-      infosSerie:'Hier wurden Naturmaterialien (Weserschlick, Wüstensand) mit Öl- oder Acrylfarbe kombiniert.',
+      infosSerie:'Hier wurden Naturmaterialien (Weserschlick, Wüstensand) mit Öl- oder Acrylfarbe kombiniert. Dies ist ein Materialexperiment, wo erkundet werden sollte, wie Farbe und natürlicher "Füllstoff" aufeinander reagieren.',
+      entstanden:'ca. 2002',
       bilder:[
         {
-          key:35,
+          key:43,
           id:0,
           titel:'Rot 1',
           source:oelsand1,altSrc:['filename2','filename3'],
@@ -666,7 +896,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:36,
+          key:44,
           id:1,
           titel:'Weserschlick 1',
           source:oelsand2,altSrc:['filename2','filename3'],
@@ -678,7 +908,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:37,
+          key:45,
           id:2,
           titel:'Weserschlick 2',
           source:oelsand3,altSrc:['filename2','filename3'],
@@ -690,7 +920,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:38,
+          key:46,
           id:3,
           titel:'Weserschlick 3',
           source:oelsand4,altSrc:['filename2','filename3'],
@@ -702,7 +932,7 @@ const App = () => {
           schatten:false
         },
         {
-          key:39,
+          key:47,
           id:4,
           titel:'Ölsand 5',
           source:oelsand5,altSrc:['filename2','filename3'],

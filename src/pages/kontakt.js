@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Kontakt = props => {
 
@@ -11,6 +12,25 @@ const Kontakt = props => {
 		navigate('/')
 		navigate('/kuenstlerin')
 	}
+
+	const onSubmit = event => {
+		event.preventDefault()
+		this.setState({disabled:true}) // von: https://youtu.be/tqmLxgvof70 erstes Tut (frontend) suchen!
+		axios.post('/api/email', this.state)
+		.then(res => {
+
+			if (res.data.success){
+				this.setState({
+					disabled:false,emailSent:true
+				})
+			} else {
+				this.setState({
+					disabled:false,emailSent:false
+				})
+			}
+		})
+	}
+
 	
 	const style = {
 		section: {zIndex:2000,width:'100vw',height:'100vh',position:'fixed',left:0,top:0,background:'rgb(240,240,240)',display:'flex',alignItems: 'center', justifyContent: 'center'},
